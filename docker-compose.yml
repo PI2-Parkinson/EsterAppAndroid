@@ -1,0 +1,8 @@
+version: "3"
+services:
+  android-build:
+    build: .
+    image: android-build/android-gradle
+    command: gradle -PdisablePreDex clean lint
+    volumes:
+    - .:/home/gradle
