@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="#000"
     android:backgroundTint="@color/colorPrimaryDark"
-    android:layout_height="match_parent"
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.Guideline
@@ -53,8 +53,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.12"
-        app:layout_constraintGuide_begin="20dp" />
+        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_percent="0.12" />
 
     <Button
         android:id="@+id/btn_dicas"
@@ -62,8 +62,8 @@
         android:layout_height="0dp"
         android:background="#000"
         android:backgroundTint="#63CFDB"
-        android:text="Dicas"
         android:drawableRight="@drawable/ic_hint"
+        android:text="Dicas"
         app:layout_constraintBottom_toTopOf="@+id/guideline12"
         app:layout_constraintTop_toTopOf="@+id/guideline11"
         tools:layout_editor_absoluteX="162dp" />
@@ -86,8 +86,8 @@
         android:layout_height="0dp"
         android:background="#000"
         android:backgroundTint="#4ED6CB"
-        android:text="Exercícios"
         android:drawableRight="@drawable/ic_tap"
+        android:text="Exercícios"
         app:layout_constraintBottom_toTopOf="@+id/btn_perfil"
         app:layout_constraintTop_toTopOf="@+id/guideline9"
         tools:layout_editor_absoluteX="161dp" />
@@ -98,20 +98,37 @@
         android:layout_height="0dp"
         android:background="#000"
         android:backgroundTint="#009CB8"
-        android:text="Conectar"
         android:drawableRight="@drawable/ic_connect"
+        android:text="Conectar"
         app:layout_constraintBottom_toTopOf="@+id/btn_exerc"
         app:layout_constraintTop_toTopOf="@+id/guideline13"
         app:layout_constraintVertical_bias="0.0"
         tools:layout_editor_absoluteX="85dp" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="140dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="124dp"
-        android:background="@drawable/ic_ester"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_percent="0" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="1"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="196dp"
+        android:layout_height="62dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_conectar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline6"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toTopOf="@+id/guideline8"
+        app:srcCompat="@drawable/ic_ester" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
