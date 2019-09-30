@@ -14,7 +14,13 @@
         <item name="windowActionBar">false</item>
         <item name="android:colorPrimaryDark">#4ED6CB</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:windowBackground">@drawable/gradient</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <!-- Login theme -->
+    <style name="LoginTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:colorPrimaryDark">#4ED6CB</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
 </resources>
