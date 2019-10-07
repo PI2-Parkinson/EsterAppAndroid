@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "626923128166",
+    "firebase_url": "https://ester-34aa7.firebaseio.com",
+    "project_id": "ester-34aa7",
+    "storage_bucket": "ester-34aa7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:626923128166:android:7fbf4b4357e27900e2b4a7",
+        "android_client_info": {
+          "package_name": "com.pidois.ester"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "626923128166-7cgt8naf6t4tq60k85o2kbfspsn2no9q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pidois.ester",
+            "certificate_hash": "e85384b400a46df9f4d267963228b357efde9d0e"
+          }
+        },
+        {
+          "client_id": "626923128166-g5k267shcnqdc0ugd7rdhg14fqe1updk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOzYv8R98oGMBmNj1Pb7MPyH8ODzl18V4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "626923128166-g5k267shcnqdc0ugd7rdhg14fqe1updk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
