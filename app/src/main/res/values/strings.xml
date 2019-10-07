@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">EsTer</string>
-
+  
+    <string name="email_title">Email</string>
+    <string name="sex_title">Sexo</string>
+    <string name="username">Jorge</string>
+    <string name="user_email">jorge@gmail.com</string>
+    <string name="user_sex">jorge@gmail.com</string>
+    <string name="user_age">89 anos</string>
 </resources>
