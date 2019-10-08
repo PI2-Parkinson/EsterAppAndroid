@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.halo.profileui.Activity_Main">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,10 +39,10 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="15dp"
                 android:background="@color/grey" />
-
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/field_gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -151,7 +150,21 @@
         android:layout_below="@id/rellay1"
         android:orientation="horizontal">
 
+
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_logout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_bg"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:drawableLeft="@drawable/ic_google_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:text="logout" />
 
 
 </RelativeLayout>
