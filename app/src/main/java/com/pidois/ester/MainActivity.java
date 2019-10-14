@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         // Button listeners
-        //findViewById(R.id.btn_conectar).setOnClickListener(this);
+        findViewById(R.id.btn_conectar).setOnClickListener(this);
         //findViewById(R.id.btn_exerc).setOnClickListener(this);
         findViewById(R.id.btn_perfil).setOnClickListener(this);
         //findViewById(R.id.btn_dicas).setOnClickListener(this);
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         int i = view.getId();
         if (i == R.id.btn_conectar){
-            //todo
+            switchScreen(DeviceScanActivity.class);
         } else if (i == R.id.btn_exerc){
             //todo
         } else if (i == R.id.btn_perfil){
