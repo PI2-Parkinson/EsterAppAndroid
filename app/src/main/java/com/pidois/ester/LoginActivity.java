@@ -67,6 +67,8 @@ public class LoginActivity extends AppCompatActivity implements
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         // [END initialize_auth]
+
+
     }
 
     // [START on_start_check_user]
@@ -76,6 +78,7 @@ public class LoginActivity extends AppCompatActivity implements
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
+        skipLoginOnLogged(currentUser);
 
     }
     // [END on_start_check_user]
@@ -121,6 +124,7 @@ public class LoginActivity extends AppCompatActivity implements
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
+                            switchToMainMenu();
 
                         } else {
                             progressBar.setVisibility(View.INVISIBLE);
@@ -138,6 +142,19 @@ public class LoginActivity extends AppCompatActivity implements
                 });
     }
     // [END auth_with_google]
+
+    // [Check user]
+    private void skipLoginOnLogged (FirebaseUser user){
+        if (user != null){
+            switchToMainMenu();
+        }
+    }
+
+    private void switchToMainMenu () {
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        LoginActivity.this.startActivity(intent);
+        LoginActivity.this.finish();
+    }
 
     // [START signin]
     private void signIn() {
