@@ -2,6 +2,8 @@ package com.pidois.ester;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -23,7 +25,8 @@ public class CognitiveActivity extends ExerciseAbstractClass {
             "#FFFF00", "#008000",
             "#FFA500", "#800080",
             "#FF0081", "#8B4513",
-            "#FFFFFF", "#808080"};
+            "#FFFFFF", "#808080"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +37,7 @@ public class CognitiveActivity extends ExerciseAbstractClass {
 
     }
 
-    public void generateSequence (String[] colorName, String[] colorHex){
+    public int generateSequence(String[] colorName, String[] colorHex){
         int randomColorName = random.nextInt(10);
         int randomColorHex = random.nextInt(10);
         while(randomColorName == randomColorHex){
@@ -47,8 +50,12 @@ public class CognitiveActivity extends ExerciseAbstractClass {
         mText = new TextView(this);
         mText.setText(colorName[randomColorName]);
         mText.setTextColor(Color.parseColor(colorHex[randomColorHex]));
+        mText.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+        mText.setTextSize(TypedValue.COMPLEX_UNIT_SP,50);
 
         lView.addView(mText);
+
+        return randomColorHex;
 
     }
 
