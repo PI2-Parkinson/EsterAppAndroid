@@ -15,4 +15,50 @@
         android:orientation="horizontal">
 
     </LinearLayout>
+
+    <TableRow
+        android:layout_width="415dp"
+        android:layout_height="123dp"
+        android:layout_marginBottom="130dp"
+        android:gravity="center|center_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Chronometer
+            android:id="@+id/simpleChronometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow"
+        android:layout_width="415dp"
+        android:layout_height="132dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginEnd="80dp"
+        android:gravity="center|center_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/leftButton"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:background="@drawable/shape" />
+
+        <Button
+            android:id="@+id/centerButton"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:background="@drawable/shape" />
+
+        <Button
+            android:id="@+id/rightButton"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:background="@drawable/shape" />
+    </TableRow>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
