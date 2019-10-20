@@ -23,4 +23,8 @@
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
+    <style name="MyAppBarLayoutTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlHighlight">@color/colorAccent</item>
+    </style>
+
 </resources>
