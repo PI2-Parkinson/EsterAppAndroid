@@ -28,7 +28,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
-                    android:text="Últimas notícias"
+                    android:text="Últimas notícias relacionadas à Parkinson"
                     android:fontFamily="sans-serif-light"
                     android:textSize="17sp"
                     android:layout_marginLeft="16dp"
