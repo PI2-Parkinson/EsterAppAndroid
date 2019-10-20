@@ -100,8 +100,7 @@
                 android:background="@drawable/circle"
                 android:contentDescription="@string/app_name"
                 android:padding="3dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_user" />
+                android:scaleType="centerInside" />
 
         </RelativeLayout>
 

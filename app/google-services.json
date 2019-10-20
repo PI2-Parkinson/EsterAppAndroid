@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "626923128166-rokdt4jfa2cv57tcghcbam0qckde1bf3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pidois.ester",
+            "certificate_hash": "1d67bbd38250647270d061b7d02e4dd5350a7061"
+          }
+        },
+        {
+          "client_id": "626923128166-gijqrhv7cpc8acc1rs2rjcj1l60vm34k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pidois.ester",
+            "certificate_hash": "a67d9af98ac9732dc1867b8863379c4d2ed11c8f"
+          }
+        },
+        {
           "client_id": "626923128166-7cgt8naf6t4tq60k85o2kbfspsn2no9q.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
