@@ -2,6 +2,8 @@ package com.pidois.ester;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
@@ -13,8 +15,17 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.pidois.ester.Adapter.ProfilePersonalInfoAdapter;
+import com.pidois.ester.Models.Person;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
+
+    public RecyclerView vRecyclerView;
+    public ProfilePersonalInfoAdapter adapter;
+    public List<Person> dataPerson = new ArrayList<>();
 
     private FirebaseAuth mAuth;
 
@@ -22,7 +33,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
@@ -39,6 +49,13 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
+
+        vRecyclerView = findViewById(R.id.profile_myrecycler);
+        //vRecyclerView.setHasFixedSize(true);
+        vRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new ProfilePersonalInfoAdapter(dataPerson);
+        vRecyclerView.setAdapter(adapter);
+
     }
 
     /*@Override

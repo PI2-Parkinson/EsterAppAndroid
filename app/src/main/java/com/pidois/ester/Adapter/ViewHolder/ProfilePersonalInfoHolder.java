@@ -28,7 +28,7 @@ public class ProfilePersonalInfoHolder extends RecyclerView.ViewHolder {
         super(card);
         this.name = card.findViewById(R.id.profile_person_name);
         this.email = card.findViewById(R.id.profile_person_email);
-        this.birthday = card.findViewById(R.id.profile_person_email);
+        this.birthday = card.findViewById(R.id.profile_person_birthday);
         this.headerLayout = card.findViewById(R.id.profile_personal_header);
         this.footerLayout = card.findViewById(R.id.profile_personal_footer);
 
