@@ -97,13 +97,13 @@ public class NewsActivity extends AppCompatActivity implements  SwipeRefreshLayo
 
         String country = "br";
         String language = "pt";
-        String sources = "globo";
+        String sources = "globo,blasting-news-br,google-news-br";
         String q = "parkinson";
 
         Call<News> call;
 
         if (keyword.length() > 0 ){
-            call = apiInterface.getNewsSearch(q, sources, API_KEY);
+            call = apiInterface.getNewsSearch(q, sources, language, API_KEY);
         } else {
             call = apiInterface.getNews(country, sources, q, API_KEY);
         }

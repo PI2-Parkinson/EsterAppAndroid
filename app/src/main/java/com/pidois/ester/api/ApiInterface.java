@@ -16,7 +16,6 @@ public interface ApiInterface {
         @Query("q") String q,
         @Query("apiKey") String apiKey
 
-
     );
 
     @GET("everything")
@@ -24,6 +23,7 @@ public interface ApiInterface {
 
         @Query("q") String keyword,
         @Query("sources") String sources,
+        @Query("language") String language,
         @Query("apiKey") String apiKey
 
     );
