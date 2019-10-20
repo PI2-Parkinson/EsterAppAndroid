@@ -12,8 +12,10 @@ public interface ApiInterface {
     Call<News> getNews(
 
         @Query("country") String country,
+        @Query("sources") String sources,
         @Query("q") String q,
         @Query("apiKey") String apiKey
+
 
     );
 
@@ -21,7 +23,7 @@ public interface ApiInterface {
     Call<News> getNewsSearch(
 
         @Query("q") String keyword,
-        @Query("language") String language,
+        @Query("sources") String sources,
         @Query("apiKey") String apiKey
 
     );
