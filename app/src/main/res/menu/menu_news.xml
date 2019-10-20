@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/share"
-        android:title="Share"
+        android:title="Compartilhar"
         android:icon="@drawable/ic_share"
         app:showAsAction="always" />
 
     <item android:id="@+id/view_web"
-        android:title="Open with browser"
+        android:title="Abrir no navegador"
         app:showAsAction="never" />
 
 

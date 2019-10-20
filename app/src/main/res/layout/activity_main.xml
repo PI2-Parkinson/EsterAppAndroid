@@ -63,7 +63,7 @@
         android:background="#000"
         android:backgroundTint="@color/blue4"
         android:drawableRight="@drawable/ic_hint"
-        android:text="Dicas"
+        android:text="Notícias"
         app:layout_constraintBottom_toTopOf="@+id/guideline12"
         app:layout_constraintTop_toTopOf="@+id/guideline11"
         tools:layout_editor_absoluteX="162dp" />

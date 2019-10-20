@@ -26,7 +26,8 @@
         android:layout_below="@id/errorImage"
         android:gravity="center_horizontal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"/>
 
     <TextView
         android:id="@+id/errorMessage"
@@ -42,11 +43,11 @@
         android:id="@+id/btnRetry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Retry"
-        android:backgroundTint="@color/colorPrimary"
+        android:text="Atualizar"
+        android:backgroundTint="@color/blue1"
         android:textColor="#fff"
         android:layout_below="@id/errorMessage"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

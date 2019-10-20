@@ -162,7 +162,7 @@ public class NewsActivity extends AppCompatActivity implements  SwipeRefreshLayo
                 showErrorMessage(
                         R.drawable.oops,
                         "Oops..",
-                        "Falha na rede. Tente novamente\n"+
+                        "Sem conexão com a internet\n"+
                                 t.toString());
             }
         });
@@ -203,41 +203,6 @@ public class NewsActivity extends AppCompatActivity implements  SwipeRefreshLayo
             }
         });
 
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        final SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-        MenuItem searchMenuItem = menu.findItem(R.id.action_search);
-
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setQueryHint("Pesquisar notícias...");
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                if (query.length() > 2){
-                    onLoadingSwipeRefresh(query);
-                }
-                else {
-                    Toast.makeText(NewsActivity.this, "Digite mais do que duas letras!", Toast.LENGTH_SHORT).show();
-                }
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
-
-        searchMenuItem.getIcon().setVisible(false, false);
-
-        return true;
     }
 
     @Override
