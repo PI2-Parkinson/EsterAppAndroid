@@ -18,6 +18,10 @@ import java.util.Random;
 public class CognitiveActivity extends ExerciseAbstractClass implements View.OnClickListener {
 
     private TextView mText = null;
+    private int time = 0;
+    private int answers = 0;
+    private int correctAnswers = 0;
+
 
     Random random = new Random();
 
@@ -41,26 +45,28 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
         Chronometer simpleChronometer = findViewById(R.id.simpleChronometer);
         simpleChronometer.setBase(SystemClock.elapsedRealtime());
         simpleChronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
-            private long mLastAction = 0;
+
             public void onChronometerTick(Chronometer chronometer) {
 
                 int timeElapsed = (int) (SystemClock.elapsedRealtime() - chronometer.getBase());
 
                 int hours = timeElapsed / 3600000;
                 int minutes = (timeElapsed - hours * 3600000) / 60000;
-                int seconds = (timeElapsed - hours * 3600000 - minutes * 60000) / 1000;
 
-                Log.i("CognitiveActivity",minutes + " minutos " + seconds + " segundos");
+                Log.i("CognitiveActivity",minutes + " minutos " + time + " segundos");
 
-                if (seconds % 10 == 0) {
+                if (time == 10) {
+                    time = 0;
                     LinearLayout lView = findViewById(R.id.linearlayout);
                     lView.removeAllViewsInLayout();
                     showLayout();
+                    countAnswers();
 
                 } else if(minutes == 1){
                     endGame();
                     chronometer.stop();
                 }
+                time++;
             }
         });
         simpleChronometer.start();
@@ -160,30 +166,41 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
         int i = view.getId();
 
         if (i == R.id.leftButton){
+            time = 0;
             lView.removeAllViewsInLayout();
             mText.setText("Acertou!");
             lView.addView(mText);
             showLayout();
+            countAnswers();
+            countRightAnswers();
         } else if (i == R.id.centerButton){
+            time = 0;
             lView.removeAllViewsInLayout();
             mText.setText("Errou!");
             lView.addView(mText);
             showLayout();
+            countAnswers();
         } else if (i == R.id.rightButton){
+            time = 0;
             lView.removeAllViewsInLayout();
             mText.setText("Errou!");
             lView.addView(mText);
             showLayout();
+            countAnswers();
         }
     }
 
-    private void switchScreen (Class cl){
-        Intent intent = new Intent(CognitiveActivity.this, cl);
-        CognitiveActivity.this.startActivity(intent);
+    public int countAnswers(){
+        answers += 1;
+        Log.i("Total of answers", answers + " total answers");
+        return answers;
     }
 
-    public int countAnswers(int answer){
-        return answer;
+    public int countRightAnswers(){
+        correctAnswers += 1;
+        Log.i("Right answers", answers + " right answers");
+
+        return correctAnswers;
     }
 
     public int showRightAnswers(int answers){
