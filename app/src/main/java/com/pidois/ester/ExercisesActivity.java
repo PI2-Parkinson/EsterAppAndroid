@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
 
-public class ExercisesActivity extends AppCompatActivity implements View.OnClickListener {
+public class ExercisesActivity extends ExerciseAbstractClass implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
