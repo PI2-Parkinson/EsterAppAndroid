@@ -13,6 +13,8 @@ import android.widget.Chronometer;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 public class CognitiveActivity extends ExerciseAbstractClass implements View.OnClickListener {
@@ -21,6 +23,8 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
     private int time = 0;
     private int answers = 0;
     private int correctAnswers = 0;
+    ArrayList<Integer> randomColorArray = new ArrayList<>();
+    ArrayList<Integer> randomButtonArray = new ArrayList<>();
 
 
     Random random = new Random();
@@ -121,27 +125,59 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
     }
 
     public void generateButtons(int[] color){
+        randomButtonArray = new ArrayList<>();
         int randomColor = random.nextInt(10);
 
-        Button buttonLeft = findViewById(R.id.leftButton);
+        randomColorArray.add(R.id.leftButton);
+        randomColorArray.add(R.id.centerButton);
+        randomColorArray.add(R.id.rightButton);
+
+        int randomArray = random.nextInt((randomColorArray.size()));
+        Log.i("generateButtons","randomArraySize " + randomColorArray.size());
+        Log.i("generateButtons","randomArray " + randomArray);
+
+        int leftButton = randomColorArray.get(randomArray);
+        randomColorArray.remove(new Integer(leftButton));
+        randomButtonArray.add(leftButton);
+        randomArray = random.nextInt((randomColorArray.size()));
+        Log.i("generateButtons","randomArraySize " + randomColorArray.size());
+        Log.i("generateButtons","randomArray " + randomArray);
+        Log.i("generateButtons","leftButton " + leftButton + " id " + R.id.leftButton);
+
+
+        int centerButton = randomColorArray.get(randomArray);
+        randomColorArray.remove(new Integer(centerButton));
+        randomButtonArray.add(centerButton);
+        randomArray = 0;
+        Log.i("generateButtons","randomArraySize " + randomColorArray.size());
+        Log.i("generateButtons","randomArray " + randomArray);
+        Log.i("generateButtons","centerButton " + centerButton);
+
+        int rightButton = randomColorArray.get(randomArray);
+        randomColorArray.remove(new Integer(rightButton));
+        randomButtonArray.add(rightButton);
+
+        Log.i("generateButtons","rightButton " + rightButton);
+
+        Button buttonLeft = findViewById(leftButton);
         buttonLeft.setBackgroundColor(Color.parseColor(colorHex[color[0]]));
         buttonLeft.setOnClickListener(this);
 
-        Button buttonCenter = findViewById(R.id.centerButton);
+        Button buttonCenter = findViewById(centerButton);
         buttonCenter.setBackgroundColor(Color.parseColor(colorHex[color[1]]));
         buttonCenter.setOnClickListener(this);
 
-        Button buttonRight = findViewById(R.id.rightButton);
+        Button buttonRight = findViewById(rightButton);
 
         if(colorHex[randomColor] != colorHex[color[0]] &&
-                colorHex[randomColor] != colorHex[color[0]]){
+                colorHex[randomColor] != colorHex[color[1]]){
 
             buttonRight.setBackgroundColor(Color.parseColor(colorHex[randomColor]));
 
         } else {
 
             while(colorHex[randomColor] == colorHex[color[0]] ||
-                    colorHex[randomColor] == colorHex[color[0]]) {
+                    colorHex[randomColor] == colorHex[color[1]]) {
                 randomColor = random.nextInt(10);
             }
 
@@ -165,7 +201,7 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
         mText = new TextView(this);
         int i = view.getId();
 
-        if (i == R.id.leftButton){
+        if (i == randomButtonArray.get(0)){
             time = 0;
             lView.removeAllViewsInLayout();
             mText.setText("Acertou!");
@@ -173,14 +209,9 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
             showLayout();
             countAnswers();
             countRightAnswers();
-        } else if (i == R.id.centerButton){
-            time = 0;
-            lView.removeAllViewsInLayout();
-            mText.setText("Errou!");
-            lView.addView(mText);
-            showLayout();
-            countAnswers();
-        } else if (i == R.id.rightButton){
+            Log.i("onClick", "randomButtonArray " + randomButtonArray.size());
+            Log.i("onClick", "randomColorArray " + randomColorArray.size());
+        } else if (i == randomButtonArray.get(1) || i == randomButtonArray.get(2)){
             time = 0;
             lView.removeAllViewsInLayout();
             mText.setText("Errou!");
