@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //findViewById(R.id.btn_conectar).setOnClickListener(this);
         findViewById(R.id.btn_exerc).setOnClickListener(this);
         findViewById(R.id.btn_perfil).setOnClickListener(this);
-        //findViewById(R.id.btn_dicas).setOnClickListener(this);
+        findViewById(R.id.btn_dicas).setOnClickListener(this);
     }
 
     @Override
@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             switchScreen(ExercisesActivity.class);
         } else if (i == R.id.btn_perfil){
             switchScreen(ProfileActivity.class);
-        } else if (i == R.id.btn_dicas){
-            //todo
+        } else if (i==R.id.btn_dicas){
+            switchScreen(NewsActivity.class);
         }
     }
 

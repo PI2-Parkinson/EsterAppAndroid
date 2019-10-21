@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -13,11 +14,16 @@ import android.widget.Chronometer;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.DatabaseReference;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Random;
 
 public class CognitiveActivity extends ExerciseAbstractClass implements View.OnClickListener {
+
+    DatabaseReference database = FirebaseDatabase.getInstance().getReference();
 
     private TextView mText = null;
     private int time = 0;
@@ -46,6 +52,8 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cognitive);
+//        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+
         Chronometer simpleChronometer = findViewById(R.id.simpleChronometer);
         simpleChronometer.setBase(SystemClock.elapsedRealtime());
         simpleChronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
@@ -68,6 +76,7 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
 
                 } else if(minutes == 1){
                     endGame();
+                    database.child("answers").setValue(correctAnswers);
                     chronometer.stop();
                 }
                 time++;
@@ -234,7 +243,7 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
         return correctAnswers;
     }
 
-    public int showRightAnswers(int answers){
-        return answers;
+    public void showRightAnswers(){
+        database.child("answers").setValue(correctAnswers);
     }
 }
