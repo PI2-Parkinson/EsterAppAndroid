@@ -16,11 +16,11 @@ import java.util.List;
 
 public class ProfilePersonalInfoAdapter extends RecyclerView.Adapter<ProfilePersonalInfoHolder> {
 
-    //public static Context mContext;
+    public static Context mContext;
     public List<Person> dataPerson;
 
-    public ProfilePersonalInfoAdapter (List<Person> dataPerson){
-        //this.mContext = mContext;
+    public ProfilePersonalInfoAdapter (Context mContext, List<Person> dataPerson){
+        this.mContext = mContext;
         this.dataPerson = dataPerson;
     }
 
@@ -36,9 +36,9 @@ public class ProfilePersonalInfoAdapter extends RecyclerView.Adapter<ProfilePers
 
     @Override
     public void onBindViewHolder(@NonNull ProfilePersonalInfoHolder holder, int position) {
-        holder.name.setText("Diboas");
-        holder.birthday.setText("16/01/1960");
-        holder.email.setText("diboas@gmail.com");
+        holder.name.setText(dataPerson.get(position).getName());
+        holder.birthday.setText(dataPerson.get(position).getBirthday());
+        holder.email.setText(dataPerson.get(position).getEmail());
 
     }
 

@@ -5,8 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Shader;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -17,6 +24,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.pidois.ester.Adapter.ProfilePersonalInfoAdapter;
 import com.pidois.ester.Models.Person;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +37,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     public ProfilePersonalInfoAdapter adapter;
     public List<Person> dataPerson = new ArrayList<>();
 
+    public TextView profileName;
+    public ImageView profileImg;
+
     private FirebaseAuth mAuth;
 
     private GoogleSignInClient mGoogleSignInClient;
@@ -35,6 +48,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        profileName = findViewById(R.id.profileName);
+        profileImg = findViewById(R.id.profile_image);
+
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -50,10 +67,24 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
 
+        Picasso.get()
+                .load(currentUser.getPhotoUrl())
+                .transform(new CircleTransform())
+                .into(profileImg);
+
+
+        profileName.setText(currentUser.getDisplayName());
+
+        dataPerson.add(new Person(currentUser.getDisplayName(), currentUser.getEmail(), "16/09/1960"));
+        dataPerson.add(new Person("Vinicius Borges de Almeida", "vbda123@@gmail.com", "16/09/1993"));
+        dataPerson.add(new Person("Vinicius Borges de Almeida", "vbda123@@gmail.com", "16/09/1993"));
+        dataPerson.add(new Person("Vinicius Borges de Almeida", "vbda123@@gmail.com", "16/09/1993"));
+
+
         vRecyclerView = findViewById(R.id.profile_myrecycler);
-        //vRecyclerView.setHasFixedSize(true);
+        vRecyclerView.setHasFixedSize(true);
         vRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ProfilePersonalInfoAdapter(dataPerson);
+        adapter = new ProfilePersonalInfoAdapter(this, dataPerson);
         vRecyclerView.setAdapter(adapter);
 
     }
@@ -83,7 +114,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View view) {
         int i = view.getId();
-        if (i == R.id.btn_logout2){
+        if (i == R.id.btn_logout2) {
             signOut();
         }
     }
@@ -93,6 +124,41 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             findViewById(R.id.btn_logout2).setVisibility(View.INVISIBLE);
         } else {
             findViewById(R.id.btn_logout2).setVisibility(View.VISIBLE);
+        }
+    }
+
+    public class CircleTransform implements Transformation {
+        @Override
+        public Bitmap transform(Bitmap source) {
+            int size = Math.min(source.getWidth(), source.getHeight());
+
+            int x = (source.getWidth() - size) / 2;
+            int y = (source.getHeight() - size) / 2;
+
+            Bitmap squaredBitmap = Bitmap.createBitmap(source, x, y, size, size);
+            if (squaredBitmap != source) {
+                source.recycle();
+            }
+
+            Bitmap bitmap = Bitmap.createBitmap(size, size, source.getConfig());
+
+            Canvas canvas = new Canvas(bitmap);
+            Paint paint = new Paint();
+            BitmapShader shader = new BitmapShader(squaredBitmap,
+                    Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+            paint.setShader(shader);
+            paint.setAntiAlias(true);
+
+            float r = size / 2f;
+            canvas.drawCircle(r, r, r, paint);
+
+            squaredBitmap.recycle();
+            return bitmap;
+        }
+
+        @Override
+        public String key() {
+            return "circle";
         }
     }
 }

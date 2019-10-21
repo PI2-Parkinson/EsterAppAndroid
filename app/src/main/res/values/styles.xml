@@ -23,5 +23,10 @@
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
+    <!--Profile theme -->
+    <style name="ProfileTheme" parent="Theme.AppCompat.Light.NoActionBar">
+         <item name="colorPrimaryDark">#015F74</item>
+    </style>
+
 
 </resources>

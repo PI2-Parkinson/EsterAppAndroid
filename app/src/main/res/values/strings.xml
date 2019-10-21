@@ -7,4 +7,5 @@
     <string name="user_email">jorge@gmail.com</string>
     <string name="user_sex">jorge@gmail.com</string>
     <string name="user_age">89 anos</string>
+    <string name="logout">Sair</string>
 </resources>

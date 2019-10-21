@@ -6,26 +6,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000"
-    android:backgroundTint="@color/profileBG">
+    android:backgroundTint="#007C97">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
         app:layout_constraintBottom_toTopOf="@+id/guideline23"
         app:layout_constraintTop_toTopOf="@+id/guideline6"
         tools:layout_editor_absoluteX="0dp">
 
         <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/profile_myrecycler"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:scrollbars="vertical"/>
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </RelativeLayout>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"
@@ -42,7 +44,7 @@
         app:layout_constraintGuide_percent="0.25" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/profile_image"
         android:layout_width="132dp"
         android:layout_height="132dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
@@ -75,7 +77,7 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/round_bg"
         android:drawableLeft="@drawable/ic_google_logo"
-        android:text="logout"
+        android:text="@string/logout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline21"
         app:layout_constraintStart_toStartOf="@+id/guideline19"
@@ -92,11 +94,15 @@
         android:id="@+id/profileName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="TextView"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toStartOf="@+id/guideline21"
         app:layout_constraintStart_toStartOf="@+id/guideline19"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_image" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

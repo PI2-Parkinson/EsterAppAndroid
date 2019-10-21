@@ -9,7 +9,7 @@
     android:layout_marginBottom="5dp"
     android:layout_marginLeft="7dp"
     android:layout_marginRight="7dp"
-    app:cardElevation="@dimen/cardview_default_elevation"
+    app:cardElevation="2dp"
     app:cardCornerRadius="10dp" >
 
     <RelativeLayout
@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/profile_personal_header"
-            android:padding="10dp">
+            android:padding="15dp">
 
             <TextView
                 android:id="@+id/profile_fixed_name"
