@@ -103,7 +103,7 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
         lView.removeAllViewsInLayout();
         mText.setText("Fim do exercício");
         mText.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-        mText.setTextSize(TypedValue.COMPLEX_UNIT_SP,50);
+        mText.setTextSize(TypedValue.COMPLEX_UNIT_SP,30);
         lView.addView(mText);
     }
 
