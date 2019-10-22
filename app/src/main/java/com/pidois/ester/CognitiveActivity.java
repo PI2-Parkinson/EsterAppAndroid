@@ -22,7 +22,20 @@ import com.google.firebase.database.DatabaseReference;
 import java.util.ArrayList;
 import java.util.Random;
 
+
 public class CognitiveActivity extends ExerciseAbstractClass implements View.OnClickListener {
+
+    public static final String RED = "#FF0000";
+    public static final String BLUE = "#0000FF";
+    public static final String GREEN = "#00FF00";
+    public static final String YELLOW = "#FFFF00";
+    public static final String ORANGE = "#FF8000";
+    public static final String PURPLE = "#9900FF";
+    public static final String PINK = "#FF00AA";
+    public static final String BROWN = "#B36800";
+    public static final String WHITE = "#FFFFFF";
+    public static final String GRAY = "#808080";
+    public static final String BLACK = "#000000";
 
     DatabaseReference database = FirebaseDatabase.getInstance().getReference();
 
@@ -42,11 +55,11 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
             "rosa", "marrom",
             "branco", "cinza"
     };
-    private String[] colorHex = {"#FF0000", "#0000FF",
-            "#FFFF00", "#008000",
-            "#FFA500", "#800080",
-            "#FF0081", "#8B4513",
-            "#FFFFFF", "#808080"
+    private String[] colorHex = {RED, BLUE,
+            YELLOW, GREEN,
+            ORANGE, PURPLE,
+            PINK, BROWN,
+            WHITE, GRAY
     };
 
     @Override
@@ -118,7 +131,7 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
         mText.setText("Fim do exercício");
         mText.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
         mText.setTextSize(TypedValue.COMPLEX_UNIT_SP,30);
-        lView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+        lView.setBackgroundColor(Color.parseColor(WHITE));
         lView.addView(mText);
         showRightAnswers();
     }
@@ -134,7 +147,7 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
         mText.setTextColor(Color.parseColor(colorHex[color[1]]));
         mText.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
         mText.setTextSize(TypedValue.COMPLEX_UNIT_SP,50);
-        mText.setBackgroundColor(Color.parseColor("#000000"));
+        mText.setBackgroundColor(Color.parseColor(BLACK));
 
         lView.addView(mText);
 

@@ -9,9 +9,10 @@
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="0dp"
-        android:layout_height="168dp"
+        android:layout_height="0dp"
         android:background="#63CFDB"
         android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/chronometerTableRow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -180,7 +181,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginBottom="35dp"
-                android:textSize="40dp"
+                android:textSize="40sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
