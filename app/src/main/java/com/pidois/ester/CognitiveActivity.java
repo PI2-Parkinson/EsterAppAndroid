@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.LinearLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 
@@ -76,7 +77,6 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
 
                 } else if(minutes == 1){
                     endGame();
-                    database.child("answers").setValue(correctAnswers);
                     chronometer.stop();
                 }
                 time++;
@@ -108,12 +108,17 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
 
     public void endGame(){
         LinearLayout lView = findViewById(R.id.linearlayout);
+        TableRow tableRow = findViewById(R.id.tableRow);
+        TableRow chronometerTableRow = findViewById(R.id.chronometerTableRow);
         mText = new TextView(this);
-        lView.removeAllViewsInLayout();
+        lView.removeAllViews();
+        tableRow.removeAllViews();
+        chronometerTableRow.removeAllViews();
         mText.setText("Fim do exercício");
         mText.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
         mText.setTextSize(TypedValue.COMPLEX_UNIT_SP,30);
         lView.addView(mText);
+        showRightAnswers();
     }
 
     public void showSequence(int[] color){
@@ -213,7 +218,6 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
         if (i == randomButtonArray.get(0)){
             time = 0;
             lView.removeAllViewsInLayout();
-            mText.setText("Acertou!");
             lView.addView(mText);
             showLayout();
             countAnswers();
@@ -223,7 +227,6 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
         } else if (i == randomButtonArray.get(1) || i == randomButtonArray.get(2)){
             time = 0;
             lView.removeAllViewsInLayout();
-            mText.setText("Errou!");
             lView.addView(mText);
             showLayout();
             countAnswers();
@@ -244,6 +247,8 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
     }
 
     public void showRightAnswers(){
-        database.child("answers").setValue(correctAnswers);
+        database.child("answers").child("rightAnswers").setValue(correctAnswers);
+        database.child("answers").child("totalAnswers").setValue(answers);
+        database.child("answers").child("wrongAnswers").setValue(answers - correctAnswers);
     }
 }
