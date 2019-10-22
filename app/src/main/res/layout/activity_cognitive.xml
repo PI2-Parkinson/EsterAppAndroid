@@ -7,13 +7,29 @@
     tools:context=".CognitiveActivity">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="#ffffff"
+        android:id="@+id/relativeLayout"
+        android:layout_width="0dp"
+        android:layout_height="168dp"
+        android:background="#63CFDB"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="196dp"
+                android:layout_height="62dp"
+                android:layout_marginTop="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_ester" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline20"
@@ -30,24 +46,78 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="110dp" />
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="196dp"
-            android:layout_height="62dp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline21"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline20"
-            app:srcCompat="@drawable/ic_ester" />
-
     </RelativeLayout>
 
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:background="@drawable/shape_linearlayout"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="@string/msg_ex4"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="145dp"
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/tableRow2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/linearlayout"
+                android:layout_width="307dp"
+                android:layout_height="129dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/shape_linear"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
     <TableRow
-        android:layout_width="410dp"
-        android:layout_height="71dp"
+        android:id="@+id/tableRow2"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:background="#FFFFFF"
         android:gravity="center|center_horizontal"
         app:layout_constraintBottom_toTopOf="@+id/tableRow"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/textView2"
@@ -59,23 +129,13 @@
             android:textSize="14dp" />
     </TableRow>
 
-    <LinearLayout
-        android:id="@+id/linearlayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_vertical|center_horizontal"
-        android:orientation="horizontal">
-
-    </LinearLayout>
-
     <TableRow
         android:id="@+id/tableRow"
-        android:layout_width="415dp"
+        android:layout_width="0dp"
         android:layout_height="132dp"
-        android:layout_marginBottom="130dp"
+        android:background="#FFFFFF"
         android:gravity="center|center_horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/chronometerTableRow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -84,28 +144,27 @@
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:layout_marginRight="16dp"
-            android:background = "@drawable/shape"/>
+            android:background="@drawable/shape" />
 
         <Button
             android:id="@+id/centerButton"
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:layout_marginRight="16dp"
-            android:background = "@drawable/shape"/>
+            android:background="@drawable/shape" />
 
         <Button
             android:id="@+id/rightButton"
             android:layout_width="110dp"
             android:layout_height="110dp"
-            android:background = "@drawable/shape"/>
+            android:background="@drawable/shape" />
     </TableRow>
 
     <TableRow
         android:id="@+id/chronometerTableRow"
-        android:layout_width="415dp"
+        android:layout_width="0dp"
         android:layout_height="123dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginEnd="80dp"
+        android:background="#FFFFFF"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

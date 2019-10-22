@@ -113,10 +113,12 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
         mText = new TextView(this);
         lView.removeAllViews();
         tableRow.removeAllViews();
+        tableRow.removeAllViewsInLayout();
         chronometerTableRow.removeAllViews();
         mText.setText("Fim do exercício");
         mText.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
         mText.setTextSize(TypedValue.COMPLEX_UNIT_SP,30);
+        lView.setBackgroundColor(Color.parseColor("#FFFFFF"));
         lView.addView(mText);
         showRightAnswers();
     }
