@@ -2,6 +2,7 @@ package com.pidois.ester.Adapter;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.pidois.ester.R;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProfileAdapter extends RecyclerView.Adapter {
@@ -28,6 +30,12 @@ public class ProfileAdapter extends RecyclerView.Adapter {
     private List<ProfileItem> mProfileItem;
     private List<Person> dataPerson;
     private List<Strap> dataStrap;
+
+    public ProfileAdapter (List<Person> dataPerson, List<Strap> dataStrap, List<ProfileItem> mProfileItem){
+        this.dataStrap = dataStrap;
+        this.dataPerson = dataPerson;
+        this.mProfileItem = mProfileItem;
+    }
 
     class ProfilePersonalInfoHolder extends RecyclerView.ViewHolder {
 
@@ -83,9 +91,12 @@ public class ProfileAdapter extends RecyclerView.Adapter {
 
         }
 
-        void bindView (int position){
+        /*void bindView (int position){
             Person person = (Person) mProfileItem.get(position);
-         }
+            name.setText(dataPerson.get(position).getName());
+            birthday.setText(dataPerson.get(position).getBirthday());
+            email.setText(dataPerson.get(position).getEmail());
+         }*/
 
 
     }
@@ -105,7 +116,7 @@ public class ProfileAdapter extends RecyclerView.Adapter {
             this.scalePos1 = card.findViewById(R.id.profile_strap_scale_data1);
             this.scalePos2 = card.findViewById(R.id.profile_strap_scale_data2);
             this.scalePos3 = card.findViewById(R.id.profile_strap_scale_data3);
-            this.date = card.findViewById(R.id.profile_strap_fixed_date);
+            this.date = card.findViewById(R.id.profile_strap_date);
             this.headerLayout = card.findViewById(R.id.profile_strap_header);
             this.footerLayout = card.findViewById(R.id.profile_strap_footer);
 
@@ -143,9 +154,13 @@ public class ProfileAdapter extends RecyclerView.Adapter {
             });
         }
 
-        void bindView (int position) {
+        /*void bindView (int position) {
             Strap strap = (Strap) mProfileItem.get(position);
-        }
+            scalePos1.setText(dataStrap.get(position).getTremorPos1());
+            scalePos2.setText(dataStrap.get(position).getTremorPos2());
+            scalePos3.setText(dataStrap.get(position).getTremorPos3());
+            date.setText(dataStrap.get(position).getDate());
+        }*/
 
     }
 
@@ -212,7 +227,7 @@ public class ProfileAdapter extends RecyclerView.Adapter {
                 itemView = (CardView) LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.profile_strap_item, parent, false);
                 return new ProfileStrapHolder(itemView);
-            default: // TYPE_NEWSPAPER
+            default: // TYPE_PERSONAL_INFO
                 itemView = (CardView) LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.profile_personal_item, parent, false);
                 return new ProfilePersonalInfoHolder(itemView);
@@ -223,16 +238,17 @@ public class ProfileAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         switch (getItemViewType(position)) {
             case ProfileItem.TYPE_PERSONAL_INFO:
-                ((ProfilePersonalInfoHolder) holder).bindView(position);
+                //((ProfilePersonalInfoHolder) holder).bindView(position);
                 ((ProfilePersonalInfoHolder) holder).name.setText(dataPerson.get(position).getName());
                 ((ProfilePersonalInfoHolder) holder).birthday.setText(dataPerson.get(position).getBirthday());
                 ((ProfilePersonalInfoHolder) holder).email.setText(dataPerson.get(position).getEmail());
                 break;
             case ProfileItem.TYPE_STRAP:
-                ((ProfileStrapHolder) holder).bindView(position);
+                //((ProfileStrapHolder) holder).bindView(position);
                 ((ProfileStrapHolder) holder).scalePos1.setText(dataStrap.get(position).getTremorPos1());
                 ((ProfileStrapHolder) holder).scalePos2.setText(dataStrap.get(position).getTremorPos2());
-                ((ProfileStrapHolder) holder).scalePos3 .setText(dataStrap.get(position).getTremorPos3());
+                ((ProfileStrapHolder) holder).scalePos3.setText(dataStrap.get(position).getTremorPos3());
+                ((ProfileStrapHolder) holder).date.setText(dataStrap.get(position).getDate());
                 break;
         }
     }
@@ -244,6 +260,16 @@ public class ProfileAdapter extends RecyclerView.Adapter {
         } else {
             return mProfileItem.size();
         }
+    }
+
+    public void setProfileItem(List<? extends ProfileItem> profileItem) {
+        if (mProfileItem == null){
+            mProfileItem = new ArrayList<>();
+        }
+        mProfileItem.clear();
+        mProfileItem.addAll(profileItem);
+        //mProfileItem.addAll(profileItem2);
+        notifyDataSetChanged();
     }
 
 }

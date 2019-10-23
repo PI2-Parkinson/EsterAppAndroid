@@ -12,6 +12,7 @@ import android.graphics.Paint;
 import android.graphics.Shader;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,8 +23,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.pidois.ester.Adapter.ProfileAdapter;
 import com.pidois.ester.Adapter.ProfilePersonalInfoAdapter;
 import com.pidois.ester.Models.Person;
+import com.pidois.ester.Models.Strap;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -31,11 +34,14 @@ import com.squareup.picasso.Transformation;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
+public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
 
-    public RecyclerView vRecyclerView;
-    public ProfilePersonalInfoAdapter adapter;
+    public RecyclerView vRecyclerView, xRecyclerView;
+    public ProfileAdapter adapterStrap; //adapterPerson;
+    public ProfilePersonalInfoAdapter adapterPerson;
     public List<Person> dataPerson = new ArrayList<>();
+    public List<Strap> dataStrap = new ArrayList<>();
+    public List<ProfileItem> profileItem = new ArrayList<>();
 
     public TextView profileName;
     public ImageView profileImg;
@@ -75,17 +81,32 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         profileName.setText(currentUser.getDisplayName());
 
+
         dataPerson.add(new Person(currentUser.getDisplayName(), currentUser.getEmail(), "16/09/1960"));
-        dataPerson.add(new Person("Vinicius Borges de Almeida", "vbda123@@gmail.com", "16/09/1993"));
-        dataPerson.add(new Person("Vinicius Borges de Almeida", "vbda123@@gmail.com", "16/09/1993"));
-        dataPerson.add(new Person("Vinicius Borges de Almeida", "vbda123@@gmail.com", "16/09/1993"));
+        dataStrap.add(new Strap("1", "4", "2", "22/10/2019"));
 
 
         vRecyclerView = findViewById(R.id.profile_myrecycler);
         vRecyclerView.setHasFixedSize(true);
         vRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ProfilePersonalInfoAdapter(this, dataPerson);
-        vRecyclerView.setAdapter(adapter);
+        adapterPerson = new ProfilePersonalInfoAdapter(this, dataPerson);
+        vRecyclerView.setAdapter(adapterPerson);
+        //adapterPerson.setProfileItem(dataPerson);
+
+        xRecyclerView = findViewById(R.id.profile_myrecycler2);
+        xRecyclerView.setHasFixedSize(true);
+        xRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapterStrap = new ProfileAdapter(dataPerson, dataStrap, profileItem);
+        xRecyclerView.setAdapter(adapterStrap);
+        adapterStrap.setProfileItem(dataStrap);
+        //dapter.setProfileItem(dataPerson);
+
+        /*vRecyclerView = findViewById(R.id.profile_myrecycler3);
+        vRecyclerView.setHasFixedSize(true);
+        vRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapterPerson = new ProfilePersonalInfoAdapter(this, dataPerson);
+        vRecyclerView.setAdapter(adapterPerson);*/
+
 
     }
 
@@ -161,4 +182,5 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             return "circle";
         }
     }
+
 }

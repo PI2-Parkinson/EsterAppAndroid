@@ -6,48 +6,48 @@ import java.util.Date;
 
 public class Strap implements ProfileItem {
 
-    private int tremorPos1;
-    private int tremorPos2;
-    private int tremorPos3;
-    private Date date;
+    private String tremorPos1;
+    private String tremorPos2;
+    private String tremorPos3;
+    private String date;
 
 
-    public Strap (int tremorPos1, int tremorPos2, int tremorPos3, Date date){
+    public Strap (String tremorPos1, String tremorPos2, String tremorPos3, String date){
         this.tremorPos1 = tremorPos1;
         this.tremorPos2 = tremorPos2;
         this.tremorPos3 = tremorPos3;
         this.date = date;
     }
 
-    public int getTremorPos1() {
+    public String getTremorPos1() {
         return tremorPos1;
     }
 
-    public int getTremorPos2() {
+    public String getTremorPos2() {
         return tremorPos2;
     }
 
-    public int getTremorPos3() {
+    public String getTremorPos3() {
         return tremorPos3;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setTremorPos1(int tremorPos1) {
+    public void setTremorPos1(String tremorPos1) {
         this.tremorPos1 = tremorPos1;
     }
 
-    public void setTremorPos2(int tremorPos2) {
+    public void setTremorPos2(String tremorPos2) {
         this.tremorPos2 = tremorPos2;
     }
 
-    public void setTremorPos3(int tremorPos3) {
+    public void setTremorPos3(String tremorPos3) {
         this.tremorPos3 = tremorPos3;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

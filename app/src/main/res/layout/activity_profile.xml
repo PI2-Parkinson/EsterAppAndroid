@@ -27,6 +27,20 @@
                 android:layout_height="wrap_content"
                 android:scrollbars="vertical"/>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/profile_myrecycler2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profile_myrecycler"
+                android:scrollbars="vertical"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/profile_myrecycler3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profile_myrecycler2"
+                android:scrollbars="vertical"/>
+
     </RelativeLayout>
 
     <androidx.constraintlayout.widget.Guideline
