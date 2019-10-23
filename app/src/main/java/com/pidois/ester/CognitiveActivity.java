@@ -16,6 +16,8 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DatabaseReference;
 
@@ -24,6 +26,9 @@ import java.util.Random;
 
 
 public class CognitiveActivity extends ExerciseAbstractClass implements View.OnClickListener {
+
+    FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+
 
     public static final String RED = "#FF0000";
     public static final String BLUE = "#0000FF";
@@ -262,8 +267,8 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
     }
 
     public void showRightAnswers(){
-        database.child("answers").child("rightAnswers").setValue(correctAnswers);
-        database.child("answers").child("totalAnswers").setValue(answers);
-        database.child("answers").child("wrongAnswers").setValue(answers - correctAnswers);
+        database.child(currentFirebaseUser.getUid()).child("answers").child("rightAnswers").setValue(correctAnswers);
+        database.child(currentFirebaseUser.getUid()).child("answers").child("totalAnswers").setValue(answers);
+        database.child(currentFirebaseUser.getUid()).child("answers").child("wrongAnswers").setValue(answers - correctAnswers);
     }
 }
