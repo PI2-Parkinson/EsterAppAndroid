@@ -26,6 +26,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.pidois.ester.Adapter.ProfileAdapter;
 import com.pidois.ester.Adapter.ProfilePersonalInfoAdapter;
 import com.pidois.ester.Models.Person;
+import com.pidois.ester.Models.Profile;
 import com.pidois.ester.Models.Strap;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
@@ -36,12 +37,9 @@ import java.util.List;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
 
-    public RecyclerView vRecyclerView, xRecyclerView;
-    public ProfileAdapter adapterStrap; //adapterPerson;
-    public ProfilePersonalInfoAdapter adapterPerson;
-    public List<Person> dataPerson = new ArrayList<>();
-    public List<Strap> dataStrap = new ArrayList<>();
-    public List<ProfileItem> profileItem = new ArrayList<>();
+    public RecyclerView vRecyclerView;
+    public ProfileAdapter profileAdapter;
+    public List<Profile> dataProfile = new ArrayList<>();
 
     public TextView profileName;
     public ImageView profileImg;
@@ -81,32 +79,39 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         profileName.setText(currentUser.getDisplayName());
 
+        //dataProfile.add(new Profile(currentUser.getDisplayName(), currentUser.getEmail(), "24/10/2019", "", "", "", ""));
+        //dataProfile.add(new Profile("", "", "", "1", "2", "3", "16/01/1993"));
 
-        dataPerson.add(new Person(currentUser.getDisplayName(), currentUser.getEmail(), "16/09/1960"));
-        dataStrap.add(new Strap("1", "4", "2", "22/10/2019"));
+        Profile profile = new Profile();
+        profile.setType(1);
+        profile.setName(currentUser.getDisplayName());
+        profile.setEmail(currentUser.getEmail());
+        profile.setBirthday("24/10/2016");
+        dataProfile.add(profile);
+
+        profile = new Profile();
+        profile.setType(3);
+        profile.setTotalAnswers("69");
+        profile.setRightAnswers("30");
+        profile.setWrongAnswers("39");
+        profile.setCognitiveDate("25/10/2019");
+        dataProfile.add(profile);
+
+        profile = new Profile();
+        profile.setType(2);
+        profile.setTremorPos1("1");
+        profile.setTremorPos2("2");
+        profile.setTremorPos3("3");
+        profile.setDate("24/10/2019");
+        dataProfile.add(profile);
+
 
 
         vRecyclerView = findViewById(R.id.profile_myrecycler);
         vRecyclerView.setHasFixedSize(true);
         vRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapterPerson = new ProfilePersonalInfoAdapter(this, dataPerson);
-        vRecyclerView.setAdapter(adapterPerson);
-        //adapterPerson.setProfileItem(dataPerson);
-
-        xRecyclerView = findViewById(R.id.profile_myrecycler2);
-        xRecyclerView.setHasFixedSize(true);
-        xRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapterStrap = new ProfileAdapter(dataPerson, dataStrap, profileItem);
-        xRecyclerView.setAdapter(adapterStrap);
-        adapterStrap.setProfileItem(dataStrap);
-        //dapter.setProfileItem(dataPerson);
-
-        /*vRecyclerView = findViewById(R.id.profile_myrecycler3);
-        vRecyclerView.setHasFixedSize(true);
-        vRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapterPerson = new ProfilePersonalInfoAdapter(this, dataPerson);
-        vRecyclerView.setAdapter(adapterPerson);*/
-
+        profileAdapter = new ProfileAdapter(this, dataProfile);
+        vRecyclerView.setAdapter(profileAdapter);
 
     }
 

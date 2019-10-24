@@ -3,6 +3,7 @@ package com.pidois.ester.Adapter;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pidois.ester.Models.Person;
+import com.pidois.ester.Models.Profile;
 import com.pidois.ester.Models.Strap;
 import com.pidois.ester.ProfileItem;
 import com.pidois.ester.R;
@@ -27,14 +29,19 @@ import java.util.List;
 
 public class ProfileAdapter extends RecyclerView.Adapter {
 
-    private List<ProfileItem> mProfileItem;
-    private List<Person> dataPerson;
-    private List<Strap> dataStrap;
+    private static int TYPE_PERSON = 1;
+    private static int TYPE_STRAP = 2;
+    private static int TYPE_COGNITIVE = 3;
 
-    public ProfileAdapter (List<Person> dataPerson, List<Strap> dataStrap, List<ProfileItem> mProfileItem){
-        this.dataStrap = dataStrap;
-        this.dataPerson = dataPerson;
-        this.mProfileItem = mProfileItem;
+    //private List<ProfileItem> mProfileItem;
+    private Context context;
+    //private List<Person> dataPerson;
+    //private List<Strap> dataStrap;
+    private List<Profile> dataProfile;
+
+    public ProfileAdapter(Context context, List<Profile> dataProfile) {
+        this.dataProfile = dataProfile;
+        this.context = context;
     }
 
     class ProfilePersonalInfoHolder extends RecyclerView.ViewHolder {
@@ -90,15 +97,63 @@ public class ProfileAdapter extends RecyclerView.Adapter {
 
 
         }
+    }
 
-        /*void bindView (int position){
-            Person person = (Person) mProfileItem.get(position);
-            name.setText(dataPerson.get(position).getName());
-            birthday.setText(dataPerson.get(position).getBirthday());
-            email.setText(dataPerson.get(position).getEmail());
-         }*/
+    class ProfileCognitiveHolder extends RecyclerView.ViewHolder {
+
+        public TextView totalAnswers;
+        public TextView rightAnswers;
+        public TextView wrongAnswers;
+        public TextView date;
+        public RelativeLayout headerLayout;
+        public RelativeLayout footerLayout;
+        public ValueAnimator vAnimator;
+
+        public ProfileCognitiveHolder(CardView card) {
+
+            super(card);
+            this.totalAnswers = card.findViewById(R.id.profile_cognitive_total);
+            this.rightAnswers = card.findViewById(R.id.profile_cognitive_right);
+            this.wrongAnswers = card.findViewById(R.id.profile_cognitive_wrong);
+            this.date = card.findViewById(R.id.profile_cognitive_date);
+            this.headerLayout = card.findViewById(R.id.profile_cognitive_header);
+            this.footerLayout = card.findViewById(R.id.profile_cognitive_footer);
+
+            this.footerLayout.setVisibility(View.GONE);
+
+            this.footerLayout.getViewTreeObserver().addOnPreDrawListener(
+                    new ViewTreeObserver.OnPreDrawListener() {
+
+                        @Override
+                        public boolean onPreDraw() {
+                            footerLayout.getViewTreeObserver().removeOnPreDrawListener(this);
+                            footerLayout.setVisibility(View.GONE);
+
+                            final int widthSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+                            final int heightSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+                            footerLayout.measure(widthSpec, heightSpec);
+
+                            vAnimator = slideAnimator(0, footerLayout.getMeasuredHeight(), footerLayout);
+                            return true;
+                        }
+                    });
+
+            this.headerLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.i("LOG", "onClickListener of headerLayout clicked");
+                    if (footerLayout.getVisibility() == View.GONE) {
+                        Log.i("LOG", "Expand Click");
+                        expand(footerLayout, vAnimator);
+                    } else {
+                        Log.i("LOG", "Collapse Click");
+                        collapse(footerLayout);
+                    }
+                }
+            });
 
 
+        }
     }
 
     class ProfileStrapHolder extends RecyclerView.ViewHolder {
@@ -111,7 +166,7 @@ public class ProfileAdapter extends RecyclerView.Adapter {
         public RelativeLayout footerLayout;
         public ValueAnimator vAnimator;
 
-        public ProfileStrapHolder (CardView card){
+        public ProfileStrapHolder(CardView card) {
             super(card);
             this.scalePos1 = card.findViewById(R.id.profile_strap_scale_data1);
             this.scalePos2 = card.findViewById(R.id.profile_strap_scale_data2);
@@ -154,14 +209,6 @@ public class ProfileAdapter extends RecyclerView.Adapter {
             });
         }
 
-        /*void bindView (int position) {
-            Strap strap = (Strap) mProfileItem.get(position);
-            scalePos1.setText(dataStrap.get(position).getTremorPos1());
-            scalePos2.setText(dataStrap.get(position).getTremorPos2());
-            scalePos3.setText(dataStrap.get(position).getTremorPos3());
-            date.setText(dataStrap.get(position).getDate());
-        }*/
-
     }
 
     private void expand(RelativeLayout footerLayout, Animator vAnimator) {
@@ -196,7 +243,7 @@ public class ProfileAdapter extends RecyclerView.Adapter {
         mAnimator.start();
     }
 
-    private ValueAnimator slideAnimator(int start, int end, final RelativeLayout footerLayout ) {
+    private ValueAnimator slideAnimator(int start, int end, final RelativeLayout footerLayout) {
         ValueAnimator animator = ValueAnimator.ofInt(start, end);
 
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -215,61 +262,68 @@ public class ProfileAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int position) {
-        return mProfileItem.get(position).getType();
+        if (dataProfile.get(position).getType() == 1) {
+            return TYPE_PERSON;
+        } else if (dataProfile.get(position).getType() == 2) {
+            return TYPE_STRAP;
+        } else {
+            return TYPE_COGNITIVE;
+        }
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         CardView itemView;
-        switch (viewType) {
-            case ProfileItem.TYPE_STRAP:
-                itemView = (CardView) LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.profile_strap_item, parent, false);
-                return new ProfileStrapHolder(itemView);
-            default: // TYPE_PERSONAL_INFO
-                itemView = (CardView) LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.profile_personal_item, parent, false);
-                return new ProfilePersonalInfoHolder(itemView);
+        if (viewType == TYPE_PERSON) {
+            itemView = (CardView) LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.profile_personal_item, parent, false);
+            return new ProfilePersonalInfoHolder(itemView);
+        } else if (viewType == TYPE_STRAP) {
+            itemView = (CardView) LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.profile_strap_item, parent, false);
+            return new ProfileStrapHolder(itemView);
+        } else {
+            itemView = (CardView) LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.profile_cognitive_item, parent, false);
+            return new ProfileCognitiveHolder(itemView);
         }
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        switch (getItemViewType(position)) {
-            case ProfileItem.TYPE_PERSONAL_INFO:
-                //((ProfilePersonalInfoHolder) holder).bindView(position);
-                ((ProfilePersonalInfoHolder) holder).name.setText(dataPerson.get(position).getName());
-                ((ProfilePersonalInfoHolder) holder).birthday.setText(dataPerson.get(position).getBirthday());
-                ((ProfilePersonalInfoHolder) holder).email.setText(dataPerson.get(position).getEmail());
-                break;
-            case ProfileItem.TYPE_STRAP:
-                //((ProfileStrapHolder) holder).bindView(position);
-                ((ProfileStrapHolder) holder).scalePos1.setText(dataStrap.get(position).getTremorPos1());
-                ((ProfileStrapHolder) holder).scalePos2.setText(dataStrap.get(position).getTremorPos2());
-                ((ProfileStrapHolder) holder).scalePos3.setText(dataStrap.get(position).getTremorPos3());
-                ((ProfileStrapHolder) holder).date.setText(dataStrap.get(position).getDate());
-                break;
+        if (getItemViewType(position) == TYPE_PERSON) {
+            //((ProfilePersonalInfoHolder) holder).bindView(position);
+            ((ProfilePersonalInfoHolder) holder).name.setText(dataProfile.get(position).getName());
+            ((ProfilePersonalInfoHolder) holder).birthday.setText(dataProfile.get(position).getBirthday());
+            ((ProfilePersonalInfoHolder) holder).email.setText(dataProfile.get(position).getEmail());
+        } else if (getItemViewType(position) == TYPE_STRAP) {
+            //((ProfileStrapHolder) holder).bindView(position);
+            ((ProfileStrapHolder) holder).scalePos1.setText(dataProfile.get(position).getTremorPos1());
+            ((ProfileStrapHolder) holder).scalePos2.setText(dataProfile.get(position).getTremorPos2());
+            ((ProfileStrapHolder) holder).scalePos3.setText(dataProfile.get(position).getTremorPos3());
+            ((ProfileStrapHolder) holder).date.setText(dataProfile.get(position).getDate());
+        } else {
+            ((ProfileCognitiveHolder) holder).totalAnswers.setText(dataProfile.get(position).getTotalAnswers());
+            ((ProfileCognitiveHolder) holder).rightAnswers.setText(dataProfile.get(position).getRightAnswers());
+            ((ProfileCognitiveHolder) holder).wrongAnswers.setText(dataProfile.get(position).getWrongAnswers());
+            ((ProfileCognitiveHolder) holder).date.setText(dataProfile.get(position).getCognitiveDate());
         }
     }
 
     @Override
     public int getItemCount() {
-        if (mProfileItem == null) {
-            return 0;
-        } else {
-            return mProfileItem.size();
-        }
+        return dataProfile.size();
     }
 
-    public void setProfileItem(List<? extends ProfileItem> profileItem) {
-        if (mProfileItem == null){
+    /*public void setProfileItem(List<? extends ProfileItem> profileItem) {
+        if (mProfileItem == null) {
             mProfileItem = new ArrayList<>();
         }
         mProfileItem.clear();
         mProfileItem.addAll(profileItem);
         //mProfileItem.addAll(profileItem2);
         notifyDataSetChanged();
-    }
+    }*/
 
 }
