@@ -90,6 +90,13 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         dataProfile.add(profile);
 
         profile = new Profile();
+        profile.setType(4);
+        profile.setSoundLevel("5");
+        profile.setSoundRightAnswers("20");
+        profile.setSoundDate("25/10/2019");
+        dataProfile.add(profile);
+
+        profile = new Profile();
         profile.setType(3);
         profile.setTotalAnswers("69");
         profile.setRightAnswers("30");

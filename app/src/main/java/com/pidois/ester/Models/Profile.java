@@ -14,6 +14,9 @@ public class Profile {
     //Cognitive ex info
     private String totalAnswers, rightAnswers, wrongAnswers, cognitiveDate;
 
+    //Sound ex info
+    private String soundLevel, soundRightAnswers, soundDate;
+
     /*public Profile (String name, String email, String birthday, String tremorPos1, String tremorPos2, String tremorPos3, String date) {
         //Person constructor
         this.name = name;
@@ -25,6 +28,30 @@ public class Profile {
         this.tremorPos3 = tremorPos3;
         this.date = date;
     }*/
+
+    public String getSoundLevel() {
+        return soundLevel;
+    }
+
+    public void setSoundLevel(String soundLevel) {
+        this.soundLevel = soundLevel;
+    }
+
+    public String getSoundRightAnswers() {
+        return soundRightAnswers;
+    }
+
+    public void setSoundRightAnswers(String soundRightAnswers) {
+        this.soundRightAnswers = soundRightAnswers;
+    }
+
+    public String getSoundDate() {
+        return soundDate;
+    }
+
+    public void setSoundDate(String soundDate) {
+        this.soundDate = soundDate;
+    }
 
     public int getType() {
         return type;

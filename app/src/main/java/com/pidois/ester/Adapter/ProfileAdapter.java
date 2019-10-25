@@ -32,6 +32,7 @@ public class ProfileAdapter extends RecyclerView.Adapter {
     private static int TYPE_PERSON = 1;
     private static int TYPE_STRAP = 2;
     private static int TYPE_COGNITIVE = 3;
+    private static int TYPE_SOUND = 4;
 
     //private List<ProfileItem> mProfileItem;
     private Context context;
@@ -61,6 +62,61 @@ public class ProfileAdapter extends RecyclerView.Adapter {
             this.birthday = card.findViewById(R.id.profile_person_birthday);
             this.headerLayout = card.findViewById(R.id.profile_personal_header);
             this.footerLayout = card.findViewById(R.id.profile_personal_footer);
+
+            this.footerLayout.setVisibility(View.GONE);
+
+            this.footerLayout.getViewTreeObserver().addOnPreDrawListener(
+                    new ViewTreeObserver.OnPreDrawListener() {
+
+                        @Override
+                        public boolean onPreDraw() {
+                            footerLayout.getViewTreeObserver().removeOnPreDrawListener(this);
+                            footerLayout.setVisibility(View.GONE);
+
+                            final int widthSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+                            final int heightSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+                            footerLayout.measure(widthSpec, heightSpec);
+
+                            vAnimator = slideAnimator(0, footerLayout.getMeasuredHeight(), footerLayout);
+                            return true;
+                        }
+                    });
+
+            this.headerLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.i("LOG", "onClickListener of headerLayout clicked");
+                    if (footerLayout.getVisibility() == View.GONE) {
+                        Log.i("LOG", "Expand Click");
+                        expand(footerLayout, vAnimator);
+                    } else {
+                        Log.i("LOG", "Collapse Click");
+                        collapse(footerLayout);
+                    }
+                }
+            });
+
+
+        }
+    }
+
+    class ProfileSoundHolder extends RecyclerView.ViewHolder {
+
+        public TextView level;
+        public TextView rightAnswers;
+        public TextView date;
+        public RelativeLayout headerLayout;
+        public RelativeLayout footerLayout;
+        public ValueAnimator vAnimator;
+
+        public ProfileSoundHolder(CardView card) {
+
+            super(card);
+            this.level = card.findViewById(R.id.profile_sound_level);
+            this.rightAnswers = card.findViewById(R.id.profile_sound_right);
+            this.date = card.findViewById(R.id.profile_sound_date);
+            this.headerLayout = card.findViewById(R.id.profile_sound_header);
+            this.footerLayout = card.findViewById(R.id.profile_sound_footer);
 
             this.footerLayout.setVisibility(View.GONE);
 
@@ -266,8 +322,10 @@ public class ProfileAdapter extends RecyclerView.Adapter {
             return TYPE_PERSON;
         } else if (dataProfile.get(position).getType() == 2) {
             return TYPE_STRAP;
-        } else {
+        } else if (dataProfile.get(position).getType() == 3){
             return TYPE_COGNITIVE;
+        } else {
+            return TYPE_SOUND;
         }
     }
 
@@ -283,10 +341,14 @@ public class ProfileAdapter extends RecyclerView.Adapter {
             itemView = (CardView) LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.profile_strap_item, parent, false);
             return new ProfileStrapHolder(itemView);
-        } else {
+        } else if (viewType == TYPE_COGNITIVE){
             itemView = (CardView) LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.profile_cognitive_item, parent, false);
             return new ProfileCognitiveHolder(itemView);
+        } else {
+            itemView = (CardView) LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.profile_sound_item, parent, false);
+            return new ProfileSoundHolder(itemView);
         }
     }
 
@@ -303,11 +365,15 @@ public class ProfileAdapter extends RecyclerView.Adapter {
             ((ProfileStrapHolder) holder).scalePos2.setText(dataProfile.get(position).getTremorPos2());
             ((ProfileStrapHolder) holder).scalePos3.setText(dataProfile.get(position).getTremorPos3());
             ((ProfileStrapHolder) holder).date.setText(dataProfile.get(position).getDate());
-        } else {
+        } else if (getItemViewType(position) == TYPE_COGNITIVE){
             ((ProfileCognitiveHolder) holder).totalAnswers.setText(dataProfile.get(position).getTotalAnswers());
             ((ProfileCognitiveHolder) holder).rightAnswers.setText(dataProfile.get(position).getRightAnswers());
             ((ProfileCognitiveHolder) holder).wrongAnswers.setText(dataProfile.get(position).getWrongAnswers());
             ((ProfileCognitiveHolder) holder).date.setText(dataProfile.get(position).getCognitiveDate());
+        } else {
+            ((ProfileSoundHolder) holder).level.setText(dataProfile.get(position).getSoundLevel());
+            ((ProfileSoundHolder) holder).rightAnswers.setText(dataProfile.get(position).getSoundRightAnswers());
+            ((ProfileSoundHolder) holder).date.setText(dataProfile.get(position).getSoundDate());
         }
     }
 
@@ -315,15 +381,5 @@ public class ProfileAdapter extends RecyclerView.Adapter {
     public int getItemCount() {
         return dataProfile.size();
     }
-
-    /*public void setProfileItem(List<? extends ProfileItem> profileItem) {
-        if (mProfileItem == null) {
-            mProfileItem = new ArrayList<>();
-        }
-        mProfileItem.clear();
-        mProfileItem.addAll(profileItem);
-        //mProfileItem.addAll(profileItem2);
-        notifyDataSetChanged();
-    }*/
 
 }
