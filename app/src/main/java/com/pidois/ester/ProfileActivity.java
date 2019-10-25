@@ -97,6 +97,13 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         dataProfile.add(profile);
 
         profile = new Profile();
+        profile.setType(5);
+        profile.setColorLevel("2");
+        profile.setColorRightanswers("12");
+        profile.setColorDate("01/01/1960");
+        dataProfile.add(profile);
+
+        profile = new Profile();
         profile.setType(3);
         profile.setTotalAnswers("69");
         profile.setRightAnswers("30");

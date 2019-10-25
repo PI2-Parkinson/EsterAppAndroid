@@ -33,6 +33,7 @@ public class ProfileAdapter extends RecyclerView.Adapter {
     private static int TYPE_STRAP = 2;
     private static int TYPE_COGNITIVE = 3;
     private static int TYPE_SOUND = 4;
+    private static int TYPE_COLOR = 5;
 
     //private List<ProfileItem> mProfileItem;
     private Context context;
@@ -117,6 +118,61 @@ public class ProfileAdapter extends RecyclerView.Adapter {
             this.date = card.findViewById(R.id.profile_sound_date);
             this.headerLayout = card.findViewById(R.id.profile_sound_header);
             this.footerLayout = card.findViewById(R.id.profile_sound_footer);
+
+            this.footerLayout.setVisibility(View.GONE);
+
+            this.footerLayout.getViewTreeObserver().addOnPreDrawListener(
+                    new ViewTreeObserver.OnPreDrawListener() {
+
+                        @Override
+                        public boolean onPreDraw() {
+                            footerLayout.getViewTreeObserver().removeOnPreDrawListener(this);
+                            footerLayout.setVisibility(View.GONE);
+
+                            final int widthSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+                            final int heightSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+                            footerLayout.measure(widthSpec, heightSpec);
+
+                            vAnimator = slideAnimator(0, footerLayout.getMeasuredHeight(), footerLayout);
+                            return true;
+                        }
+                    });
+
+            this.headerLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.i("LOG", "onClickListener of headerLayout clicked");
+                    if (footerLayout.getVisibility() == View.GONE) {
+                        Log.i("LOG", "Expand Click");
+                        expand(footerLayout, vAnimator);
+                    } else {
+                        Log.i("LOG", "Collapse Click");
+                        collapse(footerLayout);
+                    }
+                }
+            });
+
+
+        }
+    }
+
+    class ProfileColorHolder extends RecyclerView.ViewHolder {
+
+        public TextView level;
+        public TextView rightAnswers;
+        public TextView date;
+        public RelativeLayout headerLayout;
+        public RelativeLayout footerLayout;
+        public ValueAnimator vAnimator;
+
+        public ProfileColorHolder(CardView card) {
+
+            super(card);
+            this.level = card.findViewById(R.id.profile_color_level);
+            this.rightAnswers = card.findViewById(R.id.profile_color_right);
+            this.date = card.findViewById(R.id.profile_color_date);
+            this.headerLayout = card.findViewById(R.id.profile_color_header);
+            this.footerLayout = card.findViewById(R.id.profile_color_footer);
 
             this.footerLayout.setVisibility(View.GONE);
 
@@ -324,8 +380,10 @@ public class ProfileAdapter extends RecyclerView.Adapter {
             return TYPE_STRAP;
         } else if (dataProfile.get(position).getType() == 3){
             return TYPE_COGNITIVE;
-        } else {
+        } else if (dataProfile.get(position).getType() == 4){
             return TYPE_SOUND;
+        } else {
+            return TYPE_COLOR;
         }
     }
 
@@ -345,10 +403,14 @@ public class ProfileAdapter extends RecyclerView.Adapter {
             itemView = (CardView) LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.profile_cognitive_item, parent, false);
             return new ProfileCognitiveHolder(itemView);
-        } else {
+        } else if (viewType == TYPE_SOUND){
             itemView = (CardView) LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.profile_sound_item, parent, false);
             return new ProfileSoundHolder(itemView);
+        } else {
+            itemView = (CardView) LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.profile_color_item, parent, false);
+            return new ProfileColorHolder(itemView);
         }
     }
 
@@ -370,10 +432,14 @@ public class ProfileAdapter extends RecyclerView.Adapter {
             ((ProfileCognitiveHolder) holder).rightAnswers.setText(dataProfile.get(position).getRightAnswers());
             ((ProfileCognitiveHolder) holder).wrongAnswers.setText(dataProfile.get(position).getWrongAnswers());
             ((ProfileCognitiveHolder) holder).date.setText(dataProfile.get(position).getCognitiveDate());
-        } else {
+        } else if (getItemViewType(position)  == TYPE_SOUND){
             ((ProfileSoundHolder) holder).level.setText(dataProfile.get(position).getSoundLevel());
             ((ProfileSoundHolder) holder).rightAnswers.setText(dataProfile.get(position).getSoundRightAnswers());
             ((ProfileSoundHolder) holder).date.setText(dataProfile.get(position).getSoundDate());
+        } else {
+            ((ProfileColorHolder) holder).level.setText(dataProfile.get(position).getColorLevel());
+            ((ProfileColorHolder) holder).rightAnswers.setText(dataProfile.get(position).getColorRightanswers());
+            ((ProfileColorHolder) holder).date.setText(dataProfile.get(position).getColorDate());
         }
     }
 

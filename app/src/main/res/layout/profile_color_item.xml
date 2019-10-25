@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:layout_marginLeft="7dp"
+    android:layout_marginRight="7dp"
+    app:cardElevation="2dp"
+    app:cardCornerRadius="10dp" >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/profile_color_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:text="Exercicío de Cor"
+                android:textStyle="bold"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/profile_color_footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/profile_color_header"
+            android:padding="15dp">
+
+            <TextView
+                android:id="@+id/profile_fixed_color_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:text="Nível"/>
+
+            <TextView
+                android:id="@+id/profile_color_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile_fixed_color_level"
+                android:textSize="17sp"
+                android:layout_marginTop="3dp"
+                android:text="2"/>
+
+            <TextView
+                android:id="@+id/profile_fixed_color_right_answers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_below="@id/profile_color_level"
+                android:layout_marginTop="20dp"
+                android:text="Acertos"/>
+
+            <TextView
+                android:id="@+id/profile_color_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:layout_marginTop="3dp"
+                android:text="12"
+                android:layout_below="@id/profile_fixed_color_right_answers"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_btn_grey"
+                android:text="Relatório"
+                android:textColor="@color/white"
+                android:layout_below="@+id/profile_color_level"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="20dp" />
+
+            <TextView
+                android:id="@+id/profile_fixed_color_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Data"
+                android:layout_alignStart="@+id/profile_color_date"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/profile_color_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="16/01/2019"
+                android:textSize="17sp"
+                android:layout_below="@+id/profile_fixed_color_date"
+                android:layout_alignParentEnd="true"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

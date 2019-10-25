@@ -17,6 +17,9 @@ public class Profile {
     //Sound ex info
     private String soundLevel, soundRightAnswers, soundDate;
 
+    //Color ex info
+    private String colorLevel, colorRightanswers, colorDate;
+
     /*public Profile (String name, String email, String birthday, String tremorPos1, String tremorPos2, String tremorPos3, String date) {
         //Person constructor
         this.name = name;
@@ -28,6 +31,30 @@ public class Profile {
         this.tremorPos3 = tremorPos3;
         this.date = date;
     }*/
+
+    public String getColorLevel() {
+        return colorLevel;
+    }
+
+    public void setColorLevel(String colorLevel) {
+        this.colorLevel = colorLevel;
+    }
+
+    public String getColorRightanswers() {
+        return colorRightanswers;
+    }
+
+    public void setColorRightanswers(String colorRightanswers) {
+        this.colorRightanswers = colorRightanswers;
+    }
+
+    public String getColorDate() {
+        return colorDate;
+    }
+
+    public void setColorDate(String colorDate) {
+        this.colorDate = colorDate;
+    }
 
     public String getSoundLevel() {
         return soundLevel;
