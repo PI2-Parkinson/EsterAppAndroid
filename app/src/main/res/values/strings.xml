@@ -8,4 +8,6 @@
     <string name="user_sex">jorge@gmail.com</string>
     <string name="user_age">89 anos</string>
     <string name="logout">Sair</string>
+    <string name="msg_ex3">Selecione a opção que representa a cor da palavra</string>
+    <string name="msg_ex4">Exercício em andamento</string>
 </resources>

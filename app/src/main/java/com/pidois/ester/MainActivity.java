@@ -16,9 +16,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // Button listeners
         //findViewById(R.id.btn_conectar).setOnClickListener(this);
-        //findViewById(R.id.btn_exerc).setOnClickListener(this);
+        findViewById(R.id.btn_exerc).setOnClickListener(this);
         findViewById(R.id.btn_perfil).setOnClickListener(this);
-        //findViewById(R.id.btn_dicas).setOnClickListener(this);
+        findViewById(R.id.btn_dicas).setOnClickListener(this);
     }
 
     @Override
@@ -27,11 +27,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (i == R.id.btn_conectar){
             //todo
         } else if (i == R.id.btn_exerc){
-            //todo
+            switchScreen(ExercisesActivity.class);
         } else if (i == R.id.btn_perfil){
             switchScreen(ProfileActivity.class);
         } else if (i==R.id.btn_dicas){
-            //todo
+            switchScreen(NewsActivity.class);
         }
     }
 
