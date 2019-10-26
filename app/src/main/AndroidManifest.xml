@@ -13,21 +13,21 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".ProfileActivity"
+            android:name=".Controller.ProfileActivity"
             android:theme="@style/ProfileTheme"></activity>
-        <activity android:name=".ExercisesActivity"></activity>
-        <activity android:name=".CognitiveActivity" />
+        <activity android:name=".Controller.ExercisesActivity"></activity>
+        <activity android:name=".Controller.CognitiveActivity" />
         <activity
-            android:name=".NewsActivity"
+            android:name=".Controller.NewsActivity"
             android:theme="@style/MyAppBarLayoutTheme">
         </activity>
-        <activity android:name=".NewsDetailActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".Controller.NewsDetailActivity" />
+        <activity android:name=".Controller.MainActivity" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".Controller.LoginActivity"
             android:theme="@style/LoginTheme" />
         <activity
-            android:name=".SplashScreen"
+            android:name=".Controller.SplashScreen"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

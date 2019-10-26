@@ -1,4 +1,4 @@
-package com.pidois.ester;
+package com.pidois.ester.Controller;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.pidois.ester.Adapter.ProfileAdapter;
 import com.pidois.ester.Models.Profile;
+import com.pidois.ester.R;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 

@@ -1,4 +1,4 @@
-package com.pidois.ester.models;
+package com.pidois.ester.Models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -7,7 +7,7 @@ public class Article {
 
     @SerializedName("source")
     @Expose
-    private com.pidois.ester.models.Source source;
+    private Source source;
 
     @SerializedName("author")
     @Expose
