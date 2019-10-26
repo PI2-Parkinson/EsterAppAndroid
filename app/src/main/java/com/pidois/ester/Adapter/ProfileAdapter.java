@@ -16,15 +16,10 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.pidois.ester.Models.Person;
 import com.pidois.ester.Models.Profile;
-import com.pidois.ester.Models.Strap;
-import com.pidois.ester.ProfileItem;
 import com.pidois.ester.R;
 
-import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProfileAdapter extends RecyclerView.Adapter {
@@ -35,10 +30,7 @@ public class ProfileAdapter extends RecyclerView.Adapter {
     private static int TYPE_SOUND = 4;
     private static int TYPE_COLOR = 5;
 
-    //private List<ProfileItem> mProfileItem;
     private Context context;
-    //private List<Person> dataPerson;
-    //private List<Strap> dataStrap;
     private List<Profile> dataProfile;
 
     public ProfileAdapter(Context context, List<Profile> dataProfile) {
@@ -46,16 +38,13 @@ public class ProfileAdapter extends RecyclerView.Adapter {
         this.context = context;
     }
 
-    class ProfilePersonalInfoHolder extends RecyclerView.ViewHolder {
+    private class ProfilePersonalInfoHolder extends RecyclerView.ViewHolder {
 
-        public TextView name;
-        public TextView email;
-        public TextView birthday;
-        public RelativeLayout headerLayout;
-        public RelativeLayout footerLayout;
-        public ValueAnimator vAnimator;
+        private TextView name, email, birthday;
+        private RelativeLayout headerLayout, footerLayout;
+        private ValueAnimator vAnimator;
 
-        public ProfilePersonalInfoHolder(CardView card) {
+        private ProfilePersonalInfoHolder(CardView card) {
 
             super(card);
             this.name = card.findViewById(R.id.profile_person_name);
@@ -101,16 +90,13 @@ public class ProfileAdapter extends RecyclerView.Adapter {
         }
     }
 
-    class ProfileSoundHolder extends RecyclerView.ViewHolder {
+    private class ProfileSoundHolder extends RecyclerView.ViewHolder {
 
-        public TextView level;
-        public TextView rightAnswers;
-        public TextView date;
-        public RelativeLayout headerLayout;
-        public RelativeLayout footerLayout;
-        public ValueAnimator vAnimator;
+        private TextView level, rightAnswers, date;
+        private RelativeLayout headerLayout, footerLayout;
+        private ValueAnimator vAnimator;
 
-        public ProfileSoundHolder(CardView card) {
+        private ProfileSoundHolder(CardView card) {
 
             super(card);
             this.level = card.findViewById(R.id.profile_sound_level);
@@ -156,16 +142,16 @@ public class ProfileAdapter extends RecyclerView.Adapter {
         }
     }
 
-    class ProfileColorHolder extends RecyclerView.ViewHolder {
+    private class ProfileColorHolder extends RecyclerView.ViewHolder {
 
-        public TextView level;
-        public TextView rightAnswers;
-        public TextView date;
-        public RelativeLayout headerLayout;
-        public RelativeLayout footerLayout;
-        public ValueAnimator vAnimator;
+        private TextView level;
+        private TextView rightAnswers;
+        private TextView date;
+        private RelativeLayout headerLayout;
+        private RelativeLayout footerLayout;
+        private ValueAnimator vAnimator;
 
-        public ProfileColorHolder(CardView card) {
+        private ProfileColorHolder(CardView card) {
 
             super(card);
             this.level = card.findViewById(R.id.profile_color_level);
@@ -211,17 +197,17 @@ public class ProfileAdapter extends RecyclerView.Adapter {
         }
     }
 
-    class ProfileCognitiveHolder extends RecyclerView.ViewHolder {
+    private class ProfileCognitiveHolder extends RecyclerView.ViewHolder {
 
-        public TextView totalAnswers;
-        public TextView rightAnswers;
-        public TextView wrongAnswers;
-        public TextView date;
-        public RelativeLayout headerLayout;
-        public RelativeLayout footerLayout;
-        public ValueAnimator vAnimator;
+        private TextView totalAnswers;
+        private TextView rightAnswers;
+        private TextView wrongAnswers;
+        private TextView date;
+        private RelativeLayout headerLayout;
+        private RelativeLayout footerLayout;
+        private ValueAnimator vAnimator;
 
-        public ProfileCognitiveHolder(CardView card) {
+        private ProfileCognitiveHolder(CardView card) {
 
             super(card);
             this.totalAnswers = card.findViewById(R.id.profile_cognitive_total);
@@ -268,17 +254,17 @@ public class ProfileAdapter extends RecyclerView.Adapter {
         }
     }
 
-    class ProfileStrapHolder extends RecyclerView.ViewHolder {
+    private class ProfileStrapHolder extends RecyclerView.ViewHolder {
 
-        public TextView scalePos1;
-        public TextView scalePos2;
-        public TextView scalePos3;
-        public TextView date;
-        public RelativeLayout headerLayout;
-        public RelativeLayout footerLayout;
-        public ValueAnimator vAnimator;
+        private TextView scalePos1;
+        private TextView scalePos2;
+        private TextView scalePos3;
+        private TextView date;
+        private RelativeLayout headerLayout;
+        private RelativeLayout footerLayout;
+        private ValueAnimator vAnimator;
 
-        public ProfileStrapHolder(CardView card) {
+        private ProfileStrapHolder(CardView card) {
             super(card);
             this.scalePos1 = card.findViewById(R.id.profile_strap_scale_data1);
             this.scalePos2 = card.findViewById(R.id.profile_strap_scale_data2);
@@ -378,9 +364,9 @@ public class ProfileAdapter extends RecyclerView.Adapter {
             return TYPE_PERSON;
         } else if (dataProfile.get(position).getType() == 2) {
             return TYPE_STRAP;
-        } else if (dataProfile.get(position).getType() == 3){
+        } else if (dataProfile.get(position).getType() == 3) {
             return TYPE_COGNITIVE;
-        } else if (dataProfile.get(position).getType() == 4){
+        } else if (dataProfile.get(position).getType() == 4) {
             return TYPE_SOUND;
         } else {
             return TYPE_COLOR;
@@ -399,11 +385,11 @@ public class ProfileAdapter extends RecyclerView.Adapter {
             itemView = (CardView) LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.profile_strap_item, parent, false);
             return new ProfileStrapHolder(itemView);
-        } else if (viewType == TYPE_COGNITIVE){
+        } else if (viewType == TYPE_COGNITIVE) {
             itemView = (CardView) LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.profile_cognitive_item, parent, false);
             return new ProfileCognitiveHolder(itemView);
-        } else if (viewType == TYPE_SOUND){
+        } else if (viewType == TYPE_SOUND) {
             itemView = (CardView) LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.profile_sound_item, parent, false);
             return new ProfileSoundHolder(itemView);
@@ -427,12 +413,12 @@ public class ProfileAdapter extends RecyclerView.Adapter {
             ((ProfileStrapHolder) holder).scalePos2.setText(dataProfile.get(position).getTremorPos2());
             ((ProfileStrapHolder) holder).scalePos3.setText(dataProfile.get(position).getTremorPos3());
             ((ProfileStrapHolder) holder).date.setText(dataProfile.get(position).getDate());
-        } else if (getItemViewType(position) == TYPE_COGNITIVE){
+        } else if (getItemViewType(position) == TYPE_COGNITIVE) {
             ((ProfileCognitiveHolder) holder).totalAnswers.setText(dataProfile.get(position).getTotalAnswers());
             ((ProfileCognitiveHolder) holder).rightAnswers.setText(dataProfile.get(position).getRightAnswers());
             ((ProfileCognitiveHolder) holder).wrongAnswers.setText(dataProfile.get(position).getWrongAnswers());
             ((ProfileCognitiveHolder) holder).date.setText(dataProfile.get(position).getCognitiveDate());
-        } else if (getItemViewType(position)  == TYPE_SOUND){
+        } else if (getItemViewType(position) == TYPE_SOUND) {
             ((ProfileSoundHolder) holder).level.setText(dataProfile.get(position).getSoundLevel());
             ((ProfileSoundHolder) holder).rightAnswers.setText(dataProfile.get(position).getSoundRightAnswers());
             ((ProfileSoundHolder) holder).date.setText(dataProfile.get(position).getSoundDate());

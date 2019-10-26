@@ -1,8 +1,6 @@
 package com.pidois.ester.Models;
 
-import com.pidois.ester.ProfileItem;
-
-public class Person implements ProfileItem {
+public class Person {
 
     private String name;
     private String email;
@@ -38,8 +36,4 @@ public class Person implements ProfileItem {
         this.birthday = birthday;
     }
 
-    @Override
-    public int getType() {
-        return ProfileItem.TYPE_PERSONAL_INFO;
-    }
 }

@@ -1,10 +1,6 @@
 package com.pidois.ester.Models;
 
-import com.pidois.ester.ProfileItem;
-
-import java.util.Date;
-
-public class Strap implements ProfileItem {
+public class Strap {
 
     private String tremorPos1;
     private String tremorPos2;
@@ -12,7 +8,7 @@ public class Strap implements ProfileItem {
     private String date;
 
 
-    public Strap (String tremorPos1, String tremorPos2, String tremorPos3, String date){
+    public Strap(String tremorPos1, String tremorPos2, String tremorPos3, String date) {
         this.tremorPos1 = tremorPos1;
         this.tremorPos2 = tremorPos2;
         this.tremorPos3 = tremorPos3;
@@ -51,8 +47,4 @@ public class Strap implements ProfileItem {
         this.date = date;
     }
 
-    @Override
-    public int getType() {
-        return ProfileItem.TYPE_STRAP;
-    }
 }

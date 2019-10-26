@@ -12,7 +12,6 @@ import android.graphics.Paint;
 import android.graphics.Shader;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,10 +23,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.pidois.ester.Adapter.ProfileAdapter;
-import com.pidois.ester.Adapter.ProfilePersonalInfoAdapter;
-import com.pidois.ester.Models.Person;
 import com.pidois.ester.Models.Profile;
-import com.pidois.ester.Models.Strap;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -35,7 +31,7 @@ import com.squareup.picasso.Transformation;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
+public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
     public RecyclerView vRecyclerView;
     public ProfileAdapter profileAdapter;
@@ -79,8 +75,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         profileName.setText(currentUser.getDisplayName());
 
-        //dataProfile.add(new Profile(currentUser.getDisplayName(), currentUser.getEmail(), "24/10/2019", "", "", "", ""));
-        //dataProfile.add(new Profile("", "", "", "1", "2", "3", "16/01/1993"));
 
         Profile profile = new Profile();
         profile.setType(1);
@@ -119,8 +113,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         profile.setDate("24/10/2019");
         dataProfile.add(profile);
 
-
-
         vRecyclerView = findViewById(R.id.profile_myrecycler);
         vRecyclerView.setHasFixedSize(true);
         vRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -128,14 +120,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         vRecyclerView.setAdapter(profileAdapter);
 
     }
-
-    /*@Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
-    }*/
 
     private void signOut() {
         // Firebase sign out
