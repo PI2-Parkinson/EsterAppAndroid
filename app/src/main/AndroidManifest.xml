@@ -11,12 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<<<<<<< HEAD
+
         <activity android:name=".StrapActivity"></activity>
-=======
         <activity android:name=".ExercisesActivity"></activity>
         <activity android:name=".CognitiveActivity" />
->>>>>>> 8bfaa94e396c06ba145a38ad4c648c2d1d3d525c
+
         <activity
             android:name=".NewsActivity"
             android:theme="@style/MyAppBarLayoutTheme"></activity>

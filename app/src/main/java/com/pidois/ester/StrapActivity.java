@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -29,7 +28,7 @@ public class StrapActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         int i = view.getId();
         if (i == R.id.btn_m1){
-            //todo
+            setContentView(R.layout.fragment_strap_rest);
         } else if (i == R.id.btn_m2){
             //todo
         } else if (i == R.id.btn_m3){

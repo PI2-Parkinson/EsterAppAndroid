@@ -8,11 +8,16 @@
     <string name="user_sex">jorge@gmail.com</string>
     <string name="user_age">89 anos</string>
 
-<<<<<<< HEAD
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-=======
     <string name="msg_ex3">Selecione a opção que representa a cor da palavra</string>
     <string name="msg_ex4">Exercício em andamento</string>
->>>>>>> 8bfaa94e396c06ba145a38ad4c648c2d1d3d525c
+
+    <string name="strap_rest_title">Repouso</string>
+    <string name="strap_rest_desc">Permaneça sentado com os braços abaixados por 10 segundos.</string>
+
+    <string name="strap_postural_title">Postural</string>
+    <string name="strap_postural_desc">Permaneça sentado com os braços esticados na altura do ombro por 10 segundos.</string>
+
+    <string name="strap_fingernose_title">Dedo-nariz</string>
+    <string name="strap_fingernose_desc">Permaneça sentado com o braço na altura do nariz por 10 segundos.</string>
+
 </resources>
