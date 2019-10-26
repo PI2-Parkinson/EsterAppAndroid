@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (i == R.id.btn_conectar){
             //todo
         } else if (i == R.id.btn_exerc){
-            switchScreen(StrapActivity.class);
+            switchScreen(ExercisesActivity.class);
         } else if (i == R.id.btn_perfil){
             switchScreen(ProfileActivity.class);
         } else if (i==R.id.btn_dicas){
