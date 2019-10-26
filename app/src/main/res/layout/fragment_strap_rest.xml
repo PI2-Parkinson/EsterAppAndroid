@@ -10,29 +10,71 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/light_background"
+        android:background="@color/blue2"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="50dp">
-
+        android:padding="50dp"
+        android:id="@+id/linearLayout2">
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/strap_rest_title" />
+            android:text="@string/strap_rest_title"
+            tools:layout_conversion_absoluteHeight="19dp"
+            tools:layout_editor_absoluteY="125dp"
+            tools:layout_editor_absoluteX="50dp"
+            tools:layout_conversion_absoluteWidth="312dp" />
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/strap_rest_desc" />
+            android:text="@string/strap_rest_desc"
+            tools:layout_conversion_absoluteHeight="36dp"
+            tools:layout_editor_absoluteY="144dp"
+            tools:layout_editor_absoluteX="50dp"
+            tools:layout_conversion_absoluteWidth="312dp" />
 
-        <ImageView
-            android:id="@+id/imageView4"
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/strap_rest_image" />
+            app:cardCornerRadius="10dp"
+            app:cardElevation="2dp"
+            tools:layout_conversion_absoluteHeight="338dp"
+            tools:layout_editor_absoluteY="180dp"
+            tools:layout_editor_absoluteX="50dp"
+            tools:layout_conversion_absoluteWidth="312dp">
+
+            <ImageView
+                android:padding="20dp"
+                android:layout_gravity="center"
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/strap_rest_image"
+                tools:layout_conversion_absoluteHeight="338dp"
+                tools:layout_editor_absoluteY="180dp"
+                tools:layout_editor_absoluteX="50dp"
+                tools:layout_conversion_absoluteWidth="312dp" />
+
+        </androidx.cardview.widget.CardView>
+
+
+
+        <Chronometer
+            android:id="@+id/strapChronometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="40sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_conversion_absoluteHeight="54dp"
+            tools:layout_editor_absoluteY="517dp"
+            tools:layout_editor_absoluteX="179dp"
+            tools:layout_conversion_absoluteWidth="133dp" />
+
     </LinearLayout>
 
 </FrameLayout>

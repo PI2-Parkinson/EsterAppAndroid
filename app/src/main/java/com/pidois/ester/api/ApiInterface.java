@@ -1,6 +1,6 @@
 package com.pidois.ester.api;
 
-import com.pidois.ester.models.News;
+import com.pidois.ester.Models.News;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

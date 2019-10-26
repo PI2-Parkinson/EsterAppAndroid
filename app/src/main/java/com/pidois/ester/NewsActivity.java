@@ -1,8 +1,8 @@
 package com.pidois.ester;
 
-import com.pidois.ester.models.News;
-import android.app.SearchManager;
-import android.content.Context;
+import com.pidois.ester.Adapter.Adapter;
+import com.pidois.ester.Models.News;
+
 import android.content.Intent;
 import android.os.Build;
 //import android.support.v4.app.ActivityOptionsCompat;
@@ -22,27 +22,20 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 //import android.support.v7.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 //import android.support.v7.widget.SearchView;
-import androidx.appcompat.widget.SearchView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.pidois.ester.api.ApiClient;
 import com.pidois.ester.api.ApiInterface;
-import com.pidois.ester.models.Article;
-import com.pidois.ester.models.News;
+import com.pidois.ester.Models.Article;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.internal.Util;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
