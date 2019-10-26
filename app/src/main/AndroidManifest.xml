@@ -22,7 +22,6 @@
             android:theme="@style/MyAppBarLayoutTheme">
         </activity>
         <activity android:name=".NewsDetailActivity" />
-        <activity android:name=".ProfileActivity" />
         <activity android:name=".MainActivity" />
         <activity
             android:name=".LoginActivity"
