@@ -11,7 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#63CFDB"
+        android:background="@color/light_background"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="50dp">
@@ -20,7 +20,7 @@
             android:id="@+id/btn_ex1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#63CFDB"
+            android:background="@drawable/round_btn_stroked"
             android:drawableRight="@drawable/ic_ex1"
             android:text="Som"
             android:textColor="#4f4f4f"
@@ -36,7 +36,7 @@
             android:id="@+id/btn_ex2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#63CFDB"
+            android:background="@drawable/round_btn_stroked"
             android:drawableRight="@drawable/ic_ex2"
             android:text="Cores"
             android:textColor="#4f4f4f"
@@ -45,13 +45,14 @@
             app:layout_constraintTop_toTopOf="@+id/guideline9"
             app:layout_constraintVertical_bias="1.0"
             tools:layout_editor_absoluteX="0dp"
-            android:layout_marginBottom="24dp"/>
+            android:layout_marginBottom="24dp"
+            />
 
         <Button
             android:id="@+id/btn_ex3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#63CFDB"
+            android:background="@drawable/round_btn_stroked"
             android:drawableRight="@drawable/ic_ex3"
             android:text="Cognitivo"
             android:textColor="#4f4f4f"
@@ -66,7 +67,7 @@
             android:id="@+id/btn_ex4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#63CFDB"
+            android:background="@drawable/round_btn_stroked"
             android:drawableRight="@drawable/ic_ex4"
             android:text="Strap"
             android:textColor="#4f4f4f"
