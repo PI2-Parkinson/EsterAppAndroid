@@ -1,5 +1,8 @@
 package com.pidois.ester;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -174,6 +177,7 @@ public class LoginActivity extends AppCompatActivity implements
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         updateUI(null);
+                        restartApp();
                     }
                 });
     }
@@ -196,5 +200,14 @@ public class LoginActivity extends AppCompatActivity implements
         } else if (i == R.id.btn_logout) {
             signOut();
         }
+    }
+
+    public void restartApp (){
+        Intent mStartActivity = new Intent(LoginActivity.this, SplashScreen.class);
+        int mPendingIntentId = 123456;
+        PendingIntent mPendingIntent = PendingIntent.getActivity(LoginActivity.this, mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
+        AlarmManager mgr = (AlarmManager)LoginActivity.this.getSystemService(Context.ALARM_SERVICE);
+        mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
+        System.exit(0);
     }
 }
