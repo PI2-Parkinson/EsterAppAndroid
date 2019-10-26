@@ -2,6 +2,7 @@ package com.pidois.ester.Models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.pidois.ester.Models.Article;
 
 import java.util.List;
 

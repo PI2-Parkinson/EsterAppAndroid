@@ -1,4 +1,4 @@
-package com.pidois.ester;
+package com.pidois.ester.Controller;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -25,6 +25,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.pidois.ester.R;
 //import com.google.firebase.quickstart.auth.R;
 
 /**

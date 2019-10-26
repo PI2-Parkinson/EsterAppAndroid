@@ -1,10 +1,10 @@
-package com.pidois.ester;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.pidois.ester.Controller;
 
 import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
+
+import com.pidois.ester.R;
 
 public class ExercisesActivity extends ExerciseAbstractClass implements View.OnClickListener {
 

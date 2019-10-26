@@ -1,4 +1,4 @@
-package com.pidois.ester;
+package com.pidois.ester.Controller;
 
 import com.pidois.ester.Adapter.Adapter;
 import com.pidois.ester.Models.News;
@@ -29,6 +29,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.pidois.ester.R;
 import com.pidois.ester.api.ApiClient;
 import com.pidois.ester.api.ApiInterface;
 import com.pidois.ester.Models.Article;
