@@ -106,4 +106,6 @@ public class StrapRestActivity extends AppCompatActivity {
         mTextViewCountDown.setText(timeLeftFormatted);
     }
 
+    
+
 }
