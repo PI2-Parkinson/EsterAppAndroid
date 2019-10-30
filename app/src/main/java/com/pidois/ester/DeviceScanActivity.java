@@ -174,7 +174,8 @@ public class DeviceScanActivity extends ListActivity {
             mInflator = DeviceScanActivity.this.getLayoutInflater();
         }
 
-        public void addDevice(BluetoothDevice device) {
+        public void addDevice() {
+            BluetoothDevice device = mBluetoothAdapter.getRemoteDevice("24:0A:C4:AE:8B:B2");
             if(!mLeDevices.contains(device)) {
                 mLeDevices.add(device);
             }
@@ -238,7 +239,7 @@ public class DeviceScanActivity extends ListActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            mLeDeviceListAdapter.addDevice(device);
+                            mLeDeviceListAdapter.addDevice();
                             mLeDeviceListAdapter.notifyDataSetChanged();
                         }
                     });
