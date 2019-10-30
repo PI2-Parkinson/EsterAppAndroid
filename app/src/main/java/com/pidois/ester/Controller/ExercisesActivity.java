@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.view.View;
 
 import com.pidois.ester.R;
-import com.pidois.ester.StrapActivity;
 
 public class ExercisesActivity extends ExerciseAbstractClass implements View.OnClickListener {
 

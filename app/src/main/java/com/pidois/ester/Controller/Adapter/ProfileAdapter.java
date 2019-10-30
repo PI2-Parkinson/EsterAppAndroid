@@ -1,4 +1,4 @@
-package com.pidois.ester.Adapter;
+package com.pidois.ester.Controller.Adapter;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;

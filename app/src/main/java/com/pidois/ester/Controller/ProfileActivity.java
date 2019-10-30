@@ -22,7 +22,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.pidois.ester.Adapter.ProfileAdapter;
+import com.pidois.ester.Controller.Adapter.ProfileAdapter;
 import com.pidois.ester.Models.Profile;
 import com.pidois.ester.R;
 import com.squareup.picasso.Picasso;

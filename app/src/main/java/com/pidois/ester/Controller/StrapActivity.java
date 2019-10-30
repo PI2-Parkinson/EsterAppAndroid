@@ -1,4 +1,4 @@
-package com.pidois.ester;
+package com.pidois.ester.Controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import com.pidois.ester.R;
 
 
 public class StrapActivity extends AppCompatActivity implements View.OnClickListener {
