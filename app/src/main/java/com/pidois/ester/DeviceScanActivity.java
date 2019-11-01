@@ -175,7 +175,8 @@ public class DeviceScanActivity extends ListActivity {
         }
 
         public void addDevice() {
-            BluetoothDevice device = mBluetoothAdapter.getRemoteDevice("24:0A:C4:AE:8B:B2");
+            //"24:0A:C4:AE:8B:B2"
+            BluetoothDevice device = mBluetoothAdapter.getRemoteDevice("80:7D:3A:FD:D6:8E");
             if(!mLeDevices.contains(device)) {
                 mLeDevices.add(device);
             }

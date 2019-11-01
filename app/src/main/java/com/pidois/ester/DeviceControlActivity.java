@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static com.pidois.ester.BluetoothLeService.ACTION_DATA_AVAILABLE;
+
 /**
  * For a given BLE device, this Activity provides the user interface to connect, display data,
  * and display GATT services and characteristics supported by the device.  The Activity
@@ -219,11 +221,20 @@ public class DeviceControlActivity extends Activity {
         });
     }
 
+    /*private void displayData(String data) {
+        if (data != null) {
+            Intent intent2 = new Intent(ACTION_DATA_AVAILABLE);
+            intent2.putExtra("data", "C");
+            sendBroadcast(intent2);
+            mDataField.setText(data);
+        }
+    }*/
     private void displayData(String data) {
         if (data != null) {
             mDataField.setText(data);
         }
     }
+
 
     // Demonstrates how to iterate through the supported GATT Services/Characteristics.
     // In this sample, we populate the data structure that is bound to the ExpandableListView

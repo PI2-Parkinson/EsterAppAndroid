@@ -47,12 +47,31 @@ public class BluetoothLeService extends Service {
     public final static String EXTRA_DATA =
             "com.example.bluetooth.le.EXTRA_DATA";
 
-    public final static UUID UUID_HEART_RATE_MEASUREMENT =
-            UUID.fromString(SampleGattAttributes.HEART_RATE_MEASUREMENT);
+    //public final static UUID UUID_HEART_RATE_MEASUREMENT =
+    //        UUID.fromString(SampleGattAttributes.HEART_RATE_MEASUREMENT);
+
+    public final static UUID UUID_ESTER_SERVICE =
+            UUID.fromString(SampleGattAttributes.ESTER_SERVICE);
+
+    public final static UUID UUID_ESTER_CHARACTERISTIC =
+            UUID.fromString(SampleGattAttributes.ESTER_CHARACTERISTIC);
+
+    public static UUID UUID_CLIENT_CHARACTERISTIC_CONFIG =
+            UUID.fromString(SampleGattAttributes.CLIENT_CHARACTERISTIC_CONFIG);
+
 
     // Implements callback methods for GATT events that the app cares about.  For example,
     // connection change and services discovered.
     private final BluetoothGattCallback mGattCallback = new BluetoothGattCallback() {
+
+        @Override
+        public void onDescriptorWrite(BluetoothGatt gatt, BluetoothGattDescriptor descriptor, int status){
+            BluetoothGattCharacteristic characteristic =
+                    gatt.getService(UUID_ESTER_SERVICE)
+                            .getCharacteristic(UUID_ESTER_CHARACTERISTIC);
+            characteristic.setValue("C");
+            gatt.writeCharacteristic(characteristic);
+        }
         @Override
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
             String intentAction;
@@ -75,8 +94,18 @@ public class BluetoothLeService extends Service {
 
         @Override
         public void onServicesDiscovered(BluetoothGatt gatt, int status) {
+
+
+    //        gatt.setCharacteristicNotification(characteristic, true);
+
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 broadcastUpdate(ACTION_GATT_SERVICES_DISCOVERED);
+
+                BluetoothGattCharacteristic characteristic =
+                        gatt.getService(UUID_ESTER_SERVICE)
+                                .getCharacteristic(UUID_ESTER_CHARACTERISTIC);
+                gatt.setCharacteristicNotification(characteristic, true);
+                Log.i(TAG, "onServicesDiscovered received: " + status);
             } else {
                 Log.w(TAG, "onServicesDiscovered received: " + status);
             }
@@ -96,6 +125,15 @@ public class BluetoothLeService extends Service {
                                             BluetoothGattCharacteristic characteristic) {
             broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);
         }
+
+        @Override
+        public void onCharacteristicWrite(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
+            if(status != BluetoothGatt.GATT_SUCCESS){
+                Log.d("onCharacteristicWrite", "Failed write, retrying");
+                gatt.writeCharacteristic(characteristic);
+            }
+            super.onCharacteristicWrite(gatt, characteristic, status);
+        }
     };
 
     private void broadcastUpdate(final String action) {
@@ -110,7 +148,7 @@ public class BluetoothLeService extends Service {
         // This is special handling for the Heart Rate Measurement profile.  Data parsing is
         // carried out as per profile specifications:
         // http://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.heart_rate_measurement.xml
-        if (UUID_HEART_RATE_MEASUREMENT.equals(characteristic.getUuid())) {
+        if (UUID_ESTER_CHARACTERISTIC.equals(characteristic.getUuid())) {
             int flag = characteristic.getProperties();
             int format = -1;
             if ((flag & 0x01) != 0) {
@@ -218,7 +256,7 @@ public class BluetoothLeService extends Service {
         }
         // We want to directly connect to the device, so we are setting the autoConnect
         // parameter to false.
-        mBluetoothGatt = device.connectGatt(this, false, mGattCallback);
+        mBluetoothGatt = device.connectGatt(this, true, mGattCallback);
         Log.d(TAG, "Trying to create a new connection.");
         mBluetoothDeviceAddress = address;
         mConnectionState = STATE_CONNECTING;
@@ -281,13 +319,15 @@ public class BluetoothLeService extends Service {
         mBluetoothGatt.setCharacteristicNotification(characteristic, enabled);
 
         // This is specific to Heart Rate Measurement.
-        if (UUID_HEART_RATE_MEASUREMENT.equals(characteristic.getUuid())) {
+        if (UUID_ESTER_CHARACTERISTIC.equals(characteristic.getUuid())) {
             BluetoothGattDescriptor descriptor = characteristic.getDescriptor(
-                    UUID.fromString(SampleGattAttributes.CLIENT_CHARACTERISTIC_CONFIG));
+                    UUID_CLIENT_CHARACTERISTIC_CONFIG);
             descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
             mBluetoothGatt.writeDescriptor(descriptor);
         }
     }
+
+
 
     /**
      * Retrieves a list of supported GATT services on the connected device. This should be
