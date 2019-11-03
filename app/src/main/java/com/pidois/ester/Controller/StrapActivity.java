@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -30,7 +31,7 @@ public class StrapActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         int i = view.getId();
         if (i == R.id.btn_m1){
-            setContentView(R.layout.activity_strap_rest);
+            switchScreen(StrapRestActivity.class);
         } else if (i == R.id.btn_m2){
             setContentView(R.layout.activity_strap_postural);
         } else if (i == R.id.btn_m3){
@@ -60,6 +61,11 @@ public class StrapActivity extends AppCompatActivity implements View.OnClickList
         });
         AlertDialog alertDialog=dialog.create();
         alertDialog.show();
+    }
+
+    private void switchScreen (Class cl){
+        Intent intent = new Intent(StrapActivity.this, cl);
+        StrapActivity.this.startActivity(intent);
     }
 
 }
