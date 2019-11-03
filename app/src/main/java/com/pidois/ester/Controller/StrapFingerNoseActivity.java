@@ -10,7 +10,7 @@ import com.pidois.ester.R;
 
 import java.io.File;
 
-public class StrapFingerNose extends AppCompatActivity {
+public class StrapFingerNoseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

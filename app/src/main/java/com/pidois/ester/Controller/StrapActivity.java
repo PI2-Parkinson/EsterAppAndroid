@@ -32,9 +32,9 @@ public class StrapActivity extends AppCompatActivity implements View.OnClickList
         if (i == R.id.btn_m1){
             setContentView(R.layout.activity_strap_rest);
         } else if (i == R.id.btn_m2){
-            //todo
+            setContentView(R.layout.activity_strap_postural);
         } else if (i == R.id.btn_m3){
-            //todo
+            setContentView(R.layout.activity_strap_finger_nose);
         } else if (i == R.id.btn_m4){
             alertDialog();
         }
