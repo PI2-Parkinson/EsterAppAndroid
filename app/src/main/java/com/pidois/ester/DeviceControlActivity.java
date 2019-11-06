@@ -51,6 +51,9 @@ public class DeviceControlActivity extends Activity {
     private final String LIST_NAME = "NAME";
     private final String LIST_UUID = "UUID";
 
+    public static String BLUETOOTH_GLOBAL_RDATA = "";
+    public static String BLUETOOTH_GLOBAL_SDATA = "";
+
     // Code to manage Service lifecycle.
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
 
@@ -94,6 +97,20 @@ public class DeviceControlActivity extends Activity {
                 // Show all the supported services and characteristics on the user interface.
                 displayGattServices(mBluetoothLeService.getSupportedGattServices());
             } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
+                Log.i("#AQUII RECEBE O VALOR##","########### " + intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
+                BLUETOOTH_GLOBAL_RDATA = intent.getStringExtra(BluetoothLeService.EXTRA_DATA);
+
+                switch (intent.getStringExtra(BluetoothLeService.EXTRA_DATA)){
+
+                    case "C":
+                        BLUETOOTH_GLOBAL_SDATA = "C";
+                    case "BP":
+                        BLUETOOTH_GLOBAL_SDATA = "P0";
+                    case "QM":
+                        switchScreen(ProfileActivity.class);
+
+                }
+
                 displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
             }
         }
@@ -300,5 +317,10 @@ public class DeviceControlActivity extends Activity {
         intentFilter.addAction(BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED);
         intentFilter.addAction(BluetoothLeService.ACTION_DATA_AVAILABLE);
         return intentFilter;
+    }
+
+    private void switchScreen (Class cl){
+        Intent intent = new Intent(DeviceControlActivity.this, cl);
+        DeviceControlActivity.this.startActivity(intent);
     }
 }
