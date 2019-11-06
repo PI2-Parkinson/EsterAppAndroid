@@ -103,7 +103,7 @@
     </androidx.cardview.widget.CardView>
 
     <Chronometer
-        android:id="@+id/chronometer2"
+        android:id="@+id/strap_postural_chronometer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -115,7 +115,7 @@
         app:layout_editor_absoluteX="20dp" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/strap_postural_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/round_btn_grey"
@@ -124,7 +124,7 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/chronometer2"
+        app:layout_constraintStart_toEndOf="@+id/strap_postural_chronometer"
         app:layout_constraintTop_toTopOf="@+id/guideline25" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

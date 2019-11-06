@@ -83,11 +83,13 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
-        android:layout_width="348dp"
+        android:layout_width="match_parent"
         android:layout_height="346dp"
         android:padding="20dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="2dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline33"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -105,19 +107,19 @@
     </androidx.cardview.widget.CardView>
 
     <Chronometer
-        android:id="@+id/chronometer2"
+        android:id="@+id/strap_finger_chronometer"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:gravity="center"
         android:padding="40dp"
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline25"
+        app:layout_constraintTop_toTopOf="@+id/guideline33"
         app:layout_editor_absoluteX="20dp" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/strap_finger_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
@@ -127,8 +129,7 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.411"
-        app:layout_constraintStart_toEndOf="@+id/chronometer2"
+        app:layout_constraintStart_toEndOf="@+id/strap_finger_chronometer"
         app:layout_constraintTop_toTopOf="@+id/guideline25" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

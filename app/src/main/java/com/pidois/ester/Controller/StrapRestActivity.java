@@ -32,24 +32,23 @@ public class StrapRestActivity extends AppCompatActivity {
         chronometer = findViewById(R.id.strap_rest_chronometer);
         button = findViewById(R.id.strap_rest_btn);
 
-        chronometer.setBase(SystemClock.elapsedRealtime() + (11*1000));
         chronometer.setCountDown(true);
-
-        chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
-            @Override
-            public void onChronometerTick(Chronometer chronometer) {
-                time++;
-                if (time == 10){
-                    chronometer.stop();
-                }
-            }
-        });
-
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                chronometer.setBase(SystemClock.elapsedRealtime() + (10*1000));
                 chronometer.start();
+
+                chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
+                    @Override
+                    public void onChronometerTick(Chronometer chronometer) {
+                        time++;
+                        if (time == 10){
+                            chronometer.stop();
+                        }
+                    }
+                });
             }
         });
 
