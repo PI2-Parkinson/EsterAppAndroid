@@ -11,11 +11,10 @@
             android:shape="rectangle"
             android:padding="10dp">
             <corners
-                android:bottomRightRadius="50dp"
-                android:bottomLeftRadius="50dp"
-                android:topLeftRadius="50dp"
-                android:topRightRadius="50dp"/>
-            <stroke android:width="2dp" android:color="@color/blue2" />
+                android:bottomRightRadius="5dp"
+                android:bottomLeftRadius="5dp"
+                android:topLeftRadius="5dp"
+                android:topRightRadius="5dp"/>
         </shape>
     </item>
 </selector>

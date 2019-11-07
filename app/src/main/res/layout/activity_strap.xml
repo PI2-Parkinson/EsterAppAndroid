@@ -19,58 +19,64 @@
         <Button
             android:id="@+id/btn_m1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="24dp"
             android:background="@drawable/round_btn_stroked"
+            android:backgroundTint="@color/blue1"
+            android:elevation="5dp"
             android:text="@string/strap_rest_title"
-            android:textColor="@color/colorTextSubtitle"
+            android:textColor="@color/colorAccent"
             android:textSize="16dp"
             app:layout_constraintBottom_toTopOf="@+id/btn_m2"
-            app:layout_constraintTop_toTopOf="@+id/guideline13"
             app:layout_constraintVertical_bias="1.0"
-            tools:layout_editor_absoluteX="0dp"
-            android:layout_marginBottom="24dp"
-            android:layout_marginTop="40dp"/>
+            tools:layout_editor_absoluteX="0dp" />
 
         <Button
             android:id="@+id/btn_m2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
+            android:layout_marginBottom="24dp"
             android:background="@drawable/round_btn_stroked"
+            android:backgroundTint="@color/blue2"
+            android:elevation="5dp"
             android:text="@string/strap_postural_title"
-            android:textColor="@color/colorTextSubtitle"
+            android:textColor="@color/colorAccent"
             android:textSize="16dp"
             app:layout_constraintBottom_toTopOf="@+id/btn_m3"
-            app:layout_constraintTop_toTopOf="@+id/guideline9"
             app:layout_constraintVertical_bias="1.0"
-            tools:layout_editor_absoluteX="0dp"
-            android:layout_marginBottom="24dp"/>
+            tools:layout_editor_absoluteX="0dp" />
 
         <Button
             android:id="@+id/btn_m3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
+            android:layout_marginBottom="24dp"
             android:background="@drawable/round_btn_stroked"
+            android:backgroundTint="@color/blue3"
+            android:elevation="5dp"
             android:text="@string/strap_fingernose_title"
-            android:textColor="@color/colorTextSubtitle"
+            android:textColor="@color/colorAccent"
             android:textSize="16dp"
             app:layout_constraintBottom_toTopOf="@+id/btn_m4"
-            app:layout_constraintTop_toTopOf="@+id/guideline10"
             app:layout_constraintVertical_bias="1.0"
-            tools:layout_editor_absoluteX="0dp"
-            android:layout_marginBottom="24dp"/>
+            tools:layout_editor_absoluteX="0dp" />
 
         <Button
             android:id="@+id/btn_m4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/round_btn_stroked"
-            android:text="@string/strap_about_title"
-            android:textColor="@color/colorTextSubtitle"
-            android:textSize="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline12"
             app:layout_constraintTop_toTopOf="@+id/guideline11"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/round_btn_stroked"
+            android:backgroundTint="@color/blue4"
+            android:elevation="5dp"
+            android:text="@string/strap_about_title"
+            android:textColor="@color/colorAccent"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_m2"
             app:layout_constraintVertical_bias="1.0"
-            tools:layout_editor_absoluteX="0dp" />
+            tools:layout_editor_absoluteX="0dp" />/>
 
     </LinearLayout>
 
