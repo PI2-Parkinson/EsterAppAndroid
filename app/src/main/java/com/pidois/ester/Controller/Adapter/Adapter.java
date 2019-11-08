@@ -1,4 +1,4 @@
-package com.pidois.ester.Adapter;
+package com.pidois.ester.Controller.Adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -24,8 +24,8 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.pidois.ester.R;
-import com.pidois.ester.Utils;
-import com.pidois.ester.models.Article;
+import com.pidois.ester.Controller.Utils;
+import com.pidois.ester.Models.Article;
 import java.util.List;
 
 
@@ -44,7 +44,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.news_item, parent, false);
         return new MyViewHolder(view, onItemClickListener);
     }
 

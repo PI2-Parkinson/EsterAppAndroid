@@ -6,77 +6,122 @@
     android:layout_height="match_parent"
     android:background="#000"
     android:backgroundTint="@color/colorPrimaryDark"
-    tools:context=".ExercisesActivity">
+    tools:context=".Controller.ExercisesActivity">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#63CFDB"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="50dp">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-164dp">
 
-        <Button
-            android:id="@+id/btn_ex1"
-            android:layout_width="match_parent"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline22"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#63CFDB"
-            android:drawableRight="@drawable/ic_ex1"
-            android:text="Som"
-            android:textColor="#4f4f4f"
-            android:textSize="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/btn_ex2"
-            app:layout_constraintTop_toTopOf="@+id/guideline13"
-            app:layout_constraintVertical_bias="1.0"
-            tools:layout_editor_absoluteX="0dp"
-            android:layout_marginBottom="24dp"
-            android:layout_marginTop="40dp"/>
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="200dp" />
 
-        <Button
-            android:id="@+id/btn_ex2"
-            android:layout_width="match_parent"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline24"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#63CFDB"
-            android:drawableRight="@drawable/ic_ex2"
-            android:text="Cores"
-            android:textColor="#4f4f4f"
-            android:textSize="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/btn_ex3"
-            app:layout_constraintTop_toTopOf="@+id/guideline9"
-            app:layout_constraintVertical_bias="1.0"
-            tools:layout_editor_absoluteX="0dp"
-            android:layout_marginBottom="24dp"/>
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="205dp" />
 
-        <Button
-            android:id="@+id/btn_ex3"
-            android:layout_width="match_parent"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline25"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#63CFDB"
-            android:drawableRight="@drawable/ic_ex3"
-            android:text="Cognitivo"
-            android:textColor="#4f4f4f"
-            android:textSize="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/btn_ex4"
-            app:layout_constraintTop_toTopOf="@+id/guideline10"
-            app:layout_constraintVertical_bias="1.0"
-            tools:layout_editor_absoluteX="0dp"
-            android:layout_marginBottom="24dp"/>
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="365dp" />
 
         <Button
             android:id="@+id/btn_ex4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#63CFDB"
-            android:drawableRight="@drawable/ic_ex4"
-            android:text="Strap"
-            android:textColor="#4f4f4f"
+            android:layout_width="180dp"
+            android:layout_height="160dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/blue3"
+            android:drawableTop="@drawable/ic_ex4"
+            android:drawableTint="@color/colorAccent"
+            android:elevation="5dp"
+            android:text="@string/btn_exercise_strap"
+            android:textColor="@color/colorAccent"
             android:textSize="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline12"
-            app:layout_constraintTop_toTopOf="@+id/guideline11"
-            app:layout_constraintVertical_bias="1.0"
-            tools:layout_editor_absoluteX="0dp" />
+            app:layout_constraintBottom_toTopOf="@+id/guideline26"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline24"
+            app:layout_constraintTop_toTopOf="@+id/guideline25"
+            app:layout_constraintVertical_bias="1.0" />
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/btn_ex3"
+            android:layout_width="180dp"
+            android:layout_height="160dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/blue4"
+            android:drawableTop="@drawable/ic_ex3"
+            android:drawableTint="@color/colorAccent"
+            android:elevation="5dp"
+            android:text="@string/btn_exercise_cognitive"
+            android:textColor="@color/colorAccent"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline26"
+            app:layout_constraintEnd_toStartOf="@+id/guideline24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline25" />
+
+        <Button
+            android:id="@+id/btn_ex2"
+            android:layout_width="180dp"
+            android:layout_height="160dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/blue2"
+            android:drawableTop="@drawable/ic_ex2"
+            android:drawableTint="@color/colorAccent"
+            android:elevation="5dp"
+            android:text="@string/btn_exercise_color"
+            android:textColor="@color/colorAccent"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline25"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline24"
+            app:layout_constraintTop_toTopOf="@+id/guideline22" />
+
+        <Button
+            app:layout_goneMarginTop="20dp"
+            android:id="@+id/btn_ex1"
+            android:layout_width="180dp"
+            android:layout_height="160dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/blue1"
+            android:drawableTop="@drawable/ic_ex1"
+            android:drawableTint="@color/colorAccent"
+            android:elevation="5dp"
+            android:text="@string/btn_exercise_sound"
+            android:textColor="@color/colorAccent"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline25"
+            app:layout_constraintEnd_toStartOf="@+id/guideline24"
+            app:layout_constraintHorizontal_bias="0.555"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline22"
+            app:layout_constraintVertical_bias="0.454" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline26"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="538dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CognitiveActivity">
+    tools:context=".Controller.CognitiveActivity">
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#63CFDB"
+        android:background="@color/blue4"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="@+id/chronometerTableRow"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="@string/msg_ex4"
+                android:text="@string/exercise_in_progress"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -82,7 +82,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="145dp"
-        android:background="#FFFFFF"
+        android:background="@color/light_background"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/tableRow2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -114,7 +114,7 @@
         android:id="@+id/tableRow2"
         android:layout_width="0dp"
         android:layout_height="70dp"
-        android:background="#FFFFFF"
+        android:background="@color/light_background"
         android:gravity="center|center_horizontal"
         app:layout_constraintBottom_toTopOf="@+id/tableRow"
         app:layout_constraintEnd_toEndOf="parent"
@@ -126,7 +126,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/msg_ex3"
+            android:text="@string/cognitive_exercise_desc"
             android:textSize="14dp" />
     </TableRow>
 
@@ -134,7 +134,7 @@
         android:id="@+id/tableRow"
         android:layout_width="0dp"
         android:layout_height="132dp"
-        android:background="#FFFFFF"
+        android:background="@color/light_background"
         android:gravity="center|center_horizontal"
         app:layout_constraintBottom_toTopOf="@+id/chronometerTableRow"
         app:layout_constraintEnd_toEndOf="parent"
@@ -165,7 +165,7 @@
         android:id="@+id/chronometerTableRow"
         android:layout_width="0dp"
         android:layout_height="123dp"
-        android:background="#FFFFFF"
+        android:background="@color/light_background"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#000"
     android:backgroundTint="@color/colorPrimaryDark"
-    tools:context=".MainActivity">
+    tools:context=".Controller.MainActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline8"
@@ -66,7 +66,9 @@
         android:text="Notícias"
         app:layout_constraintBottom_toTopOf="@+id/guideline12"
         app:layout_constraintTop_toTopOf="@+id/guideline11"
-        tools:layout_editor_absoluteX="162dp" />
+        tools:layout_editor_absoluteX="162dp"
+        android:paddingLeft="20dp"
+        />
 
     <Button
         android:id="@+id/btn_perfil"
@@ -88,6 +90,7 @@
         android:backgroundTint="@color/blue2"
         android:drawableRight="@drawable/ic_tap"
         android:text="Exercícios"
+        android:paddingLeft="50dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_perfil"
         app:layout_constraintTop_toTopOf="@+id/guideline9"
         tools:layout_editor_absoluteX="161dp" />

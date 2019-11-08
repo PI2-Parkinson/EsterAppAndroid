@@ -1,10 +1,10 @@
-package com.pidois.ester;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.pidois.ester.Controller;
 
 import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
+
+import com.pidois.ester.R;
 
 public class ExercisesActivity extends ExerciseAbstractClass implements View.OnClickListener {
 
@@ -30,7 +30,7 @@ public class ExercisesActivity extends ExerciseAbstractClass implements View.OnC
         } else if (i == R.id.btn_ex3){
             switchScreen(CognitiveActivity.class);
         } else if (i == R.id.btn_ex4){
-            //todo
+            switchScreen(StrapActivity.class);
         }
     }
 
