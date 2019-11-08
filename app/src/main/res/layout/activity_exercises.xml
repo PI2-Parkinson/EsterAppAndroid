@@ -39,7 +39,9 @@
             android:id="@+id/btn_ex4"
             android:layout_width="180dp"
             android:layout_height="160dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
             android:backgroundTint="@color/blue3"
             android:drawableTop="@drawable/ic_ex4"
             android:drawableTint="@color/colorAccent"
@@ -57,7 +59,9 @@
             android:id="@+id/btn_ex3"
             android:layout_width="180dp"
             android:layout_height="160dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:backgroundTint="@color/blue4"
             android:drawableTop="@drawable/ic_ex3"
             android:drawableTint="@color/colorAccent"
@@ -74,6 +78,9 @@
             android:id="@+id/btn_ex2"
             android:layout_width="180dp"
             android:layout_height="160dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
             android:backgroundTint="@color/blue2"
             android:drawableTop="@drawable/ic_ex2"
             android:drawableTint="@color/colorAccent"
@@ -87,9 +94,13 @@
             app:layout_constraintTop_toTopOf="@+id/guideline22" />
 
         <Button
+            app:layout_goneMarginTop="20dp"
             android:id="@+id/btn_ex1"
             android:layout_width="180dp"
             android:layout_height="160dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:backgroundTint="@color/blue1"
             android:drawableTop="@drawable/ic_ex1"
             android:drawableTint="@color/colorAccent"
@@ -99,8 +110,10 @@
             android:textSize="16dp"
             app:layout_constraintBottom_toTopOf="@+id/guideline25"
             app:layout_constraintEnd_toStartOf="@+id/guideline24"
+            app:layout_constraintHorizontal_bias="0.555"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline22" />
+            app:layout_constraintTop_toTopOf="@+id/guideline22"
+            app:layout_constraintVertical_bias="0.454" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline26"
