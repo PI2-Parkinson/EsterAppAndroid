@@ -9,6 +9,7 @@
     tools:context=".Controller.ExerciseColorActivity">
 
     <RelativeLayout
+        android:id="@+id/relativeLayout4"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@color/colorAccent"
@@ -64,15 +65,16 @@
         app:layout_constraintGuide_percent="0.24" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/fixed_strap_postural"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_marginTop="15dp"
         android:text="@string/exercise_in_progress"
-        android:textSize="15sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline32"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline31" />
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout4" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline33"
