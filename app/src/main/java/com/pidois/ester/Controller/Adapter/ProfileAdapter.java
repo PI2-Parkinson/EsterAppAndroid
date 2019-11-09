@@ -9,8 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -20,6 +22,7 @@ import com.pidois.ester.Models.Profile;
 import com.pidois.ester.R;
 
 
+import java.io.BufferedReader;
 import java.util.List;
 
 public class ProfileAdapter extends RecyclerView.Adapter {
@@ -95,6 +98,7 @@ public class ProfileAdapter extends RecyclerView.Adapter {
         private TextView level, rightAnswers, date;
         private RelativeLayout headerLayout, footerLayout;
         private ValueAnimator vAnimator;
+        private Button chartButton;
 
         private ProfileSoundHolder(CardView card) {
 
@@ -104,6 +108,7 @@ public class ProfileAdapter extends RecyclerView.Adapter {
             this.date = card.findViewById(R.id.profile_sound_date);
             this.headerLayout = card.findViewById(R.id.profile_sound_header);
             this.footerLayout = card.findViewById(R.id.profile_sound_footer);
+            this.chartButton = card.findViewById(R.id.profile_sound_button);
 
             this.footerLayout.setVisibility(View.GONE);
 
@@ -135,6 +140,13 @@ public class ProfileAdapter extends RecyclerView.Adapter {
                         Log.i("LOG", "Collapse Click");
                         collapse(footerLayout);
                     }
+                }
+            });
+
+            this.chartButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.i("PROFILE", "Sound btn click");
                 }
             });
 
@@ -144,12 +156,10 @@ public class ProfileAdapter extends RecyclerView.Adapter {
 
     private class ProfileColorHolder extends RecyclerView.ViewHolder {
 
-        private TextView level;
-        private TextView rightAnswers;
-        private TextView date;
-        private RelativeLayout headerLayout;
-        private RelativeLayout footerLayout;
+        private TextView level, rightAnswers, date;
+        private RelativeLayout headerLayout, footerLayout;
         private ValueAnimator vAnimator;
+        private Button chartButton;
 
         private ProfileColorHolder(CardView card) {
 
@@ -159,6 +169,7 @@ public class ProfileAdapter extends RecyclerView.Adapter {
             this.date = card.findViewById(R.id.profile_color_date);
             this.headerLayout = card.findViewById(R.id.profile_color_header);
             this.footerLayout = card.findViewById(R.id.profile_color_footer);
+            this.chartButton = card.findViewById(R.id.profile_color_button);
 
             this.footerLayout.setVisibility(View.GONE);
 
@@ -193,19 +204,23 @@ public class ProfileAdapter extends RecyclerView.Adapter {
                 }
             });
 
+            this.chartButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.i("PROFILE", "Color btn click");
+                }
+            });
+
 
         }
     }
 
     private class ProfileCognitiveHolder extends RecyclerView.ViewHolder {
 
-        private TextView totalAnswers;
-        private TextView rightAnswers;
-        private TextView wrongAnswers;
-        private TextView date;
-        private RelativeLayout headerLayout;
-        private RelativeLayout footerLayout;
+        private TextView totalAnswers, rightAnswers, wrongAnswers, date;
+        private RelativeLayout headerLayout, footerLayout;
         private ValueAnimator vAnimator;
+        private Button chartButton;
 
         private ProfileCognitiveHolder(CardView card) {
 
@@ -216,6 +231,7 @@ public class ProfileAdapter extends RecyclerView.Adapter {
             this.date = card.findViewById(R.id.profile_cognitive_date);
             this.headerLayout = card.findViewById(R.id.profile_cognitive_header);
             this.footerLayout = card.findViewById(R.id.profile_cognitive_footer);
+            this.chartButton = card.findViewById(R.id.profile_cognitive_button);
 
             this.footerLayout.setVisibility(View.GONE);
 
@@ -250,19 +266,22 @@ public class ProfileAdapter extends RecyclerView.Adapter {
                 }
             });
 
+            this.chartButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.i("PROFILE", "Cognitive btn click");
+                }
+            });
 
         }
     }
 
     private class ProfileStrapHolder extends RecyclerView.ViewHolder {
 
-        private TextView scalePos1;
-        private TextView scalePos2;
-        private TextView scalePos3;
-        private TextView date;
-        private RelativeLayout headerLayout;
-        private RelativeLayout footerLayout;
+        private TextView scalePos1, scalePos2, scalePos3, date;
+        private RelativeLayout headerLayout, footerLayout;
         private ValueAnimator vAnimator;
+        private Button chartButton;
 
         private ProfileStrapHolder(CardView card) {
             super(card);
@@ -272,6 +291,7 @@ public class ProfileAdapter extends RecyclerView.Adapter {
             this.date = card.findViewById(R.id.profile_strap_date);
             this.headerLayout = card.findViewById(R.id.profile_strap_header);
             this.footerLayout = card.findViewById(R.id.profile_strap_footer);
+            this.chartButton = card.findViewById(R.id.profile_strap_button);
 
             this.footerLayout.setVisibility(View.GONE);
 
@@ -305,6 +325,15 @@ public class ProfileAdapter extends RecyclerView.Adapter {
                     }
                 }
             });
+
+            this.chartButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.i("PROFILE", "Strap btn click");
+                }
+            });
+
+
         }
 
     }

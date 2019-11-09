@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Controller.StrapFingerNoseActivity"/>
+        <activity android:name=".Controller.Charts"></activity>
+        <activity android:name=".Controller.StrapFingerNoseActivity" />
         <activity android:name=".Controller.StrapPosturalActivity" />
         <activity android:name=".Controller.StrapRestActivity" />
         <activity android:name=".Controller.StrapActivity" />
