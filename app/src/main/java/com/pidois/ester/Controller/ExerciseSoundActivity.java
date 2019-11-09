@@ -12,17 +12,17 @@ import android.widget.Chronometer;
 
 import com.pidois.ester.R;
 
-public class ExerciseColorActivity extends AppCompatActivity {
+public class ExerciseSoundActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exercise_color);
+        setContentView(R.layout.activity_exercise_sound);
 
-        final Chronometer exec_chronometer = (Chronometer)findViewById(R.id.exec_color_chronometer);
+        final Chronometer exec_chronometer = (Chronometer)findViewById(R.id.exec_sound_chronometer);
 
-        final Button buttonStart = (Button)findViewById(R.id.exec_color_btn_start);
-        final Button buttonStop = (Button)findViewById(R.id.exec_color_btn_stop);
+        final Button buttonStart = (Button)findViewById(R.id.exec_sound_btn_start);
+        final Button buttonStop = (Button)findViewById(R.id.exec_sound_btn_stop);
 
         buttonStop.setVisibility(View.INVISIBLE);
 
@@ -45,7 +45,6 @@ public class ExerciseColorActivity extends AppCompatActivity {
                 exec_chronometer.stop();
             }
         });
-
     }
 
     private void alertDialog() {
