@@ -11,16 +11,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".Controller.StrapFingerNoseActivity"/>
+        <activity android:name=".Controller.StrapPosturalActivity" />
+        <activity android:name=".Controller.StrapRestActivity" />
+        <activity android:name=".Controller.StrapActivity" />
         <activity
             android:name=".Controller.ProfileActivity"
-            android:theme="@style/ProfileTheme"></activity>
-        <activity android:name=".Controller.ExercisesActivity"></activity>
+            android:theme="@style/ProfileTheme" />
+        <activity android:name=".Controller.ExercisesActivity" />
         <activity android:name=".Controller.CognitiveActivity" />
         <activity
             android:name=".Controller.NewsActivity"
-            android:theme="@style/MyAppBarLayoutTheme">
-        </activity>
+            android:theme="@style/MyAppBarLayoutTheme" />
         <activity android:name=".Controller.NewsDetailActivity" />
         <activity android:name=".Controller.MainActivity" />
         <activity

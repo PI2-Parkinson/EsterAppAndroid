@@ -4,12 +4,13 @@
     <color name="colorPrimaryDark">#FFFFFF</color>
     <color name="colorAccent">#FFFFFF</color>
 
+    <color name="light_background">#F8F8F8</color>
+
     <color name="blue1">#009CB8</color>
     <color name="blue2">#4ED6CB</color>
     <color name="blue3">#007C97</color>
     <color name="blue4">#63CFDB</color>
     <color name="blue5">#53B7C2</color>
-
    
     <color name="address">#2F7092</color>
     <color name="followers">#0D5D98</color>

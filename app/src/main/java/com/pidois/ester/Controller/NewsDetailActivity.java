@@ -167,12 +167,12 @@ public class NewsDetailActivity extends AppCompatActivity implements AppBarLayou
                 Intent i = new Intent(Intent.ACTION_SEND);
                 i.setType("text/plan");
                 i.putExtra(Intent.EXTRA_SUBJECT, mSource);
-                String body = mTitle + "\n" + mUrl + "\n" + "Share from the News App" + "\n";
+                String body = mTitle + "\n" + mUrl + "\n" + "Compartilhar" + "\n";
                 i.putExtra(Intent.EXTRA_TEXT, body);
-                startActivity(Intent.createChooser(i, "Share with :"));
+                startActivity(Intent.createChooser(i, "Compartilhar com :"));
 
             }catch (Exception e){
-                Toast.makeText(this, "Hmm.. Sorry, \nCannot be share", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Hmm.. Desculpe, \nNão foi possível compartilhar", Toast.LENGTH_SHORT).show();
             }
         }
 

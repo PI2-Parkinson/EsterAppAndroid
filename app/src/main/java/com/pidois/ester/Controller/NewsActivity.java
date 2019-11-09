@@ -1,6 +1,6 @@
 package com.pidois.ester.Controller;
 
-import com.pidois.ester.Adapter.Adapter;
+import com.pidois.ester.Controller.Adapter.Adapter;
 import com.pidois.ester.Models.News;
 
 import android.content.Intent;

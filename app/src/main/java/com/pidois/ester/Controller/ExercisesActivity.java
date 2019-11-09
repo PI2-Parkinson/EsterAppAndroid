@@ -30,7 +30,7 @@ public class ExercisesActivity extends ExerciseAbstractClass implements View.OnC
         } else if (i == R.id.btn_ex3){
             switchScreen(CognitiveActivity.class);
         } else if (i == R.id.btn_ex4){
-            //todo
+            switchScreen(StrapActivity.class);
         }
     }
 

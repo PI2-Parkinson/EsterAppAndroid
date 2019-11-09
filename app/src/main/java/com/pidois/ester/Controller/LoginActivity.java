@@ -178,7 +178,6 @@ public class LoginActivity extends AppCompatActivity implements
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         updateUI(null);
-                        restartApp();
                     }
                 });
     }

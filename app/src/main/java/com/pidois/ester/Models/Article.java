@@ -7,7 +7,7 @@ public class Article {
 
     @SerializedName("source")
     @Expose
-    private Source source;
+    private com.pidois.ester.Models.Source source;
 
     @SerializedName("author")
     @Expose
