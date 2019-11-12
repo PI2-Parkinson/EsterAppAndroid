@@ -24,9 +24,9 @@ public class ExercisesActivity extends ExerciseAbstractClass implements View.OnC
     public void onClick(View view) {
         int i = view.getId();
         if (i == R.id.btn_ex1){
-            //todo
+            switchScreen(ExerciseSoundActivity.class);
         } else if (i == R.id.btn_ex2){
-            //todo
+            switchScreen(ExerciseColorActivity.class);
         } else if (i == R.id.btn_ex3){
             switchScreen(CognitiveActivity.class);
         } else if (i == R.id.btn_ex4){

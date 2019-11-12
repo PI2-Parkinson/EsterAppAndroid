@@ -12,7 +12,10 @@
     <string name="strap_fingernose_title">Dedo-nariz</string>
     <string name="strap_fingernose_desc">Permaneça sentado com o braço na altura do nariz por 10 segundos.</string>
     <string name="strap_about_title">Sobre os testes</string>
-    <string name="strap_btn_start">Começar</string>
+    <string name="btn_start">Começar</string>
+
+    <string name="btn_stop">Sair</string>
+
 
     <!-- Cognitive exercise strings -->
     <string name="cognitive_exercise_desc">Selecione a opção que representa a cor da palavra</string>
@@ -23,7 +26,6 @@
     <string name="btn_exercise_color">Cores</string>
     <string name="btn_exercise_cognitive">Cognitivo</string>
     <string name="btn_exercise_strap">Strap</string>
-
 
 
 </resources>
