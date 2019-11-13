@@ -70,6 +70,7 @@ public class BluetoothLeService extends Service {
                     gatt.getService(UUID_ESTER_SERVICE)
                             .getCharacteristic(UUID_ESTER_CHARACTERISTIC);
             characteristic.setValue(DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+            Log.i("#AQUII ENVIA O VALOR##","########### " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
             gatt.writeCharacteristic(characteristic);
         }
         @Override
@@ -136,12 +137,12 @@ public class BluetoothLeService extends Service {
         }
     };
 
-    private void broadcastUpdate(final String action) {
+    public void broadcastUpdate(final String action) {
         final Intent intent = new Intent(action);
         sendBroadcast(intent);
     }
 
-    private void broadcastUpdate(final String action,
+    public void broadcastUpdate(final String action,
                                  final BluetoothGattCharacteristic characteristic) {
         final Intent intent = new Intent(action);
 

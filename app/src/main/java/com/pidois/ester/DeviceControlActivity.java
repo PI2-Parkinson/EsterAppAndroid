@@ -80,6 +80,8 @@ public class DeviceControlActivity extends Activity {
     // ACTION_GATT_SERVICES_DISCOVERED: discovered GATT services.
     // ACTION_DATA_AVAILABLE: received data from the device.  This can be a result of read
     //                        or notification operations.
+
+
     private final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -97,19 +99,49 @@ public class DeviceControlActivity extends Activity {
                 // Show all the supported services and characteristics on the user interface.
                 displayGattServices(mBluetoothLeService.getSupportedGattServices());
             } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
-                Log.i("#AQUII RECEBE O VALOR##","########### " + intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
+                Log.i("RECEBE DA ESP32","VALOR: " + intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
+
                 BLUETOOTH_GLOBAL_RDATA = intent.getStringExtra(BluetoothLeService.EXTRA_DATA);
+                Log.i("DA ESP32 PRA VARIAVEL","VALOR VARIAVEL: " + BLUETOOTH_GLOBAL_RDATA);
 
-                switch (intent.getStringExtra(BluetoothLeService.EXTRA_DATA)){
+                if (BLUETOOTH_GLOBAL_RDATA.contains("C")){
 
-                    case "C":
-                        BLUETOOTH_GLOBAL_SDATA = "C";
-                    case "BP":
-                        BLUETOOTH_GLOBAL_SDATA = "P0";
-                    case "QM":
-                        switchScreen(ProfileActivity.class);
-
+                    BLUETOOTH_GLOBAL_SDATA = "C";
+                    Log.i("AQUI MANDA SDATA","CONEXAO ESTABELECIDA : " + BLUETOOTH_GLOBAL_SDATA);
                 }
+
+                if (BLUETOOTH_GLOBAL_RDATA.contains("BP")){
+
+                    BLUETOOTH_GLOBAL_SDATA = "P0";
+                    Log.i("AQUI MANDA SDATA","BOTAO DE PARAR : " + BLUETOOTH_GLOBAL_SDATA);
+                }
+
+                if (BLUETOOTH_GLOBAL_RDATA.contains("QM")){
+
+                    BLUETOOTH_GLOBAL_SDATA = "M1";
+                    Log.i("AQUI MANDA SDATA","EXERCICIO 1 SELECIONADO: " + BLUETOOTH_GLOBAL_SDATA);
+                }
+
+                if (BLUETOOTH_GLOBAL_RDATA.contains("SQ")){
+
+                    BLUETOOTH_GLOBAL_SDATA = "SR";
+                    Log.i("AQUI MANDA SDATA","SEQUENCIA RECEBIDA: " + BLUETOOTH_GLOBAL_SDATA);
+                }
+                //sendBroadcast(intent);
+
+//                switch (BLUETOOTH_GLOBAL_RDATA){
+//
+//                    case "C":
+//                        BLUETOOTH_GLOBAL_SDATA = "C";
+//                    case "BP":
+//                        BLUETOOTH_GLOBAL_SDATA = "P0";
+//                    case "QM":
+//                        switchScreen(ProfileActivity.class);
+//
+//                    default:
+//                        Log.w("DEU RUIMMM","LASCOU");
+//
+//                }
 
                 displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
             }
