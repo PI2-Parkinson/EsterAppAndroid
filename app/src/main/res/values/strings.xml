@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">EsTer</string>
 
+
     <string name="email_title">Email</string>
     <string name="sex_title">Sexo</string>
     <string name="username">Jorge</string>
@@ -27,4 +28,32 @@
     <string name="menu_disconnect">Disconnect</string>
     <string name="menu_scan">Scan</string>
     <string name="menu_stop">Stop</string>
+
+    <!-- Profile strings -->
+    <string name="logout">Sair</string>
+
+    <!-- Strap strings -->
+    <string name="strap_rest_title">Repouso</string>
+    <string name="strap_rest_desc">Permaneça sentado com os braços abaixados por 10 segundos.</string>
+    <string name="strap_postural_title">Postural</string>
+    <string name="strap_postural_desc">Permaneça sentado com os braços esticados na altura do ombro por 10 segundos.</string>
+    <string name="strap_fingernose_title">Dedo-nariz</string>
+    <string name="strap_fingernose_desc">Permaneça sentado com o braço na altura do nariz por 10 segundos.</string>
+    <string name="strap_about_title">Sobre os testes</string>
+    <string name="btn_start">Começar</string>
+
+    <string name="btn_stop">Sair</string>
+
+
+    <!-- Cognitive exercise strings -->
+    <string name="cognitive_exercise_desc">Selecione a opção que representa a cor da palavra</string>
+
+    <!-- Exercises strings -->
+    <string name="exercise_in_progress">Exercício em andamento</string>
+    <string name="btn_exercise_sound">Som</string>
+    <string name="btn_exercise_color">Cores</string>
+    <string name="btn_exercise_cognitive">Cognitivo</string>
+    <string name="btn_exercise_strap">Strap</string>
+
+
 </resources>

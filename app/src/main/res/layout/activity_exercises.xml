@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/main_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    android:backgroundTint="@color/colorPrimaryDark"
+    tools:context=".Controller.ExercisesActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-164dp">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.2" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".45" />
+
+        <Button
+            android:id="@+id/btn_ex4"
+            android:layout_width="180dp"
+            android:layout_height="160dp"
+            android:backgroundTint="@color/blue3"
+            android:drawableTop="@drawable/ic_ex4"
+            android:drawableTint="@color/colorAccent"
+            android:elevation="5dp"
+            android:text="@string/btn_exercise_strap"
+            android:textColor="@color/colorAccent"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline26"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline24"
+            app:layout_constraintTop_toTopOf="@+id/guideline25" />
+
+        <Button
+            android:id="@+id/btn_ex3"
+            android:layout_width="180dp"
+            android:layout_height="160dp"
+            android:backgroundTint="@color/blue4"
+            android:drawableTop="@drawable/ic_ex3"
+            android:drawableTint="@color/colorAccent"
+            android:elevation="5dp"
+            android:text="@string/btn_exercise_cognitive"
+            android:textColor="@color/colorAccent"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline26"
+            app:layout_constraintEnd_toStartOf="@+id/guideline24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline25" />
+
+        <Button
+            android:id="@+id/btn_ex2"
+            android:layout_width="180dp"
+            android:layout_height="160dp"
+            android:backgroundTint="@color/blue2"
+            android:drawableTop="@drawable/ic_ex2"
+            android:drawableTint="@color/colorAccent"
+            android:elevation="5dp"
+            android:text="@string/btn_exercise_color"
+            android:textColor="@color/colorAccent"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline25"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline24"
+            app:layout_constraintTop_toTopOf="@+id/guideline22" />
+
+        <Button
+            android:id="@+id/btn_ex1"
+            android:layout_width="180dp"
+            android:layout_height="160dp"
+            android:backgroundTint="@color/blue1"
+            android:drawableTop="@drawable/ic_ex1"
+            android:drawableTint="@color/colorAccent"
+            android:elevation="5dp"
+            android:text="@string/btn_exercise_sound"
+            android:textColor="@color/colorAccent"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline25"
+            app:layout_constraintEnd_toStartOf="@+id/guideline24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline22" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline26"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.7" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="#ffffff"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="20dp"
+            app:layout_constraintGuide_percent="0" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="110dp" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="196dp"
+            android:layout_height="62dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline21"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline20"
+            app:srcCompat="@drawable/ic_ester" />
+
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
