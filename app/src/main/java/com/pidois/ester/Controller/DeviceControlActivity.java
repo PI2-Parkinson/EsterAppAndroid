@@ -2,6 +2,7 @@ package com.pidois.ester.Controller;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothGattCharacteristic;
+import android.bluetooth.BluetoothGattDescriptor;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -24,6 +25,7 @@ import com.pidois.ester.R;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * For a given BLE device, this Activity provides the user interface to connect, display data,
@@ -32,6 +34,11 @@ import java.util.List;
  * Bluetooth LE API.
  */
 public class DeviceControlActivity extends Activity {
+
+
+    private BluetoothLeService mbls;
+
+
     private final static String TAG = DeviceControlActivity.class.getSimpleName();
 
     public static final String EXTRAS_DEVICE_NAME = "DEVICE_NAME";
@@ -112,14 +119,24 @@ public class DeviceControlActivity extends Activity {
 
                 if (BLUETOOTH_GLOBAL_RDATA.contains("BP")){
 
+                    mbls = new BluetoothLeService();
+
+                    BluetoothGattService service = mbls.mBluetoothGatt.getService(UUID.fromString("c96d9bcc-f3b8-442e-b634-d546e4835f64"));
+                    BluetoothGattCharacteristic mGattCharacteristic = service.getCharacteristic(UUID.fromString("807b8bad-a892-4ff7-b8bc-83a644742f9b"));
+                    BluetoothGattDescriptor descriptor = mGattCharacteristic.getDescriptor(
+                            BluetoothLeService.UUID_CLIENT_CHARACTERISTIC_CONFIG);
+                    descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
                     BLUETOOTH_GLOBAL_SDATA = "P0";
+
+                    mbls.mBluetoothGatt.writeDescriptor(descriptor);
+                    sendBroadcast(intent);
                     Log.i("AQUI MANDA SDATA","BOTAO DE PARAR : " + BLUETOOTH_GLOBAL_SDATA);
                 }
 
                 if (BLUETOOTH_GLOBAL_RDATA.contains("QM")){
 
-                    BLUETOOTH_GLOBAL_SDATA = "M1";
-                    Log.i("AQUI MANDA SDATA","EXERCICIO 1 SELECIONADO: " + BLUETOOTH_GLOBAL_SDATA);
+                    switchScreen(ExercisesActivity.class);
+
                 }
 
                 if (BLUETOOTH_GLOBAL_RDATA.contains("SQ")){
