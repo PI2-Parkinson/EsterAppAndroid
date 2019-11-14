@@ -119,7 +119,8 @@ public class DeviceControlActivity extends Activity {
 
                 if (BLUETOOTH_GLOBAL_RDATA.contains("BP")){
 
-                    mbls = new BluetoothLeService();
+                    tratarBp();
+                   /* mbls = new BluetoothLeService();
 
                     BluetoothGattService service = mbls.mBluetoothGatt.getService(UUID.fromString("c96d9bcc-f3b8-442e-b634-d546e4835f64"));
                     BluetoothGattCharacteristic mGattCharacteristic = service.getCharacteristic(UUID.fromString("807b8bad-a892-4ff7-b8bc-83a644742f9b"));
@@ -128,9 +129,11 @@ public class DeviceControlActivity extends Activity {
                     descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
                     BLUETOOTH_GLOBAL_SDATA = "P0";
 
+                    mbls.mBluetoothGatt.setCharacteristicNotification(mGattCharacteristic, true);
                     mbls.mBluetoothGatt.writeDescriptor(descriptor);
-                    sendBroadcast(intent);
-                    Log.i("AQUI MANDA SDATA","BOTAO DE PARAR : " + BLUETOOTH_GLOBAL_SDATA);
+                    mbls.mBluetoothGatt.writeDescriptor(descriptor);
+                    //sendBroadcast(intent);
+                    Log.i("AQUI MANDA SDATA","BOTAO DE PARAR : " + BLUETOOTH_GLOBAL_SDATA);*/
                 }
 
                 if (BLUETOOTH_GLOBAL_RDATA.contains("QM")){
@@ -164,6 +167,25 @@ public class DeviceControlActivity extends Activity {
             }
         }
     };
+
+    public void tratarBp(){
+
+        mbls = new BluetoothLeService();
+
+        BluetoothGattService service = mbls.mBluetoothGatt.getService(UUID.fromString("c96d9bcc-f3b8-442e-b634-d546e4835f64"));
+        BluetoothGattCharacteristic mGattCharacteristic = service.getCharacteristic(UUID.fromString("807b8bad-a892-4ff7-b8bc-83a644742f9b"));
+        BluetoothGattDescriptor descriptor = mGattCharacteristic.getDescriptor(
+                BluetoothLeService.UUID_CLIENT_CHARACTERISTIC_CONFIG);
+        descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
+        BLUETOOTH_GLOBAL_SDATA = "P0";
+
+        mbls.mBluetoothGatt.setCharacteristicNotification(mGattCharacteristic, true);
+        mbls.mBluetoothGatt.writeDescriptor(descriptor);
+        mbls.mBluetoothGatt.writeDescriptor(descriptor);
+        //sendBroadcast(intent);
+        Log.i("AQUI MANDA SDATA","BOTAO DE PARAR : " + BLUETOOTH_GLOBAL_SDATA);
+    }
+
 
     // If a given GATT characteristic is selected, check for supported features.  This sample
     // demonstrates 'Read' and 'Notify' features.  See

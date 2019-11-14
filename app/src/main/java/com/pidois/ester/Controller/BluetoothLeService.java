@@ -317,7 +317,7 @@ public class BluetoothLeService extends Service {
             Log.w(TAG, "BluetoothAdapter not initialized");
             return;
         }
-        //mBluetoothGatt.setCharacteristicNotification(characteristic, enabled);
+        mBluetoothGatt.setCharacteristicNotification(characteristic, enabled); //TAVA COMENTADO ANTES, TIREI E MUDOU NADA
 
         // This is specific to Heart Rate Measurement.
         if (UUID_ESTER_CHARACTERISTIC.equals(characteristic.getUuid())) {

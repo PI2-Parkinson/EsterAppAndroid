@@ -40,19 +40,14 @@ public class ExercisesActivity extends ExerciseAbstractClass implements View.OnC
 
         BluetoothLeService bls = new BluetoothLeService();
 
+        service = mbls.mBluetoothGatt.getService(UUID.fromString("c96d9bcc-f3b8-442e-b634-d546e4835f64"));
+        mGattCharacteristic = service.getCharacteristic(UUID.fromString("807b8bad-a892-4ff7-b8bc-83a644742f9b"));
+        mbls = new BluetoothLeService();
 
         int i = view.getId();
         if (i == R.id.btn_ex1){
             DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "M1";
-            mbls = new BluetoothLeService();
-
-
-
-            service = mbls.mBluetoothGatt.getService(UUID.fromString("c96d9bcc-f3b8-442e-b634-d546e4835f64"));
-            mGattCharacteristic = service.getCharacteristic(UUID.fromString("807b8bad-a892-4ff7-b8bc-83a644742f9b"));
             Log.i("%$%$#$#$$#%$%#$#$#$@#","EXERCICIO 1 SELECIONADO: " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
-
-            Log.i("VALOR DA CARACT","VALORRRRRRRRRR" + mGattCharacteristic);
 
             BluetoothGattDescriptor descriptor = mGattCharacteristic.getDescriptor(
                     BluetoothLeService.UUID_CLIENT_CHARACTERISTIC_CONFIG);
@@ -60,14 +55,39 @@ public class ExercisesActivity extends ExerciseAbstractClass implements View.OnC
             mbls.mBluetoothGatt.writeDescriptor(descriptor);
 
             switchScreen(ExerciseSoundActivity.class);
+
         } else if (i == R.id.btn_ex2){
             DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "M2";
+
+            Log.i("%$%$#$#$$#%$%#$#$#$@#","EXERCICIO 2 SELECIONADO: " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+
+            BluetoothGattDescriptor descriptor = mGattCharacteristic.getDescriptor(
+                    BluetoothLeService.UUID_CLIENT_CHARACTERISTIC_CONFIG);
+            descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
+            mbls.mBluetoothGatt.writeDescriptor(descriptor);
+
             switchScreen(ExerciseColorActivity.class);
+
         } else if (i == R.id.btn_ex3){
             DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "M3";
+            Log.i("%$%$#$#$$#%$%#$#$#$@#","EXERCICIO 3 SELECIONADO: " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+
+            BluetoothGattDescriptor descriptor = mGattCharacteristic.getDescriptor(
+                    BluetoothLeService.UUID_CLIENT_CHARACTERISTIC_CONFIG);
+            descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
+            mbls.mBluetoothGatt.writeDescriptor(descriptor);
+
             switchScreen(CognitiveActivity.class);
+
         } else if (i == R.id.btn_ex4){
             DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "M4";
+            Log.i("%$%$#$#$$#%$%#$#$#$@#","EXERCICIO 4 SELECIONADO: " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+
+            BluetoothGattDescriptor descriptor = mGattCharacteristic.getDescriptor(
+                    BluetoothLeService.UUID_CLIENT_CHARACTERISTIC_CONFIG);
+            descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
+            mbls.mBluetoothGatt.writeDescriptor(descriptor);
+
             switchScreen(StrapActivity.class);
         }
     }
