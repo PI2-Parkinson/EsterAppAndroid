@@ -20,7 +20,8 @@
             android:name=".Controller.ProfileActivity"
             android:theme="@style/ProfileTheme" />
         <activity android:name=".Controller.ExercisesActivity" />
-        <activity android:name=".Controller.CognitiveActivity" />
+        <activity
+            android:name=".Controller.CognitiveActivity" />
         <activity
             android:name=".Controller.NewsActivity"
             android:theme="@style/MyAppBarLayoutTheme" />
