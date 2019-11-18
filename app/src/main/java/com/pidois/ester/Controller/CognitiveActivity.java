@@ -22,16 +22,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DatabaseReference;
 import com.pidois.ester.R;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 import java.util.Random;
 
 
 public class CognitiveActivity extends ExerciseAbstractClass implements View.OnClickListener {
 
     FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+
 
     public static final String RED = "#FF0000";
     public static final String BLUE = "#0000FF";
@@ -48,11 +46,12 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
     DatabaseReference database = FirebaseDatabase.getInstance().getReference();
 
     private TextView mText = null;
-    private int time = 0;
+    private int time = 0, timeCountDown = 0;
     private int answers = 0;
     private int correctAnswers = 0;
     ArrayList<Integer> randomColorArray = new ArrayList<>();
     ArrayList<Integer> randomButtonArray = new ArrayList<>();
+
 
     Random random = new Random();
 
@@ -69,18 +68,15 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
             WHITE, GRAY
     };
 
-    final Button buttonStop = (Button)findViewById(R.id.exec_cognitive_btn_stop);
-
-    String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cognitive);
 //        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
-        final Chronometer simpleChronometer = findViewById(R.id.simpleChronometer);
-        simpleChronometer.setBase(SystemClock.elapsedRealtime());
+        Chronometer simpleChronometer = findViewById(R.id.simpleChronometer);
+        simpleChronometer.setCountDown(true);
+        simpleChronometer.setBase(SystemClock.elapsedRealtime()+ 60*1000);
         simpleChronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
 
             public void onChronometerTick(Chronometer chronometer) {
@@ -92,18 +88,20 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
 
                 Log.i("CognitiveActivity",minutes + " minutos " + time + " segundos");
 
-                if (time == 10) {
+                if (timeCountDown == 10) {
+                    endGame();
+                    chronometer.stop();
+                    alertDialog();
+                } else if (time == 10) {
                     time = 0;
                     LinearLayout lView = findViewById(R.id.linearlayout);
                     lView.removeAllViewsInLayout();
                     showLayout();
                     countAnswers();
-
-                } else if(minutes == 1){
-                    endGame();
-                    chronometer.stop();
                 }
                 time++;
+                timeCountDown++;
+
             }
         });
         simpleChronometer.start();
@@ -113,13 +111,6 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
         showSequence(color);
         generateButtons(color);
 
-        buttonStop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                alertDialog();
-                simpleChronometer.stop();
-            }
-        });
 
     }
 
@@ -141,6 +132,10 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
         LinearLayout lView = findViewById(R.id.linearlayout);
         TableRow tableRow = findViewById(R.id.tableRow);
         TableRow chronometerTableRow = findViewById(R.id.chronometerTableRow);
+        TextView title = findViewById(R.id.cognitive_title);
+        TextView title2 = findViewById(R.id.cognitive_title2);
+        title.setVisibility(View.INVISIBLE);
+        title2.setVisibility(View.INVISIBLE);
         mText = new TextView(this);
         lView.removeAllViews();
         tableRow.removeAllViews();
@@ -155,7 +150,10 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
     }
 
     public void showSequence(int[] color){
+
+
         LinearLayout lView = findViewById(R.id.linearlayout);
+
 
         mText = new TextView(this);
         mText.setText(colorName[color[0]]);
@@ -165,6 +163,7 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
         mText.setBackgroundColor(Color.parseColor(BLACK));
 
         lView.addView(mText);
+
     }
 
     public void generateButtons(int[] color){
@@ -276,29 +275,25 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
     }
 
     public void showRightAnswers(){
-        database.child(currentFirebaseUser.getUid()).child("answers").child("date").setValue(date);
         database.child(currentFirebaseUser.getUid()).child("answers").child("rightAnswers").setValue(correctAnswers);
         database.child(currentFirebaseUser.getUid()).child("answers").child("totalAnswers").setValue(answers);
         database.child(currentFirebaseUser.getUid()).child("answers").child("wrongAnswers").setValue(answers - correctAnswers);
     }
 
     private void alertDialog() {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setMessage("Você deseja mesmo encerrar o exercício? Todo o progresso não será salvo.");
-        dialog.setTitle("Deseja mesmo sair?");
-        dialog.setPositiveButton("sair",
+        int wrongAnswers1 = answers-correctAnswers;
+        AlertDialog.Builder dialog=new AlertDialog.Builder(this);
+        dialog.setMessage("Total: " +answers + "\n\nRespostas corretas: "+correctAnswers+"\nRespostas erradas: "+wrongAnswers1);
+        dialog.setTitle("Resultado");
+        dialog.setCancelable(false);
+        dialog.setPositiveButton("ok",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,
                                         int which) {
                         finish();
+
                     }
                 });
-        dialog.setNegativeButton("cancelar",new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                //
-            }
-        });
         AlertDialog alertDialog=dialog.create();
         alertDialog.show();
     }

@@ -94,6 +94,7 @@
                 android:text="25"/>
 
             <Button
+                android:id="@+id/profile_cognitive_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/round_btn_grey"
