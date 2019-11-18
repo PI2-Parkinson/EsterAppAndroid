@@ -1,5 +1,7 @@
 package com.pidois.ester.Controller;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -20,14 +22,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DatabaseReference;
 import com.pidois.ester.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
 
 
 public class CognitiveActivity extends ExerciseAbstractClass implements View.OnClickListener {
 
     FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
-
 
     public static final String RED = "#FF0000";
     public static final String BLUE = "#0000FF";
@@ -50,7 +54,6 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
     ArrayList<Integer> randomColorArray = new ArrayList<>();
     ArrayList<Integer> randomButtonArray = new ArrayList<>();
 
-
     Random random = new Random();
 
     private String[] colorName = {"vermelho", "azul",
@@ -66,13 +69,17 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
             WHITE, GRAY
     };
 
+    final Button buttonStop = (Button)findViewById(R.id.exec_cognitive_btn_stop);
+
+    String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cognitive);
 //        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
-        Chronometer simpleChronometer = findViewById(R.id.simpleChronometer);
+        final Chronometer simpleChronometer = findViewById(R.id.simpleChronometer);
         simpleChronometer.setBase(SystemClock.elapsedRealtime());
         simpleChronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
 
@@ -106,6 +113,13 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
         showSequence(color);
         generateButtons(color);
 
+        buttonStop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog();
+                simpleChronometer.stop();
+            }
+        });
 
     }
 
@@ -141,10 +155,7 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
     }
 
     public void showSequence(int[] color){
-
-
         LinearLayout lView = findViewById(R.id.linearlayout);
-
 
         mText = new TextView(this);
         mText.setText(colorName[color[0]]);
@@ -154,7 +165,6 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
         mText.setBackgroundColor(Color.parseColor(BLACK));
 
         lView.addView(mText);
-
     }
 
     public void generateButtons(int[] color){
@@ -266,8 +276,30 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
     }
 
     public void showRightAnswers(){
+        database.child(currentFirebaseUser.getUid()).child("answers").child("date").setValue(date);
         database.child(currentFirebaseUser.getUid()).child("answers").child("rightAnswers").setValue(correctAnswers);
         database.child(currentFirebaseUser.getUid()).child("answers").child("totalAnswers").setValue(answers);
         database.child(currentFirebaseUser.getUid()).child("answers").child("wrongAnswers").setValue(answers - correctAnswers);
+    }
+
+    private void alertDialog() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("Você deseja mesmo encerrar o exercício? Todo o progresso não será salvo.");
+        dialog.setTitle("Deseja mesmo sair?");
+        dialog.setPositiveButton("sair",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                        finish();
+                    }
+                });
+        dialog.setNegativeButton("cancelar",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //
+            }
+        });
+        AlertDialog alertDialog=dialog.create();
+        alertDialog.show();
     }
 }
