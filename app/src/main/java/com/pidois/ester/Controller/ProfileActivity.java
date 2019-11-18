@@ -1,6 +1,7 @@
 package com.pidois.ester.Controller;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,6 +19,7 @@ import android.graphics.Paint;
 import android.graphics.Shader;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,6 +32,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.pidois.ester.Controller.Adapter.ProfileAdapter;
 import com.pidois.ester.Models.Profile;
 import com.pidois.ester.R;
@@ -39,6 +47,7 @@ import com.squareup.picasso.Transformation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -52,6 +61,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private FirebaseAuth mAuth;
 
     private GoogleSignInClient mGoogleSignInClient;
+
+    private DatabaseReference databaseReference;
+    private FirebaseDatabase firebaseDatabase;
+
+    private FirebaseUser currentFirebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,6 +141,54 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         vRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         profileAdapter = new ProfileAdapter(this, dataProfile);
         vRecyclerView.setAdapter(profileAdapter);
+
+        currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference(currentFirebaseUser.getUid());
+
+        //databaseReference.child("Holy").child("fuck").setValue("Moly");
+        //databaseReference.child("Holy").child("Moly").setValue("Fuck");
+
+
+        databaseReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
+                Log.d("MYDB", "Value is: " + map);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        /*databaseReference.child("rightAnswers").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                String value = snapshot.getValue(String.class);
+                Log.d("Firebase", "Value is: " + value);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });*/
 
     }
 
