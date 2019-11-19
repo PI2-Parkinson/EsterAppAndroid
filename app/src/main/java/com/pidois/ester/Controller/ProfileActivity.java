@@ -22,6 +22,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,6 +58,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     public TextView profileName;
     public ImageView profileImg;
+    private ProgressBar progressBar;
 
     private FirebaseAuth mAuth;
 
@@ -67,6 +69,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private FirebaseUser currentFirebaseUser;
 
+    private Long rightAnswers, totalAnswers, wrongAnswers;
+    private String cognitiveDate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +79,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         profileName = findViewById(R.id.profileName);
         profileImg = findViewById(R.id.profile_image);
+        progressBar = findViewById(R.id.profile_progressbar);
 
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -121,14 +127,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         dataProfile.add(profile);
 
         profile = new Profile();
-        profile.setType(3);
-        profile.setTotalAnswers("69");
-        profile.setRightAnswers("30");
-        profile.setWrongAnswers("39");
-        profile.setCognitiveDate("25/10/2019");
-        dataProfile.add(profile);
-
-        profile = new Profile();
         profile.setType(2);
         profile.setTremorPos1("1");
         profile.setTremorPos2("2");
@@ -140,57 +138,48 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         vRecyclerView.setHasFixedSize(true);
         vRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         profileAdapter = new ProfileAdapter(this, dataProfile);
-        vRecyclerView.setAdapter(profileAdapter);
+        //vRecyclerView.setAdapter(profileAdapter);
 
         currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
-
-
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference(currentFirebaseUser.getUid());
 
-        //databaseReference.child("Holy").child("fuck").setValue("Moly");
-        //databaseReference.child("Holy").child("Moly").setValue("Fuck");
 
-
-        databaseReference.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
-                Log.d("MYDB", "Value is: " + map);
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        /*databaseReference.child("rightAnswers").addValueEventListener(new ValueEventListener() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                String value = snapshot.getValue(String.class);
-                Log.d("Firebase", "Value is: " + value);
+                for (DataSnapshot ds : snapshot.getChildren()){
+                    rightAnswers = ds.child("rightAnswers").getValue(Long.class);
+                    totalAnswers = ds.child("totalAnswers").getValue(Long.class);
+                    wrongAnswers = ds.child("wrongAnswers").getValue(Long.class);
+                    cognitiveDate = ds.child("date").getValue(String.class);
+
+                    Profile profile = new Profile();
+                    profile.setType(3);
+                    profile.setTotalAnswers(String.valueOf(totalAnswers));
+                    profile.setRightAnswers(String.valueOf(rightAnswers));
+                    profile.setWrongAnswers(String.valueOf(wrongAnswers));
+                    profile.setCognitiveDate(cognitiveDate);
+                    dataProfile.add(profile);
+
+                    vRecyclerView.setAdapter(profileAdapter);
+
+                    progressBar.setVisibility(View.INVISIBLE);
+
+                }
+
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
+                Toast toast = Toast.makeText(ProfileActivity.this, "Não deu!", Toast.LENGTH_SHORT);
+                toast.show();
             }
-        });*/
+        });
+
+
 
     }
+
 
     private void signOut() {
         // Firebase sign out

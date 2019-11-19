@@ -24,7 +24,8 @@
 
     <!--Profile theme -->
     <style name="ProfileTheme" parent="Theme.AppCompat.Light.NoActionBar">
-         <item name="colorPrimaryDark">#015F74</item>
+        <item name="colorPrimaryDark">#015F74</item>
+        <item name="colorAccent">@color/white</item>
     </style>
 
     <style name="MyAppBarLayoutTheme" parent="Theme.AppCompat.Light.DarkActionBar">

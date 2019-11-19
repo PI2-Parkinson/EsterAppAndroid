@@ -22,7 +22,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DatabaseReference;
 import com.pidois.ester.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
 
@@ -278,6 +280,7 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
         database.child(currentFirebaseUser.getUid()).child("answers").child("rightAnswers").setValue(correctAnswers);
         database.child(currentFirebaseUser.getUid()).child("answers").child("totalAnswers").setValue(answers);
         database.child(currentFirebaseUser.getUid()).child("answers").child("wrongAnswers").setValue(answers - correctAnswers);
+        database.child(currentFirebaseUser.getUid()).child("answers").child("date").setValue(getCurrentDate());
     }
 
     private void alertDialog() {
@@ -296,5 +299,12 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
                 });
         AlertDialog alertDialog=dialog.create();
         alertDialog.show();
+    }
+
+    private String getCurrentDate(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String currentDateandTime = sdf.format(new Date());
+
+        return currentDateandTime;
     }
 }
