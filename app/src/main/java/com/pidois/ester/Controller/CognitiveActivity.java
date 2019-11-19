@@ -45,7 +45,8 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
     public static final String GRAY = "#808080";
     public static final String BLACK = "#000000";
 
-    DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference database = FirebaseDatabase.getInstance().getReference("cognitive_answers").child(currentFirebaseUser.getUid());
+    DatabaseReference databaseRef = database.push();
 
     private TextView mText = null;
     private int time = 0, timeCountDown = 0;
@@ -277,10 +278,16 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
     }
 
     public void showRightAnswers(){
-        database.child(currentFirebaseUser.getUid()).child("answers").child("rightAnswers").setValue(correctAnswers);
-        database.child(currentFirebaseUser.getUid()).child("answers").child("totalAnswers").setValue(answers);
-        database.child(currentFirebaseUser.getUid()).child("answers").child("wrongAnswers").setValue(answers - correctAnswers);
-        database.child(currentFirebaseUser.getUid()).child("answers").child("date").setValue(getCurrentDate());
+
+        databaseRef.child("rightAnswers").setValue(correctAnswers);
+        databaseRef.child("totalAnswers").setValue(answers);
+        databaseRef.child("wrongAnswers").setValue(answers - correctAnswers);
+        databaseRef.child("date").setValue(getCurrentDate());
+
+        //database.child(currentFirebaseUser.getUid()).child("answers").child("rightAnswers").setValue(correctAnswers);
+        //database.child(currentFirebaseUser.getUid()).child("answers").child("totalAnswers").setValue(answers);
+        //database.child(currentFirebaseUser.getUid()).child("answers").child("wrongAnswers").setValue(answers - correctAnswers);
+        //database.child(currentFirebaseUser.getUid()).child("answers").child("date").setValue(getCurrentDate());
     }
 
     private void alertDialog() {
