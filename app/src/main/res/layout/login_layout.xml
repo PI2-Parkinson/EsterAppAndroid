@@ -47,7 +47,7 @@
         android:layout_marginRight="20dp"
         android:background="@drawable/round_bg"
         android:drawableLeft="@drawable/ic_google_logo"
-        android:text="Log in with google"
+        android:text="Entrar com o google"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline17"
         tools:layout_editor_absoluteX="160dp" />

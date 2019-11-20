@@ -28,4 +28,8 @@
     <color name="colorBackground">#f9f9fa</color>
     <color name="colorTextSubtitle">#4e4e4e</color>
     <color name="colorTextTitle">#262626</color>
+
+    <!-- Chart colors -->
+    <color name="chart_green">#50F050</color>
+    <color name="chart_red">#FF4B4B</color>
 </resources>

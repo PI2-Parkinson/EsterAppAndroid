@@ -91,7 +91,7 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
 
                 Log.i("CognitiveActivity",minutes + " minutos " + time + " segundos");
 
-                if (timeCountDown == 10) {
+                if (timeCountDown == 60) {
                     endGame();
                     chronometer.stop();
                     alertDialog();
