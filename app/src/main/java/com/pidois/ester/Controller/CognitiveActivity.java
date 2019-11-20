@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.util.Log;
 import android.util.TypedValue;
@@ -84,17 +85,18 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
 
             public void onChronometerTick(Chronometer chronometer) {
 
-                int timeElapsed = (int) (SystemClock.elapsedRealtime() - chronometer.getBase());
+                //int timeElapsed = (int) (SystemClock.elapsedRealtime() - chronometer.getBase());
 
-                int hours = timeElapsed / 3600000;
-                int minutes = (timeElapsed - hours * 3600000) / 60000;
+                //int hours = timeElapsed / 3600000;
+                //int minutes = (timeElapsed - hours * 3600000) / 60000;
 
-                Log.i("CognitiveActivity",minutes + " minutos " + time + " segundos");
+                //Log.i("CognitiveActivity",minutes + " minutos " + time + " segundos");
 
                 if (timeCountDown == 60) {
                     endGame();
                     chronometer.stop();
                     alertDialog();
+                    //postDelay();
                 } else if (time == 10) {
                     time = 0;
                     LinearLayout lView = findViewById(R.id.linearlayout);
@@ -300,12 +302,24 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,
                                         int which) {
-                        finish();
+                        //finish();
+                        postDelay();
 
                     }
                 });
         AlertDialog alertDialog=dialog.create();
         alertDialog.show();
+    }
+
+    private void postDelay(){
+        Handler hander = new Handler();
+        hander.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //alertDialog();
+                finish();
+            }
+        }, 100);
     }
 
     private String getCurrentDate(){

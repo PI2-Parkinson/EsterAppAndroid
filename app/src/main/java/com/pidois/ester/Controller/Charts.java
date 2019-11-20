@@ -36,9 +36,10 @@ public class Charts extends AppCompatActivity {
 
     private BarChart barChart;
     private int[] colorClassArray = new int[]{Color.argb(255, 80, 240, 80), Color.argb(255, 255, 75, 75)};
-    private ArrayList<BarEntry> dataEntry = new ArrayList<>();
+    private ArrayList<BarEntry> dataEntry = new ArrayList<>(), noEntry = new ArrayList<>();
     private Long rightAnswers, wrongAnswers;
     private int i = 0;
+    private String cognitiveDate;
 
     private FloatingActionButton floatingActionButton;
 
@@ -72,6 +73,7 @@ public class Charts extends AppCompatActivity {
 
                     rightAnswers = ds.child("rightAnswers").getValue(Long.class);
                     wrongAnswers = ds.child("wrongAnswers").getValue(Long.class);
+                    cognitiveDate = ds.child("date").getValue(String.class);
 
                     dataEntry.add(new BarEntry(i, new float[]{rightAnswers, wrongAnswers}));
 
@@ -80,17 +82,26 @@ public class Charts extends AppCompatActivity {
                     i++;
                 }
 
-                BarDataSet barDataSet = new BarDataSet(dataEntry, "Exercício Cognitivo");
-                barDataSet.setHighlightEnabled(false);
-                barDataSet.setColors(colorClassArray);
-                barDataSet.setValueTextSize(10);
-                barDataSet.setStackLabels(new String[]{"Acertos", "Erros"});
+                if (cognitiveDate == null){
 
-                BarData barData = new BarData(barDataSet);
+                    //Nada
 
-                barChart.setData(barData);
-                barChart.animateX(2000);
-                barChart.invalidate();
+                } else {
+
+                    BarDataSet barDataSet = new BarDataSet(dataEntry, "Exercício Cognitivo");
+                    barDataSet.setHighlightEnabled(false);
+                    barDataSet.setColors(colorClassArray);
+                    barDataSet.setValueTextSize(10);
+                    barDataSet.setStackLabels(new String[]{"Acertos", "Erros"});
+
+                    BarData barData = new BarData(barDataSet);
+
+                    barChart.setData(barData);
+                    barChart.animateY(2000);
+                    barChart.invalidate();
+
+                }
+
             }
 
             @Override

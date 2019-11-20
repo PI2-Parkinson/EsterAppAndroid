@@ -161,7 +161,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                             public void run() {
                                 restartApp();
                             }
-                        },500);
+                        }, 500);
                     }
                 });
     }
@@ -218,17 +218,17 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    public void restartApp (){
+    public void restartApp() {
         Intent mStartActivity = new Intent(ProfileActivity.this, SplashScreen.class);
         int mPendingIntentId = 123456;
         PendingIntent mPendingIntent = PendingIntent.getActivity(ProfileActivity.this, mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
-        AlarmManager mgr = (AlarmManager)ProfileActivity.this.getSystemService(Context.ALARM_SERVICE);
+        AlarmManager mgr = (AlarmManager) ProfileActivity.this.getSystemService(Context.ALARM_SERVICE);
         mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
         System.exit(0);
     }
 
     private void alertDialog() {
-        AlertDialog.Builder dialog=new AlertDialog.Builder(this);
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setMessage("Tem certeza que deseja sair ou trocar de usuário? Este aplicativo só funciona com alguma conta registrada.");
         dialog.setTitle("Sair");
         dialog.setPositiveButton("sim",
@@ -238,30 +238,49 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                         signOut();
                     }
                 });
-        dialog.setNegativeButton("cancelar",new DialogInterface.OnClickListener() {
+        dialog.setNegativeButton("cancelar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //
             }
         });
-        AlertDialog alertDialog=dialog.create();
+        AlertDialog alertDialog = dialog.create();
         alertDialog.show();
     }
 
-    private void getCognitiveLastAsnwer (FirebaseUser currentFirebaseUser, FirebaseDatabase firebaseDatabase, DatabaseReference databaseReference){
+    private void getCognitiveLastAsnwer(FirebaseUser currentFirebaseUser, FirebaseDatabase firebaseDatabase, DatabaseReference databaseReference) {
 
-        currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+        currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("cognitive_answers/"+currentFirebaseUser.getUid());
+        databaseReference = firebaseDatabase.getReference("cognitive_answers/" + currentFirebaseUser.getUid());
 
         databaseReference.limitToLast(1).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                for (DataSnapshot ds : snapshot.getChildren()){
+                for (DataSnapshot ds : snapshot.getChildren()) {
                     rightAnswers = ds.child("rightAnswers").getValue(Long.class);
                     totalAnswers = ds.child("totalAnswers").getValue(Long.class);
                     wrongAnswers = ds.child("wrongAnswers").getValue(Long.class);
                     cognitiveDate = ds.child("date").getValue(String.class);
+
+                    Log.d("NULLDATA", cognitiveDate);
+
+                }
+
+                if (cognitiveDate == null) {
+                    Profile profile = new Profile();
+                    profile.setType(3);
+                    profile.setTotalAnswers("Sem registro");
+                    profile.setRightAnswers("Sem registro");
+                    profile.setWrongAnswers("Sem registro");
+                    profile.setCognitiveDate("Sem registro");
+                    dataProfile.add(profile);
+
+                    vRecyclerView.setAdapter(profileAdapter);
+
+                    progressBar.setVisibility(View.INVISIBLE);
+
+                } else {
 
                     Profile profile = new Profile();
                     profile.setType(3);
@@ -274,10 +293,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                     vRecyclerView.setAdapter(profileAdapter);
 
                     progressBar.setVisibility(View.INVISIBLE);
-
                 }
 
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Toast toast = Toast.makeText(ProfileActivity.this, "Não deu!", Toast.LENGTH_SHORT);
