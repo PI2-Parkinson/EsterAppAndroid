@@ -263,7 +263,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                     wrongAnswers = ds.child("wrongAnswers").getValue(Long.class);
                     cognitiveDate = ds.child("date").getValue(String.class);
 
-                    Log.d("NULLDATA", cognitiveDate);
+                    //Log.d("NULLDATA", cognitiveDate);
 
                 }
 

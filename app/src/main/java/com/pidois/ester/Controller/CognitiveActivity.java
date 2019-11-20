@@ -268,13 +268,13 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
 
     public int countAnswers(){
         answers += 1;
-        Log.i("Total of answers", answers + " total answers");
+        //Log.i("Total of answers", answers + " total answers");
         return answers;
     }
 
     public int countRightAnswers(){
         correctAnswers += 1;
-        Log.i("Right answers", answers + " right answers");
+        //Log.i("Right answers", answers + " right answers");
 
         return correctAnswers;
     }

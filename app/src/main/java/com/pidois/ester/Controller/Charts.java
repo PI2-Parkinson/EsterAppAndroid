@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -32,7 +33,7 @@ import com.pidois.ester.R;
 
 import java.util.ArrayList;
 
-public class Charts extends AppCompatActivity {
+public class Charts extends ChartUtils {
 
     private BarChart barChart;
     private int[] colorClassArray = new int[]{Color.argb(255, 80, 240, 80), Color.argb(255, 255, 75, 75)};
@@ -109,6 +110,21 @@ public class Charts extends AppCompatActivity {
             }
         });
 
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (ContextCompat.checkSelfPermission(view.getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                    saveToGallery();
+                } else {
+                    requestStoragePermission(barChart);
+                }
+            }
+        });
+
     }
 
+    @Override
+    protected void saveToGallery() {
+        saveToGallery(barChart, "Cognitive Chart");
+    }
 }
