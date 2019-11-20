@@ -45,7 +45,7 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
     public static final String GRAY = "#808080";
     public static final String BLACK = "#000000";
 
-    DatabaseReference database = FirebaseDatabase.getInstance().getReference("cognitive_answers").child(currentFirebaseUser.getUid());
+    DatabaseReference database = FirebaseDatabase.getInstance().getReference("cognitive_answers/"+currentFirebaseUser.getUid());
     DatabaseReference databaseRef = database.push();
 
     private TextView mText = null;
@@ -279,8 +279,8 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
 
     public void showRightAnswers(){
 
-        databaseRef.child("rightAnswers").setValue(correctAnswers);
         databaseRef.child("totalAnswers").setValue(answers);
+        databaseRef.child("rightAnswers").setValue(correctAnswers);
         databaseRef.child("wrongAnswers").setValue(answers - correctAnswers);
         databaseRef.child("date").setValue(getCurrentDate());
 

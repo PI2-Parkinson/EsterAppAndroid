@@ -140,43 +140,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         profileAdapter = new ProfileAdapter(this, dataProfile);
         //vRecyclerView.setAdapter(profileAdapter);
 
-        currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference(currentFirebaseUser.getUid());
-
-
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                for (DataSnapshot ds : snapshot.getChildren()){
-                    rightAnswers = ds.child("rightAnswers").getValue(Long.class);
-                    totalAnswers = ds.child("totalAnswers").getValue(Long.class);
-                    wrongAnswers = ds.child("wrongAnswers").getValue(Long.class);
-                    cognitiveDate = ds.child("date").getValue(String.class);
-
-                    Profile profile = new Profile();
-                    profile.setType(3);
-                    profile.setTotalAnswers(String.valueOf(totalAnswers));
-                    profile.setRightAnswers(String.valueOf(rightAnswers));
-                    profile.setWrongAnswers(String.valueOf(wrongAnswers));
-                    profile.setCognitiveDate(cognitiveDate);
-                    dataProfile.add(profile);
-
-                    vRecyclerView.setAdapter(profileAdapter);
-
-                    progressBar.setVisibility(View.INVISIBLE);
-
-                }
-
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast toast = Toast.makeText(ProfileActivity.this, "Não deu!", Toast.LENGTH_SHORT);
-                toast.show();
-            }
-        });
-
-
+        getCognitiveLastAsnwer(currentFirebaseUser, firebaseDatabase, databaseReference);
 
     }
 
@@ -282,6 +246,46 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         });
         AlertDialog alertDialog=dialog.create();
         alertDialog.show();
+    }
+
+    private void getCognitiveLastAsnwer (FirebaseUser currentFirebaseUser, FirebaseDatabase firebaseDatabase, DatabaseReference databaseReference){
+
+        currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("cognitive_answers/"+currentFirebaseUser.getUid());
+
+        databaseReference.limitToLast(1).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()){
+                    rightAnswers = ds.child("rightAnswers").getValue(Long.class);
+                    totalAnswers = ds.child("totalAnswers").getValue(Long.class);
+                    wrongAnswers = ds.child("wrongAnswers").getValue(Long.class);
+                    cognitiveDate = ds.child("date").getValue(String.class);
+
+                    Profile profile = new Profile();
+                    profile.setType(3);
+                    profile.setTotalAnswers(String.valueOf(totalAnswers));
+                    profile.setRightAnswers(String.valueOf(rightAnswers));
+                    profile.setWrongAnswers(String.valueOf(wrongAnswers));
+                    profile.setCognitiveDate(cognitiveDate);
+                    dataProfile.add(profile);
+
+                    vRecyclerView.setAdapter(profileAdapter);
+
+                    progressBar.setVisibility(View.INVISIBLE);
+
+                }
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast toast = Toast.makeText(ProfileActivity.this, "Não deu!", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+
+
     }
 
 }

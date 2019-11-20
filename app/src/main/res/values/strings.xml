@@ -24,5 +24,7 @@
     <string name="btn_exercise_cognitive">Cognitivo</string>
     <string name="btn_exercise_strap">Strap</string>
 
+    <string name="dash">-</string>
+
 
 </resources>
