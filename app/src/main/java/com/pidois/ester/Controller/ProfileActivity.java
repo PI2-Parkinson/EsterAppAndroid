@@ -254,7 +254,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("cognitive_answers/" + currentFirebaseUser.getUid());
 
-        databaseReference.limitToLast(1).addValueEventListener(new ValueEventListener() {
+        databaseReference.limitToLast(1).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot ds : snapshot.getChildren()) {
