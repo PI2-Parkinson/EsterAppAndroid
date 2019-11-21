@@ -5,6 +5,14 @@ import android.content.DialogInterface;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public abstract class StrapUtils extends AppCompatActivity {
 
     private String title;
@@ -56,6 +64,24 @@ public abstract class StrapUtils extends AppCompatActivity {
                 break;
 
         }
+    }
+
+    public String getCurrentDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String currentDateandTime = sdf.format(new Date());
+
+        return currentDateandTime;
+    }
+
+     public void sendStrapAsnwer(FirebaseUser currentFirebaseUser, DatabaseReference databaseReference, String tipoTremor, int value) {
+         currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+         databaseReference = FirebaseDatabase.getInstance().getReference("strap_answers/" + currentFirebaseUser.getUid());
+         DatabaseReference databaseRef = databaseReference.push();
+
+         databaseRef.child(tipoTremor).setValue(value);
+         databaseRef.child("date").setValue(getCurrentDate());
+
     }
 
 }
