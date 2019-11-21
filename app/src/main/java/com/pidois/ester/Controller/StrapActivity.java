@@ -51,8 +51,6 @@ public class StrapActivity extends AppCompatActivity implements View.OnClickList
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,
                                         int which) {
-                        finish();
-
                     }
                 });
         AlertDialog alertDialog=dialog.create();
