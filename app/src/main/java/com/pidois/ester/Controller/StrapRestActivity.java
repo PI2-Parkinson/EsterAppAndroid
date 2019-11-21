@@ -1,24 +1,13 @@
 package com.pidois.ester.Controller;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.annotation.TargetApi;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.SystemClock;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
 import com.pidois.ester.R;
 
-import java.util.Locale;
-
-public class StrapRestActivity extends AppCompatActivity {
+public class StrapRestActivity extends StrapUtils {
 
     private Chronometer chronometer;
     private Button button;
@@ -37,20 +26,24 @@ public class StrapRestActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                chronometer.setBase(SystemClock.elapsedRealtime() + (10*1000));
+                chronometer.setBase(SystemClock.elapsedRealtime() + (11*1000));
                 chronometer.start();
 
                 chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
                     @Override
                     public void onChronometerTick(Chronometer chronometer) {
                         time++;
-                        if (time == 10){
+                        if (time == 11){
                             chronometer.stop();
+
+                            strapResult(1);
                         }
                     }
                 });
             }
         });
+
+
 
     }
 

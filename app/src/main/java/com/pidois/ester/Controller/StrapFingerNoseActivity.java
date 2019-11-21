@@ -1,20 +1,14 @@
 package com.pidois.ester.Controller;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
-import android.widget.ImageView;
-
-import com.bumptech.glide.Glide;
 import com.pidois.ester.R;
 
-import java.io.File;
-
-public class StrapFingerNoseActivity extends AppCompatActivity {
+public class StrapFingerNoseActivity extends StrapUtils {
 
     private Chronometer chronometer;
     private Button button;

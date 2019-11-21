@@ -1,7 +1,5 @@
 package com.pidois.ester.Controller;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
@@ -10,7 +8,7 @@ import android.widget.Chronometer;
 
 import com.pidois.ester.R;
 
-public class StrapPosturalActivity extends AppCompatActivity {
+public class StrapPosturalActivity extends StrapUtils {
 
     private Chronometer chronometer;
     private Button button;
