@@ -3,6 +3,7 @@ package com.pidois.ester.Controller.Adapter;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.pidois.ester.Controller.Charts;
+import com.pidois.ester.Controller.ExercisesActivity;
 import com.pidois.ester.Models.Profile;
 import com.pidois.ester.R;
 
@@ -270,6 +273,8 @@ public class ProfileAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View view) {
                     Log.i("PROFILE", "Cognitive btn click");
+                    Intent intent = new Intent(view.getContext(), Charts.class);
+                    view.getContext().startActivity(intent);
                 }
             });
 

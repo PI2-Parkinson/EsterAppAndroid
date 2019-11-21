@@ -29,10 +29,13 @@
     <color name="colorTextSubtitle">#4e4e4e</color>
     <color name="colorTextTitle">#262626</color>
 
+    <!-- Chart colors -->
+    <color name="chart_green">#50F050</color>
+    <color name="chart_red">#FF4B4B</color>
+  
     <color name="red">#FF0000</color>
     <color name="orange">#FF9900</color>
     <color name="yellow">#FFE600</color>
     <color name="green">#33FF00</color>
     <color name="blue">#00C2FF</color>
-
 </resources>

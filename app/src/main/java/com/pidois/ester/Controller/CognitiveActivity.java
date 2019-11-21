@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.util.Log;
 import android.util.TypedValue;
@@ -22,7 +23,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DatabaseReference;
 import com.pidois.ester.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
 
@@ -43,7 +46,8 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
     public static final String GRAY = "#808080";
     public static final String BLACK = "#000000";
 
-    DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference database = FirebaseDatabase.getInstance().getReference("cognitive_answers/"+currentFirebaseUser.getUid());
+    DatabaseReference databaseRef = database.push();
 
     private TextView mText = null;
     private int time = 0, timeCountDown = 0;
@@ -81,17 +85,18 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
 
             public void onChronometerTick(Chronometer chronometer) {
 
-                int timeElapsed = (int) (SystemClock.elapsedRealtime() - chronometer.getBase());
+                //int timeElapsed = (int) (SystemClock.elapsedRealtime() - chronometer.getBase());
 
-                int hours = timeElapsed / 3600000;
-                int minutes = (timeElapsed - hours * 3600000) / 60000;
+                //int hours = timeElapsed / 3600000;
+                //int minutes = (timeElapsed - hours * 3600000) / 60000;
 
-                Log.i("CognitiveActivity",minutes + " minutos " + time + " segundos");
+                //Log.i("CognitiveActivity",minutes + " minutos " + time + " segundos");
 
-                if (timeCountDown == 10) {
+                if (timeCountDown == 60) {
                     endGame();
                     chronometer.stop();
                     alertDialog();
+                    //postDelay();
                 } else if (time == 10) {
                     time = 0;
                     LinearLayout lView = findViewById(R.id.linearlayout);
@@ -263,21 +268,28 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
 
     public int countAnswers(){
         answers += 1;
-        Log.i("Total of answers", answers + " total answers");
+        //Log.i("Total of answers", answers + " total answers");
         return answers;
     }
 
     public int countRightAnswers(){
         correctAnswers += 1;
-        Log.i("Right answers", answers + " right answers");
+        //Log.i("Right answers", answers + " right answers");
 
         return correctAnswers;
     }
 
     public void showRightAnswers(){
-        database.child(currentFirebaseUser.getUid()).child("answers").child("rightAnswers").setValue(correctAnswers);
-        database.child(currentFirebaseUser.getUid()).child("answers").child("totalAnswers").setValue(answers);
-        database.child(currentFirebaseUser.getUid()).child("answers").child("wrongAnswers").setValue(answers - correctAnswers);
+
+        databaseRef.child("totalAnswers").setValue(answers);
+        databaseRef.child("rightAnswers").setValue(correctAnswers);
+        databaseRef.child("wrongAnswers").setValue(answers - correctAnswers);
+        databaseRef.child("date").setValue(getCurrentDate());
+
+        //database.child(currentFirebaseUser.getUid()).child("answers").child("rightAnswers").setValue(correctAnswers);
+        //database.child(currentFirebaseUser.getUid()).child("answers").child("totalAnswers").setValue(answers);
+        //database.child(currentFirebaseUser.getUid()).child("answers").child("wrongAnswers").setValue(answers - correctAnswers);
+        //database.child(currentFirebaseUser.getUid()).child("answers").child("date").setValue(getCurrentDate());
     }
 
     private void alertDialog() {
@@ -290,11 +302,30 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,
                                         int which) {
-                        finish();
+                        //finish();
+                        postDelay();
 
                     }
                 });
         AlertDialog alertDialog=dialog.create();
         alertDialog.show();
+    }
+
+    private void postDelay(){
+        Handler hander = new Handler();
+        hander.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //alertDialog();
+                finish();
+            }
+        }, 100);
+    }
+
+    private String getCurrentDate(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String currentDateandTime = sdf.format(new Date());
+
+        return currentDateandTime;
     }
 }
