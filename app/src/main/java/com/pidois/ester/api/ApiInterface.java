@@ -12,18 +12,24 @@ public interface ApiInterface {
     Call<News> getNews(
 
         @Query("country") String country,
-        @Query("sources") String sources,
+        //@Query("sources") String sources,
         @Query("q") String q,
+        @Query("excludeDomains") String excludeDomains,
+        @Query("language") String language,
         @Query("apiKey") String apiKey
 
     );
+
 
     @GET("everything")
     Call<News> getNewsSearch(
 
         @Query("q") String keyword,
-        @Query("sources") String sources,
+        @Query("excludeDomains") String excludeDomains,
+        //@Query("sources") String sources,
+        //@Query("qInTitle") String qInTitle,
         @Query("language") String language,
+        @Query("sortBy") String sortBy,
         @Query("apiKey") String apiKey
 
     );
