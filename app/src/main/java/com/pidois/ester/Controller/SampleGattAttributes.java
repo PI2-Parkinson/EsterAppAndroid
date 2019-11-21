@@ -9,17 +9,17 @@ public class SampleGattAttributes {
    // public static String HEART_RATE_MEASUREMENT = "00002a37-0000-1000-8000-00805f9b34fb";
     public static String CLIENT_CHARACTERISTIC_CONFIG = "00002902-0000-1000-8000-00805f9b34fb";
 
-    public static String ESTER_SERVICE = "c96d9bcc-f3b8-442e-b634-d546e4835f64";
-    public static String ESTER_CHARACTERISTIC = "807b8bad-a892-4ff7-b8bc-83a644742f9b";
+    public static String ESTER_SERVICE = "4fafc201-1fb5-459e-8fcc-c5c9c331914b";
+    public static String ESTER_CHARACTERISTIC = "beb5483e-36e1-4688-b7f5-ea07361b26a8";
 
 
     static {
         // Sample Services.
-        attributes.put("c96d9bcc-f3b8-442e-b634-d546e4835f64", "TOPZERA SERVICE");
+        attributes.put("4fafc201-1fb5-459e-8fcc-c5c9c331914b", "TOPZERA SERVICE");
 //        attributes.put("0000180a-0000-1000-8000-00805f9b34fb", "Device Information Service");
         // Sample Characteristics.
 //        attributes.put(HEART_RATE_MEASUREMENT, "Heart Rate Measurement");
-        attributes.put("807b8bad-a892-4ff7-b8bc-83a644742f9b", "ENVIA ESSE CARAI!");
+        attributes.put("beb5483e-36e1-4688-b7f5-ea07361b26a8", "ENVIA ESSE CARAI!");
     }
 
     public static String lookup(String uuid, String defaultName) {

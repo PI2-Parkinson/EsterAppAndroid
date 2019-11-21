@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
@@ -89,10 +90,12 @@ public class DeviceControlActivity extends Activity {
     //                        or notification operations.
 
 
-    private final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() {
+    public final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
+            Log.i("RECEBE DA ESP32","VALOR: " + intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
+
             if (BluetoothLeService.ACTION_GATT_CONNECTED.equals(action)) {
                 mConnected = true;
                 updateConnectionState(R.string.connected);
@@ -106,86 +109,46 @@ public class DeviceControlActivity extends Activity {
                 // Show all the supported services and characteristics on the user interface.
                 displayGattServices(mBluetoothLeService.getSupportedGattServices());
             } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
-                Log.i("RECEBE DA ESP32","VALOR: " + intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
 
                 BLUETOOTH_GLOBAL_RDATA = intent.getStringExtra(BluetoothLeService.EXTRA_DATA);
                 Log.i("DA ESP32 PRA VARIAVEL","VALOR VARIAVEL: " + BLUETOOTH_GLOBAL_RDATA);
 
-                if (BLUETOOTH_GLOBAL_RDATA.contains("C")){
 
-                    BLUETOOTH_GLOBAL_SDATA = "C";
-                    Log.i("AQUI MANDA SDATA","CONEXAO ESTABELECIDA : " + BLUETOOTH_GLOBAL_SDATA);
-                }
 
-                if (BLUETOOTH_GLOBAL_RDATA.contains("BP")){
+                if (BLUETOOTH_GLOBAL_RDATA.contains("N2")){
 
-                    tratarBp();
-                   /* mbls = new BluetoothLeService();
-
-                    BluetoothGattService service = mbls.mBluetoothGatt.getService(UUID.fromString("c96d9bcc-f3b8-442e-b634-d546e4835f64"));
-                    BluetoothGattCharacteristic mGattCharacteristic = service.getCharacteristic(UUID.fromString("807b8bad-a892-4ff7-b8bc-83a644742f9b"));
-                    BluetoothGattDescriptor descriptor = mGattCharacteristic.getDescriptor(
-                            BluetoothLeService.UUID_CLIENT_CHARACTERISTIC_CONFIG);
-                    descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
-                    BLUETOOTH_GLOBAL_SDATA = "P0";
-
-                    mbls.mBluetoothGatt.setCharacteristicNotification(mGattCharacteristic, true);
-                    mbls.mBluetoothGatt.writeDescriptor(descriptor);
-                    mbls.mBluetoothGatt.writeDescriptor(descriptor);
-                    //sendBroadcast(intent);
-                    Log.i("AQUI MANDA SDATA","BOTAO DE PARAR : " + BLUETOOTH_GLOBAL_SDATA);*/
-                }
-
-                if (BLUETOOTH_GLOBAL_RDATA.contains("QM")){
-
-                    switchScreen(ExercisesActivity.class);
+                    BLUETOOTH_GLOBAL_SDATA = "N201";
+                    Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + BLUETOOTH_GLOBAL_SDATA);
+                    enviarDescriptor();
 
                 }
-
-                if (BLUETOOTH_GLOBAL_RDATA.contains("SQ")){
-
-                    BLUETOOTH_GLOBAL_SDATA = "SR";
-                    Log.i("AQUI MANDA SDATA","SEQUENCIA RECEBIDA: " + BLUETOOTH_GLOBAL_SDATA);
-                }
-                //sendBroadcast(intent);
-
-//                switch (BLUETOOTH_GLOBAL_RDATA){
-//
-//                    case "C":
-//                        BLUETOOTH_GLOBAL_SDATA = "C";
-//                    case "BP":
-//                        BLUETOOTH_GLOBAL_SDATA = "P0";
-//                    case "QM":
-//                        switchScreen(ProfileActivity.class);
-//
-//                    default:
-//                        Log.w("DEU RUIMMM","LASCOU");
-//
-//                }
-
                 displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
             }
         }
     };
 
-    public void tratarBp(){
+    public static void enviarDescriptor(){
 
-        mbls = new BluetoothLeService();
+        BluetoothGattService service = BluetoothLeService.mBluetoothGatt.getService(UUID.fromString("4fafc201-1fb5-459e-8fcc-c5c9c331914b"));
+        BluetoothGattCharacteristic mGattCharacteristic = service.getCharacteristic(UUID.fromString("beb5483e-36e1-4688-b7f5-ea07361b26a8"));
 
-        BluetoothGattService service = mbls.mBluetoothGatt.getService(UUID.fromString("c96d9bcc-f3b8-442e-b634-d546e4835f64"));
-        BluetoothGattCharacteristic mGattCharacteristic = service.getCharacteristic(UUID.fromString("807b8bad-a892-4ff7-b8bc-83a644742f9b"));
+        for (BluetoothGattDescriptor descriptor:mGattCharacteristic.getDescriptors()){
+            Log.i(TAG, "BluetoothGattDescriptor: "+descriptor.getUuid().toString());
+        }
+
+        Log.i("$$$$$$$$$","mBluetoothGatt "+ BluetoothLeService.mBluetoothGatt);
+
+        Log.i("$$$$$$$$$","mGattCharacteristic "+ mGattCharacteristic);
+
         BluetoothGattDescriptor descriptor = mGattCharacteristic.getDescriptor(
                 BluetoothLeService.UUID_CLIENT_CHARACTERISTIC_CONFIG);
+
+        Log.i("$$$$$$$$$","DESCRIPTOR "+ descriptor);
         descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
-        BLUETOOTH_GLOBAL_SDATA = "P0";
 
-        mbls.mBluetoothGatt.setCharacteristicNotification(mGattCharacteristic, true);
-        mbls.mBluetoothGatt.writeDescriptor(descriptor);
-        mbls.mBluetoothGatt.writeDescriptor(descriptor);
-        //sendBroadcast(intent);
-        Log.i("AQUI MANDA SDATA","BOTAO DE PARAR : " + BLUETOOTH_GLOBAL_SDATA);
+        Log.i("$$$$$$$$$","ENABLE NOTIFICATION " + BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
+        BluetoothLeService.mBluetoothGatt.writeDescriptor(descriptor);
     }
-
 
     // If a given GATT characteristic is selected, check for supported features.  This sample
     // demonstrates 'Read' and 'Notify' features.  See
@@ -246,6 +209,20 @@ public class DeviceControlActivity extends Activity {
         //getActionBar().setDisplayHomeAsUpEnabled(true);
         Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
         bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
+
+        final Button buttonStart = (Button)findViewById(R.id.exec_sound_btn_start);
+
+        buttonStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BLUETOOTH_GLOBAL_SDATA = "C";
+                //buttonStart.setVisibility(View.INVISIBLE);
+                Log.i("AQUI MANDA SDATA","CONEXAO ESTABELECIDA : " + BLUETOOTH_GLOBAL_SDATA);
+                enviarDescriptor();
+                switchScreen(MainActivity.class);
+
+            }
+        });
     }
 
     @Override

@@ -123,6 +123,7 @@ public class LoginActivity extends AppCompatActivity implements
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            //DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "C";
                             progressBar.setVisibility(View.INVISIBLE);
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");

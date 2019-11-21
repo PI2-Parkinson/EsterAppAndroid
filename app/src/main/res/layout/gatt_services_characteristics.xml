@@ -52,7 +52,19 @@
             android:text="@string/no_data"
             android:textSize="18sp"/>
     </LinearLayout>
-    <ExpandableListView android:id="@+id/gatt_services_list"
+
+    <ExpandableListView
+        android:id="@+id/gatt_services_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="320dp" />
+
+    <Button
+        android:id="@+id/exec_sound_btn_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_btn_grey"
+        android:padding="15dp"
+        android:text="@string/btn_start"
+        android:textColor="@color/white" />
+
 </LinearLayout>

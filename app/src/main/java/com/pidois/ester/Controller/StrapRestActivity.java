@@ -22,7 +22,7 @@ public class StrapRestActivity extends AppCompatActivity {
 
     private Chronometer chronometer;
     private Button button;
-    private int time = 0;
+    private int time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +37,14 @@ public class StrapRestActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "IT";
+
+                Log.i("AQUI MANDA SDATA","IT : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+                DeviceControlActivity.enviarDescriptor();
+
+                time = 0;
+
                 chronometer.setBase(SystemClock.elapsedRealtime() + (10*1000));
                 chronometer.start();
 
@@ -44,7 +52,14 @@ public class StrapRestActivity extends AppCompatActivity {
                     @Override
                     public void onChronometerTick(Chronometer chronometer) {
                         time++;
+
+                        Log.i("AQUI E O TIME","VALOR DO TEMPO : " + time);
+
                         if (time == 10){
+                            DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "GTR";
+
+                            Log.i("AQUI MANDA SDATA","GTR MALUCO : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+                            DeviceControlActivity.enviarDescriptor();
                             chronometer.stop();
                         }
                     }

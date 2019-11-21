@@ -70,6 +70,7 @@ public class BluetoothLeService extends Service {
                     gatt.getService(UUID_ESTER_SERVICE)
                             .getCharacteristic(UUID_ESTER_CHARACTERISTIC);
             characteristic.setValue(DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+            characteristic.setWriteType(BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT);
             Log.i("#AQUII ENVIA O VALOR##","########### " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
             gatt.writeCharacteristic(characteristic);
         }
