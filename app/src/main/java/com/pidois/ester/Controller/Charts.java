@@ -37,7 +37,7 @@ public class Charts extends ChartUtils {
 
     private BarChart barChart;
     private int[] colorClassArray = new int[]{Color.argb(255, 80, 240, 80), Color.argb(255, 255, 75, 75)};
-    private ArrayList<BarEntry> dataEntry = new ArrayList<>(), noEntry = new ArrayList<>();
+    private ArrayList<BarEntry> dataEntry = new ArrayList<>();
     private Long rightAnswers, wrongAnswers;
     private int i = 0;
     private String cognitiveDate;
@@ -83,7 +83,7 @@ public class Charts extends ChartUtils {
                     i++;
                 }
 
-                if (cognitiveDate == null){
+                if (cognitiveDate == null) {
 
                     //Nada
 
@@ -103,12 +103,15 @@ public class Charts extends ChartUtils {
 
                 }
 
+                hideSnapShotBtn(dataEntry, floatingActionButton);
+
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,6 +123,14 @@ public class Charts extends ChartUtils {
                 }
             }
         });
+
+    }
+
+    private void hideSnapShotBtn(ArrayList arrayList, FloatingActionButton floatingActionButton) {
+
+        if (arrayList.size() == 0) {
+            floatingActionButton.hide();
+        }
 
     }
 
