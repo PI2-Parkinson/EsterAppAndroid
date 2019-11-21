@@ -80,6 +80,9 @@ dependencies {
 
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
 
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    implementation 'com.sackcentury:shinebutton:0.2.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

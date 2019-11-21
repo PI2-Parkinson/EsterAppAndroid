@@ -44,21 +44,15 @@ public class StrapActivity extends AppCompatActivity implements View.OnClickList
 
     private void alertDialog() {
         AlertDialog.Builder dialog=new AlertDialog.Builder(this);
-        dialog.setMessage("Please Select any option");
-        dialog.setTitle("Dialog Box");
-        dialog.setPositiveButton("YES",
+        dialog.setMessage("A medição do tremor da mão é realizada de acordo com a Escala de Classificação de Doenças de Parkinson Unificada (Unified Parkinson’s Disease Rating Scale - UPDRS).\n" +
+                "Essa forma de avaliação é patrocinada pela Sociedade de Distúrbios do Movimento (Movement Disorders Society - MDS), e possui classificação dos tremores de 0 a 4, sendo eles: normal, discreto, ligeiro, moderado e grave. Para iniciar o teste é necessário colocar a pulseira no punho e escolher o modo.");
+        dialog.setCancelable(false);
+        dialog.setPositiveButton("ok",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,
                                         int which) {
-                        Toast.makeText(getApplicationContext(),"Yes is clicked",Toast.LENGTH_LONG).show();
                     }
                 });
-        dialog.setNegativeButton("cancel",new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(),"cancel is clicked",Toast.LENGTH_LONG).show();
-            }
-        });
         AlertDialog alertDialog=dialog.create();
         alertDialog.show();
     }

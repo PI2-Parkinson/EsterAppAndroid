@@ -91,15 +91,18 @@ public class NewsActivity extends AppCompatActivity implements  SwipeRefreshLayo
 
         String country = "br";
         String language = "pt";
-        String sources = "globo,blasting-news-br,google-news-br";
+        //String sources = "globo,blasting-news-br,google-news-br,Gazetadopovo.com.br,InfoMoney,Foxsportsla.com,Correiodoestado.com.br,Abril.com.br,Superesportes.com.br,Diariodocentrodomundo.com.br,Oantagonista.com,IGN,Gazetadopovo.com.br";
         String q = "parkinson";
+        //String qInTitle = "doença AND parkinson";
+        String excludeDomains = "uol.com.br";
+        String sortBy = "publishedAt";
 
         Call<News> call;
 
         if (keyword.length() > 0 ){
-            call = apiInterface.getNewsSearch(q, sources, language, API_KEY);
+            call = apiInterface.getNewsSearch(q, excludeDomains, language, sortBy, API_KEY);
         } else {
-            call = apiInterface.getNews(country, sources, q, API_KEY);
+            call = apiInterface.getNews(country, q, excludeDomains, language, API_KEY);
         }
 
         call.enqueue(new Callback<News>() {

@@ -124,6 +124,7 @@
                 android:layout_below="@+id/profile_fixed_pos1"/>
 
             <Button
+                android:id="@+id/profile_strap_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/round_btn_grey"

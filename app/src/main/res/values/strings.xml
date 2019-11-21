@@ -15,6 +15,7 @@
     <string name="btn_start">Começar</string>
 
     <string name="btn_stop">Sair</string>
+    <string name="btn_demo">Ver demonstração</string>
 
 
     <!-- Cognitive exercise strings -->
@@ -22,10 +23,14 @@
 
     <!-- Exercises strings -->
     <string name="exercise_in_progress">Exercício em andamento</string>
+    <string name="exercise_desc">A demonstração será exibida abaixo.
+        \nEm seguida, clique em COMEÇAR para dar início ao exercício.</string>
     <string name="btn_exercise_sound">Som</string>
     <string name="btn_exercise_color">Cores</string>
     <string name="btn_exercise_cognitive">Cognitivo</string>
     <string name="btn_exercise_strap">Strap</string>
+
+    <string name="dash">-</string>
 
 
 </resources>
