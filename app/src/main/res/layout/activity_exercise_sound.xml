@@ -117,8 +117,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="20dp"
-        app:cardCornerRadius="100dp"
-        app:cardElevation="5dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="1dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline33"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline32">
@@ -134,7 +134,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="70dp"
                 android:layout_marginRight="5dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="40dp"
                 android:layout_marginBottom="70dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_circle"
@@ -186,73 +186,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="70dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="40dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_circle"
                 android:backgroundTint="@color/blue"
                 app:layout_constraintStart_toEndOf="@+id/e_button_fa"
-                app:layout_constraintTop_toTopOf="@+id/guideline32" />
-
-            <Button
-                android:id="@+id/d_button_sol"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="70dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_circle"
-                android:backgroundTint="@color/blue"
-                app:layout_constraintTop_toTopOf="@+id/guideline32"
-                tools:layout_editor_absoluteX="206dp" />
-
-            <Button
-                android:id="@+id/d_button_fa"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="70dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_circle"
-                android:backgroundTint="@color/green"
-                app:layout_constraintStart_toEndOf="@+id/d_button_sol"
-                app:layout_constraintTop_toTopOf="@+id/guideline32" />
-
-            <Button
-                android:id="@+id/d_button_mi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="70dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_circle"
-                android:backgroundTint="@color/yellow"
-                app:layout_constraintStart_toEndOf="@+id/d_button_fa"
-                app:layout_constraintTop_toTopOf="@+id/guideline32" />
-
-            <Button
-                android:id="@+id/d_button_re"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="70dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_circle"
-                android:backgroundTint="@color/orange"
-                app:layout_constraintStart_toEndOf="@+id/d_button_mi"
-                app:layout_constraintTop_toTopOf="@+id/guideline32" />
-
-            <Button
-                android:id="@+id/d_button_do"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="70dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_circle"
-                android:backgroundTint="@color/red"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/d_button_re"
                 app:layout_constraintTop_toTopOf="@+id/guideline32" />
 
         </LinearLayout>
