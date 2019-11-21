@@ -59,7 +59,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.17" />
+        app:layout_constraintGuide_begin="256dp" />
+
+    <TextView
+        android:id="@+id/exec_sound_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_exercise_sound"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/exec_sound_desc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout3" />
+
+    <TextView
+        android:id="@+id/exec_sound_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/exercise_desc"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline32"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -82,7 +105,6 @@
         app:layout_constraintTop_toTopOf="@+id/guideline33"
         app:layout_editor_absoluteX="20dp" />
 
-
     <Button
         android:id="@+id/exec_sound_btn_start"
         android:layout_width="wrap_content"
@@ -94,8 +116,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/exec_sound_chronometer"
-        app:layout_constraintTop_toTopOf="@+id/guideline33"
-        app:layout_constraintVertical_bias="0.15" />
+        app:layout_constraintTop_toTopOf="@+id/guideline33" />
 
     <Button
         android:id="@+id/exec_sound_btn_stop"
@@ -107,10 +128,22 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.463"
         app:layout_constraintStart_toEndOf="@+id/exec_sound_chronometer"
-        app:layout_constraintTop_toBottomOf="@+id/exec_sound_btn_start"
-        app:layout_constraintVertical_bias="0.396" />
+        app:layout_constraintTop_toTopOf="@+id/guideline33" />
+
+    <Button
+        android:id="@+id/btn_demo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_btn_grey"
+        android:padding="15dp"
+        android:text="@string/btn_demo"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/exec_sound_chronometer"
+        app:layout_constraintTop_toTopOf="@+id/guideline33" />
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
@@ -132,9 +165,9 @@
                 android:id="@+id/e_button_do"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
                 android:layout_marginTop="70dp"
                 android:layout_marginRight="5dp"
-                android:layout_marginLeft="40dp"
                 android:layout_marginBottom="70dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_circle"

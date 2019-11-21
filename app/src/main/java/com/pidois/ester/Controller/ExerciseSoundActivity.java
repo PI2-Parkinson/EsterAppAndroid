@@ -35,8 +35,6 @@ public class ExerciseSoundActivity extends AppCompatActivity {
         btnFa = findViewById(R.id.e_button_fa);
         btnSol = findViewById(R.id.e_button_sol);
 
-
-
         //mediaPlayer = MediaPlayer.create(this, R.raw.nota_do);
         btnDo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +71,47 @@ public class ExerciseSoundActivity extends AppCompatActivity {
             }
         });
 
-        playSequence();
+        //playSequence();
+
+        final Chronometer exec_chronometer = (Chronometer)findViewById(R.id.exec_sound_chronometer);
+
+        final Button buttonStart = (Button)findViewById(R.id.exec_sound_btn_start);
+        final Button buttonStop = (Button)findViewById(R.id.exec_sound_btn_stop);
+        final Button buttonDemo = (Button)findViewById(R.id.btn_demo);
+
+        buttonStop.setVisibility(View.INVISIBLE);
+        buttonStart.setVisibility(View.INVISIBLE);
+
+        buttonDemo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                buttonDemo.setVisibility(View.INVISIBLE);
+                buttonStart.setVisibility(View.VISIBLE);
+                buttonStop.setVisibility(View.INVISIBLE);
+                playSequence();
+
+            }
+        });
+
+        buttonStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                buttonStart.setVisibility(View.INVISIBLE);
+                buttonStop.setVisibility(View.VISIBLE);
+                exec_chronometer.setBase(SystemClock.elapsedRealtime());
+                exec_chronometer.start();
+            }
+        });
+
+        buttonStop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                buttonStart.setVisibility(View.VISIBLE);
+                buttonStop.setVisibility(View.INVISIBLE);
+                alertDialog();
+                exec_chronometer.stop();
+            }
+        });
 
     }
 
