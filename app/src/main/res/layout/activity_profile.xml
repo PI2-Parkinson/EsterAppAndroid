@@ -16,6 +16,11 @@
         app:layout_constraintTop_toTopOf="@+id/guideline6"
         tools:layout_editor_absoluteX="0dp">
 
+        <ProgressBar
+            android:id="@+id/profile_progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/profile_myrecycler"
             android:layout_width="wrap_content"

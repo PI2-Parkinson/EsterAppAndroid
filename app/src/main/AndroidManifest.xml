@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <permission android:name="android.permission.BLUETOOTH" android:label="BLUETOOTH" />
     <permission android:name="android.permission.BLUETOOTH_ADMIN" />
@@ -22,11 +23,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".Controller.ExerciseSoundActivity"
             android:theme="@style/ProfileTheme" />
         <activity
             android:name=".Controller.ExerciseColorActivity"
             android:theme="@style/ProfileTheme" />
+        <activity android:name=".Controller.Charts"></activity>
         <activity android:name=".Controller.StrapFingerNoseActivity" />
         <activity android:name=".Controller.StrapPosturalActivity" />
         <activity android:name=".Controller.StrapRestActivity" />
@@ -38,7 +41,8 @@
             android:name=".Controller.ProfileActivity"
             android:theme="@style/ProfileTheme" />
         <activity android:name=".Controller.ExercisesActivity" />
-        <activity android:name=".Controller.CognitiveActivity" />
+        <activity
+            android:name=".Controller.CognitiveActivity" />
         <activity
             android:name=".Controller.NewsActivity"
             android:theme="@style/MyAppBarLayoutTheme" />

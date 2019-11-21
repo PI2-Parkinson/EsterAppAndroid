@@ -1,7 +1,10 @@
 package com.pidois.ester.Controller;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.util.Log;
 import android.util.TypedValue;
@@ -20,7 +23,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DatabaseReference;
 import com.pidois.ester.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
 
@@ -41,10 +46,11 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
     public static final String GRAY = "#808080";
     public static final String BLACK = "#000000";
 
-    DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference database = FirebaseDatabase.getInstance().getReference("cognitive_answers/"+currentFirebaseUser.getUid());
+    DatabaseReference databaseRef = database.push();
 
     private TextView mText = null;
-    private int time = 0;
+    private int time = 0, timeCountDown = 0;
     private int answers = 0;
     private int correctAnswers = 0;
     ArrayList<Integer> randomColorArray = new ArrayList<>();
@@ -73,30 +79,34 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
 //        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
         Chronometer simpleChronometer = findViewById(R.id.simpleChronometer);
-        simpleChronometer.setBase(SystemClock.elapsedRealtime());
+        simpleChronometer.setCountDown(true);
+        simpleChronometer.setBase(SystemClock.elapsedRealtime()+ 60*1000);
         simpleChronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
 
             public void onChronometerTick(Chronometer chronometer) {
 
-                int timeElapsed = (int) (SystemClock.elapsedRealtime() - chronometer.getBase());
+                //int timeElapsed = (int) (SystemClock.elapsedRealtime() - chronometer.getBase());
 
-                int hours = timeElapsed / 3600000;
-                int minutes = (timeElapsed - hours * 3600000) / 60000;
+                //int hours = timeElapsed / 3600000;
+                //int minutes = (timeElapsed - hours * 3600000) / 60000;
 
-                Log.i("CognitiveActivity",minutes + " minutos " + time + " segundos");
+                //Log.i("CognitiveActivity",minutes + " minutos " + time + " segundos");
 
-                if (time == 10) {
+                if (timeCountDown == 60) {
+                    endGame();
+                    chronometer.stop();
+                    alertDialog();
+                    //postDelay();
+                } else if (time == 10) {
                     time = 0;
                     LinearLayout lView = findViewById(R.id.linearlayout);
                     lView.removeAllViewsInLayout();
                     showLayout();
                     countAnswers();
-
-                } else if(minutes == 1){
-                    endGame();
-                    chronometer.stop();
                 }
                 time++;
+                timeCountDown++;
+
             }
         });
         simpleChronometer.start();
@@ -127,6 +137,10 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
         LinearLayout lView = findViewById(R.id.linearlayout);
         TableRow tableRow = findViewById(R.id.tableRow);
         TableRow chronometerTableRow = findViewById(R.id.chronometerTableRow);
+        TextView title = findViewById(R.id.cognitive_title);
+        TextView title2 = findViewById(R.id.cognitive_title2);
+        title.setVisibility(View.INVISIBLE);
+        title2.setVisibility(View.INVISIBLE);
         mText = new TextView(this);
         lView.removeAllViews();
         tableRow.removeAllViews();
@@ -254,20 +268,64 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
 
     public int countAnswers(){
         answers += 1;
-        Log.i("Total of answers", answers + " total answers");
+        //Log.i("Total of answers", answers + " total answers");
         return answers;
     }
 
     public int countRightAnswers(){
         correctAnswers += 1;
-        Log.i("Right answers", answers + " right answers");
+        //Log.i("Right answers", answers + " right answers");
 
         return correctAnswers;
     }
 
     public void showRightAnswers(){
-        database.child(currentFirebaseUser.getUid()).child("answers").child("rightAnswers").setValue(correctAnswers);
-        database.child(currentFirebaseUser.getUid()).child("answers").child("totalAnswers").setValue(answers);
-        database.child(currentFirebaseUser.getUid()).child("answers").child("wrongAnswers").setValue(answers - correctAnswers);
+
+        databaseRef.child("totalAnswers").setValue(answers);
+        databaseRef.child("rightAnswers").setValue(correctAnswers);
+        databaseRef.child("wrongAnswers").setValue(answers - correctAnswers);
+        databaseRef.child("date").setValue(getCurrentDate());
+
+        //database.child(currentFirebaseUser.getUid()).child("answers").child("rightAnswers").setValue(correctAnswers);
+        //database.child(currentFirebaseUser.getUid()).child("answers").child("totalAnswers").setValue(answers);
+        //database.child(currentFirebaseUser.getUid()).child("answers").child("wrongAnswers").setValue(answers - correctAnswers);
+        //database.child(currentFirebaseUser.getUid()).child("answers").child("date").setValue(getCurrentDate());
+    }
+
+    private void alertDialog() {
+        int wrongAnswers1 = answers-correctAnswers;
+        AlertDialog.Builder dialog=new AlertDialog.Builder(this);
+        dialog.setMessage("Total: " +answers + "\n\nRespostas corretas: "+correctAnswers+"\nRespostas erradas: "+wrongAnswers1);
+        dialog.setTitle("Resultado");
+        dialog.setCancelable(false);
+        dialog.setPositiveButton("ok",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                        //finish();
+                        postDelay();
+
+                    }
+                });
+        AlertDialog alertDialog=dialog.create();
+        alertDialog.show();
+    }
+
+    private void postDelay(){
+        Handler hander = new Handler();
+        hander.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //alertDialog();
+                finish();
+            }
+        }, 100);
+    }
+
+    private String getCurrentDate(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String currentDateandTime = sdf.format(new Date());
+
+        return currentDateandTime;
     }
 }
