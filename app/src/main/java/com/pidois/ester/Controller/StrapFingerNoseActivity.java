@@ -6,6 +6,9 @@ import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
+
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.pidois.ester.R;
 
 public class StrapFingerNoseActivity extends StrapUtils {
@@ -13,6 +16,10 @@ public class StrapFingerNoseActivity extends StrapUtils {
     private Chronometer chronometer;
     private Button button;
     private int time = 0;
+
+    FirebaseUser firebaseUser;
+    DatabaseReference databaseReference;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +43,12 @@ public class StrapFingerNoseActivity extends StrapUtils {
                         time++;
                         if (time == 10){
                             chronometer.stop();
+                            //sendStrapAsnwer(firebaseUser, databaseReference, "finger_nose", scale);
                         }
                     }
                 });
             }
         });
+
     }
-
-
 }
