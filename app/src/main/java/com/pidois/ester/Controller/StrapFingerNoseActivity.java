@@ -26,6 +26,8 @@ public class StrapFingerNoseActivity extends StrapUtils {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_strap_finger_nose);
 
+        calibrate();
+
         chronometer = findViewById(R.id.strap_finger_chronometer);
         button = findViewById(R.id.strap_finger_btn);
 

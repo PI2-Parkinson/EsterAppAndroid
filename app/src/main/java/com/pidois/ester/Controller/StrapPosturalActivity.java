@@ -19,6 +19,8 @@ public class StrapPosturalActivity extends StrapUtils {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_strap_postural);
 
+        calibrate();
+
         chronometer = findViewById(R.id.strap_postural_chronometer);
         button = findViewById(R.id.strap_postural_btn);
 

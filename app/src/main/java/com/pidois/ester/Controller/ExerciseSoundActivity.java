@@ -5,19 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
-
 import com.pidois.ester.R;
-
-import java.net.URI;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ExerciseSoundActivity extends AppCompatActivity {
 
@@ -35,7 +31,6 @@ public class ExerciseSoundActivity extends AppCompatActivity {
         btnFa = findViewById(R.id.e_button_fa);
         btnSol = findViewById(R.id.e_button_sol);
 
-        //mediaPlayer = MediaPlayer.create(this, R.raw.nota_do);
         btnDo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,12 +75,11 @@ public class ExerciseSoundActivity extends AppCompatActivity {
         final Button buttonDemo = (Button)findViewById(R.id.btn_demo);
 
         buttonStop.setVisibility(View.INVISIBLE);
-        buttonStart.setVisibility(View.INVISIBLE);
+        buttonStart.setVisibility(View.VISIBLE);
 
         buttonDemo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                buttonDemo.setVisibility(View.INVISIBLE);
                 buttonStart.setVisibility(View.VISIBLE);
                 buttonStop.setVisibility(View.INVISIBLE);
                 playSequence();
@@ -117,14 +111,24 @@ public class ExerciseSoundActivity extends AppCompatActivity {
 
     private void playSequence() {
         // create an empty array list with an initial capacity
-        ArrayList<Integer> arrlist = new ArrayList<Integer>(5);
+        ArrayList<Integer> arrlist = new ArrayList<Integer>(30);
 
         // use add() method to add elements in the list
-        arrlist.add(1);
-        arrlist.add(2);
+        arrlist.add(3);
         arrlist.add(3);
         arrlist.add(4);
         arrlist.add(5);
+        arrlist.add(5);
+        arrlist.add(4);
+        arrlist.add(3);
+        arrlist.add(2);
+        arrlist.add(1);
+        arrlist.add(1);
+        arrlist.add(2);
+        arrlist.add(3);
+        arrlist.add(3);
+        arrlist.add(2);
+        arrlist.add(2);
 
         final Handler handler = new Handler();
 
@@ -133,44 +137,52 @@ public class ExerciseSoundActivity extends AppCompatActivity {
             //System.out.println("Number = " + number);
             switch (number) {
                 case 1:
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            playSound(mediaPlayer, R.raw.nota_do);
-                        }
-                    }, 1000);
+                    playSound(mediaPlayer, R.raw.nota_do);
+
+                    try {
+                        Thread.sleep(333);
+                    } catch (Exception e) {
+                        Log.e("Erro sleep", "Erro! " + e);
+                    }
+
                     break;
                 case 2:
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            playSound(mediaPlayer, R.raw.nota_re);
-                        }
-                    }, 2000);
+                    playSound(mediaPlayer, R.raw.nota_re);
+
+                    try {
+                        Thread.sleep(333);
+                    } catch (Exception e) {
+                        Log.e("Erro sleep", "Erro! " + e);
+                    }
+
                     break;
                 case 3:
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            playSound(mediaPlayer, R.raw.nota_mi);
-                        }
-                    }, 3000);
+                    playSound(mediaPlayer, R.raw.nota_mi);
+
+                    try {
+                        Thread.sleep(333);
+                    } catch (Exception e) {
+                        Log.e("Erro sleep", "Erro! " + e);
+                    }
+
                     break;
                 case 4:
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            playSound(mediaPlayer, R.raw.nota_fa);
-                        }
-                    }, 4000);
+                    playSound(mediaPlayer, R.raw.nota_fa);
+
+                    try {
+                        Thread.sleep(333);
+                    } catch (Exception e) {
+                        Log.e("Erro sleep", "Erro! " + e);
+                    }
                     break;
                 case 5:
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            playSound(mediaPlayer, R.raw.nota_sol);
-                        }
-                    }, 5000);
+                    playSound(mediaPlayer, R.raw.nota_sol);
+
+                    try {
+                        Thread.sleep(333);
+                    } catch (Exception e) {
+                        Log.e("Erro sleep", "Erro! " + e);
+                    }
                     break;
                 default:
                     break;

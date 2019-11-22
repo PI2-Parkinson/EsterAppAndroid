@@ -36,7 +36,7 @@ import java.util.ArrayList;
 public class Charts extends ChartUtils {
 
     private BarChart barChart;
-    private int[] colorClassArray = new int[]{Color.argb(255, 37, 209, 195), Color.argb(255, 83, 183, 194)};
+    private int[] colorClassArray = new int[]{Color.argb(255, 37, 209, 195), Color.argb(255, 219, 149, 134)};
     private ArrayList<BarEntry> dataEntry = new ArrayList<>();
     private Long rightAnswers, wrongAnswers;
     private int i = 0;

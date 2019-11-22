@@ -12,11 +12,14 @@ public class StrapRestActivity extends StrapUtils {
     private Chronometer chronometer;
     private Button button;
     private int time = 0;
+    private String title, message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_strap_rest);
+
+        calibrate();
 
         chronometer = findViewById(R.id.strap_rest_chronometer);
         button = findViewById(R.id.strap_rest_btn);

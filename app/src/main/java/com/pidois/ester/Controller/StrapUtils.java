@@ -18,6 +18,12 @@ public abstract class StrapUtils extends AppCompatActivity {
     private String title;
     private String message;
 
+    public void calibrate() {
+        title = "Vamos calibrar a strap?";
+        message = "\nAntes de iniciar, coloque a pulseira em um lugar estável (ex: em cima da mesa). \n\nA calibração dura aproximadamente 15 segundos.";
+        alertDialog(title, message);
+    }
+
     public void alertDialog(String title, String message) {
         AlertDialog.Builder dialog=new AlertDialog.Builder(this);
         dialog.setTitle(title);
