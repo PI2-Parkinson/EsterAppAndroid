@@ -1,29 +1,32 @@
 package com.pidois.ester.Controller;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.pidois.ester.R;
 
-import java.io.File;
-
-public class StrapFingerNoseActivity extends AppCompatActivity {
+public class StrapFingerNoseActivity extends StrapUtils {
 
     private Chronometer chronometer;
     private Button button;
     private int time = 0;
 
+    FirebaseUser firebaseUser;
+    DatabaseReference databaseReference;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_strap_finger_nose);
+
+        calibrate();
 
         chronometer = findViewById(R.id.strap_finger_chronometer);
         button = findViewById(R.id.strap_finger_btn);
@@ -42,12 +45,12 @@ public class StrapFingerNoseActivity extends AppCompatActivity {
                         time++;
                         if (time == 10){
                             chronometer.stop();
+                            //sendStrapAsnwer(firebaseUser, databaseReference, "finger_nose", scale);
                         }
                     }
                 });
             }
         });
+
     }
-
-
 }

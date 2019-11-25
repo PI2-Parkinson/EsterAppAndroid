@@ -1,7 +1,5 @@
 package com.pidois.ester.Controller;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
@@ -10,7 +8,7 @@ import android.widget.Chronometer;
 
 import com.pidois.ester.R;
 
-public class StrapPosturalActivity extends AppCompatActivity {
+public class StrapPosturalActivity extends StrapUtils {
 
     private Chronometer chronometer;
     private Button button;
@@ -20,6 +18,8 @@ public class StrapPosturalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_strap_postural);
+
+        calibrate();
 
         chronometer = findViewById(R.id.strap_postural_chronometer);
         button = findViewById(R.id.strap_postural_btn);

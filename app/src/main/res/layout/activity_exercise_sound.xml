@@ -116,7 +116,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/exec_sound_chronometer"
-        app:layout_constraintTop_toTopOf="@+id/guideline33" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_demo" />
 
     <Button
         android:id="@+id/exec_sound_btn_stop"
@@ -129,7 +129,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/exec_sound_chronometer"
-        app:layout_constraintTop_toTopOf="@+id/guideline33" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_demo" />
 
     <Button
         android:id="@+id/btn_demo"
@@ -139,11 +139,9 @@
         android:padding="15dp"
         android:text="@string/btn_demo"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/exec_sound_chronometer"
         app:layout_constraintTop_toTopOf="@+id/guideline33" />
-
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
