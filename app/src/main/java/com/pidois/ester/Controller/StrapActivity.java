@@ -36,7 +36,7 @@ public class StrapActivity extends AppCompatActivity implements View.OnClickList
             DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "MT1";
 
             Log.i("AQUI MANDA SDATA","MT1 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
-            DeviceControlActivity.enviarDescriptor();
+            BluetoothLeService.enviarDescriptor();
 
             switchScreen(StrapRestActivity.class);
         } else if (i == R.id.btn_m2){
@@ -44,14 +44,14 @@ public class StrapActivity extends AppCompatActivity implements View.OnClickList
             DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "MT2";
 
             Log.i("AQUI MANDA SDATA","MT2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
-            DeviceControlActivity.enviarDescriptor();
+            BluetoothLeService.enviarDescriptor();
             switchScreen(StrapPosturalActivity.class);
         } else if (i == R.id.btn_m3){
 
             DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "MT3";
 
             Log.i("AQUI MANDA SDATA","MT3 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
-            DeviceControlActivity.enviarDescriptor();
+            BluetoothLeService.enviarDescriptor();
             switchScreen(StrapFingerNoseActivity.class);
         } else if (i == R.id.btn_m4){
             alertDialog();

@@ -34,7 +34,7 @@ public class ExerciseColorActivity extends AppCompatActivity {
                 DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SR";
 
                 Log.i("AQUI MANDA SDATA","CONEXAO ESTABELECIDA : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
-                DeviceControlActivity.enviarDescriptor();
+                BluetoothLeService.enviarDescriptor();
 
                 buttonStart.setVisibility(View.GONE);
                buttonStop.setVisibility(View.VISIBLE);
@@ -66,7 +66,7 @@ public class ExerciseColorActivity extends AppCompatActivity {
                                         int which) {
                         DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SF";
                         Log.i("AQUI MANDA SDATA","CONEXAO ESTABELECIDA : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
-                        DeviceControlActivity.enviarDescriptor();
+                        BluetoothLeService.enviarDescriptor();
                         finish();
                     }
                 });

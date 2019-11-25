@@ -34,28 +34,29 @@ public class ExercisesActivity extends ExerciseAbstractClass implements View.OnC
         int i = view.getId();
         if (i == R.id.btn_ex1){
             DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "M1";
-            DeviceControlActivity.enviarDescriptor();
+            BluetoothLeService.enviarDescriptor();
+//            DeviceControlActivity.getCharacteristic();
             Log.i("%$%$#$#$$#%$%#$#$#$@#","EXERCICIO 1 SELECIONADO: " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
 
             switchScreen(ExerciseSoundActivity.class);
 
         } else if (i == R.id.btn_ex2){
             DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "M2";
-            DeviceControlActivity.enviarDescriptor();
+            BluetoothLeService.enviarDescriptor();
             Log.i("%$%$#$#$$#%$%#$#$#$@#","EXERCICIO 2 SELECIONADO: " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
 
             switchScreen(ExerciseColorActivity.class);
 
         } else if (i == R.id.btn_ex3){
             DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "M3";
-            DeviceControlActivity.enviarDescriptor();
+            BluetoothLeService.enviarDescriptor();
             Log.i("%$%$#$#$$#%$%#$#$#$@#","EXERCICIO 3 SELECIONADO: " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
 
             switchScreen(CognitiveActivity.class);
 
         } else if (i == R.id.btn_ex4){
             DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "M4";
-            DeviceControlActivity.enviarDescriptor();
+            BluetoothLeService.enviarDescriptor();
             Log.i("%$%$#$#$$#%$%#$#$#$@#","EXERCICIO 4 SELECIONADO: " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
 
             switchScreen(StrapActivity.class);

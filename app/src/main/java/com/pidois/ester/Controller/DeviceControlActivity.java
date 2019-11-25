@@ -119,7 +119,7 @@ public class DeviceControlActivity extends Activity {
 
                     BLUETOOTH_GLOBAL_SDATA = "N201";
                     Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + BLUETOOTH_GLOBAL_SDATA);
-                    enviarDescriptor();
+                    BluetoothLeService.enviarDescriptor();
 
                 }
                 displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
@@ -127,62 +127,50 @@ public class DeviceControlActivity extends Activity {
         }
     };
 
-    public static void enviarDescriptor(){
-
-        BluetoothGattService service = BluetoothLeService.mBluetoothGatt.getService(UUID.fromString("4fafc201-1fb5-459e-8fcc-c5c9c331914b"));
-        BluetoothGattCharacteristic mGattCharacteristic = service.getCharacteristic(UUID.fromString("beb5483e-36e1-4688-b7f5-ea07361b26a8"));
-
-        for (BluetoothGattDescriptor descriptor:mGattCharacteristic.getDescriptors()){
-            Log.i(TAG, "BluetoothGattDescriptor: "+descriptor.getUuid().toString());
-        }
-
-        Log.i("$$$$$$$$$","mBluetoothGatt "+ BluetoothLeService.mBluetoothGatt);
-
-        Log.i("$$$$$$$$$","mGattCharacteristic "+ mGattCharacteristic);
-
-        BluetoothGattDescriptor descriptor = mGattCharacteristic.getDescriptor(
-                BluetoothLeService.UUID_CLIENT_CHARACTERISTIC_CONFIG);
-
-        Log.i("$$$$$$$$$","DESCRIPTOR "+ descriptor);
-        descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
-
-        Log.i("$$$$$$$$$","ENABLE NOTIFICATION " + BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
-        BluetoothLeService.mBluetoothGatt.writeDescriptor(descriptor);
-    }
-
     // If a given GATT characteristic is selected, check for supported features.  This sample
     // demonstrates 'Read' and 'Notify' features.  See
     // http://d.android.com/reference/android/bluetooth/BluetoothGatt.html for the complete
     // list of supported characteristic features.
-    private final ExpandableListView.OnChildClickListener servicesListClickListner =
-            new ExpandableListView.OnChildClickListener() {
-                @Override
-                public boolean onChildClick(ExpandableListView parent, View v, int groupPosition,
-                                            int childPosition, long id) {
-                    if (mGattCharacteristics != null) {
-                        final BluetoothGattCharacteristic characteristic =
-                                mGattCharacteristics.get(groupPosition).get(childPosition);
-                        final int charaProp = characteristic.getProperties();
-                        if ((charaProp | BluetoothGattCharacteristic.PROPERTY_READ) > 0) {
-                            // If there is an active notification on a characteristic, clear
-                            // it first so it doesn't update the data field on the user interface.
-                            if (mNotifyCharacteristic != null) {
-                                mBluetoothLeService.setCharacteristicNotification(
-                                        mNotifyCharacteristic, false);
-                                mNotifyCharacteristic = null;
-                            }
-                            mBluetoothLeService.readCharacteristic(characteristic);
-                        }
-                        if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
-                            mNotifyCharacteristic = characteristic;
-                            mBluetoothLeService.setCharacteristicNotification(
-                                    characteristic, true);
-                        }
-                        return true;
-                    }
-                    return false;
-                }
-            };
+//    private final ExpandableListView.OnChildClickListener servicesListClickListner =
+//            new ExpandableListView.OnChildClickListener() {
+//                @Override
+//                public boolean onChildClick(ExpandableListView parent, View v, int groupPosition,
+//                                            int childPosition, long id) {
+//
+//                    Log.i("*******","PARENT >>> " + parent);
+//                    Log.i("*******","VIEW V >>> " + v);
+//                    Log.i("*******","ID >>> " + id);
+//
+//                    if (mGattCharacteristics != null) {
+//                        final BluetoothGattCharacteristic characteristic =
+//                                mGattCharacteristics.get(groupPosition).get(childPosition);
+//
+//                        Log.i("*******","CHARACTERISTIC >>> " + characteristic.getProperties());
+//
+//                        Log.i("*******","GROUP >>> " + groupPosition);
+//                        Log.i("*******","CHILD >>> " + childPosition);
+//
+//                        final int charaProp = characteristic.getProperties();
+//                        if ((charaProp | BluetoothGattCharacteristic.PROPERTY_READ) > 0) {
+//                            // If there is an active notification on a characteristic, clear
+//                            // it first so it doesn't update the data field on the user interface.
+//                            if (mNotifyCharacteristic != null) {
+//                                mBluetoothLeService.setCharacteristicNotification(
+//                                        mNotifyCharacteristic, false);
+//                                mNotifyCharacteristic = null;
+//                            }
+//                            mBluetoothLeService.readCharacteristic(characteristic);
+//                        }
+//                        if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
+//                            mNotifyCharacteristic = characteristic;
+//                            mBluetoothLeService.setCharacteristicNotification(
+//                                    characteristic, true);
+//                        }
+//                        return true;
+//                    }
+//                    return false;
+//                }
+//            };
 
     private void clearUI() {
         mGattServicesList.setAdapter((SimpleExpandableListAdapter) null);
@@ -201,7 +189,7 @@ public class DeviceControlActivity extends Activity {
         // Sets up UI references.
         ((TextView) findViewById(R.id.device_address)).setText(mDeviceAddress);
         mGattServicesList = (ExpandableListView) findViewById(R.id.gatt_services_list);
-        mGattServicesList.setOnChildClickListener(servicesListClickListner);
+//        mGattServicesList.setOnChildClickListener(servicesListClickListner);
         mConnectionState = (TextView) findViewById(R.id.connection_state);
         mDataField = (TextView) findViewById(R.id.data_value);
 
@@ -215,10 +203,17 @@ public class DeviceControlActivity extends Activity {
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 BLUETOOTH_GLOBAL_SDATA = "C";
+
                 //buttonStart.setVisibility(View.INVISIBLE);
                 Log.i("AQUI MANDA SDATA","CONEXAO ESTABELECIDA : " + BLUETOOTH_GLOBAL_SDATA);
-                enviarDescriptor();
+                //servicesListClickListner.onChildClick(findViewById(R.id.gatt_services_list,,2,0,0)).performItemClick(list.getChildAt(pos), pos, list.getItemIdAtPosition(pos));
+
+                //servicesListClickListner.onChildClick().performClick();
+
+                BluetoothLeService.enviarDescriptor();
+//                getCharacteristic();
                 switchScreen(MainActivity.class);
 
             }

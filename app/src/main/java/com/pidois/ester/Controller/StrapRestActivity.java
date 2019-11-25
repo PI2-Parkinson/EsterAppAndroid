@@ -41,7 +41,7 @@ public class StrapRestActivity extends AppCompatActivity {
                 DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "IT";
 
                 Log.i("AQUI MANDA SDATA","IT : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
-                DeviceControlActivity.enviarDescriptor();
+                BluetoothLeService.enviarDescriptor();
 
                 time = 0;
 
@@ -59,7 +59,7 @@ public class StrapRestActivity extends AppCompatActivity {
                             DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "GTR";
 
                             Log.i("AQUI MANDA SDATA","GTR MALUCO : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
-                            DeviceControlActivity.enviarDescriptor();
+                            BluetoothLeService.enviarDescriptor();
                             chronometer.stop();
                         }
                     }

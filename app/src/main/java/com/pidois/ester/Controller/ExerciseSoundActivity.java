@@ -104,7 +104,7 @@ public class ExerciseSoundActivity extends AppCompatActivity {
 
             DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "N101";
             Log.i("AQUI MANDA SDATA","NIVEL JOGO 1 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
-            DeviceControlActivity.enviarDescriptor();
+            BluetoothLeService.enviarDescriptor();
         }
 
         buttonStart.setOnClickListener(new View.OnClickListener() {
@@ -113,7 +113,7 @@ public class ExerciseSoundActivity extends AppCompatActivity {
 
                 DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SR";
 
-                DeviceControlActivity.enviarDescriptor();
+                BluetoothLeService.enviarDescriptor();
                 DeviceControlActivity merda = new DeviceControlActivity();
                 Log.i("AQUI MANDA SDATA","SR FOI : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
 
@@ -221,7 +221,7 @@ public class ExerciseSoundActivity extends AppCompatActivity {
 
                         DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SF";
 
-                        DeviceControlActivity.enviarDescriptor();
+                        BluetoothLeService.enviarDescriptor();
                         DeviceControlActivity merda = new DeviceControlActivity();
 
                         Log.i("%$%$#$#$$#%$%#$#$#$@#","SF FOI: " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
