@@ -3,6 +3,10 @@ package com.pidois.ester.Controller;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.bluetooth.BluetoothGattCharacteristic;
+import android.bluetooth.BluetoothGattDescriptor;
+import android.bluetooth.BluetoothGattService;
+import android.content.BroadcastReceiver;
 import android.content.DialogInterface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -87,10 +91,26 @@ public class ExerciseSoundActivity extends AppCompatActivity {
             }
         });
 
+        Log.i("OLHA O RDATA MLK DOIDO","TOMAAAAAAAAA : " + DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA);
+
+        if (DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.contains("N1")){
+
+            DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "N101";
+            Log.i("AQUI MANDA SDATA","NIVEL JOGO 1 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+            BluetoothLeService.enviarDescriptor();
+        }
+
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                buttonStart.setVisibility(View.INVISIBLE);
+
+                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SR";
+
+                BluetoothLeService.enviarDescriptor();
+                DeviceControlActivity merda = new DeviceControlActivity();
+                Log.i("AQUI MANDA SDATA","SR FOI : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+
+                buttonStart.setVisibility(View.GONE);
                 buttonStop.setVisibility(View.VISIBLE);
                 exec_chronometer.setBase(SystemClock.elapsedRealtime());
                 exec_chronometer.start();
@@ -100,8 +120,9 @@ public class ExerciseSoundActivity extends AppCompatActivity {
         buttonStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 buttonStart.setVisibility(View.VISIBLE);
-                buttonStop.setVisibility(View.INVISIBLE);
+                buttonStop.setVisibility(View.GONE);
                 alertDialog();
                 exec_chronometer.stop();
             }
@@ -208,6 +229,13 @@ public class ExerciseSoundActivity extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,
                                         int which) {
+
+                        DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SF";
+
+                        BluetoothLeService.enviarDescriptor();
+                        DeviceControlActivity merda = new DeviceControlActivity();
+
+                        Log.i("%$%$#$#$$#%$%#$#$#$@#","SF FOI: " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
                         finish();
                     }
                 });
