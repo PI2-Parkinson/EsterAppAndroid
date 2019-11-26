@@ -32,7 +32,6 @@ public class BluetoothLeService extends Service {
     private String mBluetoothDeviceAddress;
     private static BluetoothGatt mBluetoothGatt;
     private int mConnectionState = STATE_DISCONNECTED;
-    public static String BLUETOOTH_GLOBAL_RDATA = "";
 
     private static final int STATE_DISCONNECTED = 0;
     private static final int STATE_CONNECTING = 1;
@@ -135,10 +134,9 @@ public class BluetoothLeService extends Service {
         public void onCharacteristicRead(BluetoothGatt gatt,
                                          BluetoothGattCharacteristic characteristic,
                                          int status) {
-            Log.i(TAG, "ENTROU!!!!!!!!!!!!!!!!!: " + characteristic);
+            Log.i(TAG, "ENTROU NO onCharacteristicRead " + characteristic);
             String value = new String(characteristic.getValue());
-            Log.i(TAG, "!!!!!!!!!!!!!!!!!: " + value);
-            if (value.contains("SF")){
+            while (value == DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA){
                 try {
                     Thread.sleep(1000);
                 } catch (Exception e) {
@@ -159,8 +157,13 @@ public class BluetoothLeService extends Service {
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt,
                                             BluetoothGattCharacteristic characteristic) {
-//            String value = Arrays.toString(characteristic.getValue());
-            Log.i(TAG, "ENTROU NA PORRA DESSE CARAI!!" + Arrays.toString(characteristic.getValue()));
+            String value = new String(characteristic.getValue());
+
+            // IMPORTANTE!!
+            // Se aparecer esse Log toda vez que mudar a característica,
+            // tira o while do onCharacteristicRead
+
+            Log.i(TAG, "ENTROU NO onCharacteristicChanged!! " + value);
             broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);
         }
 
