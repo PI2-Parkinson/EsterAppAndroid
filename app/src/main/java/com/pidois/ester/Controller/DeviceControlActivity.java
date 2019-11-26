@@ -59,6 +59,7 @@ public class DeviceControlActivity extends Activity {
     private final String LIST_NAME = "NAME";
     private final String LIST_UUID = "UUID";
 
+    public static BluetoothLeService serviceBLE;
     public static String BLUETOOTH_GLOBAL_RDATA = "";
     public static String BLUETOOTH_GLOBAL_SDATA = "";
 
@@ -68,6 +69,7 @@ public class DeviceControlActivity extends Activity {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder service) {
             mBluetoothLeService = ((BluetoothLeService.LocalBinder) service).getService();
+            serviceBLE = mBluetoothLeService;
             if (!mBluetoothLeService.initialize()) {
                 Log.e(TAG, "Unable to initialize Bluetooth");
                 finish();

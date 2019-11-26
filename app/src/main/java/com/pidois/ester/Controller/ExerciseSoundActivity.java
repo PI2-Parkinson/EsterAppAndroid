@@ -7,7 +7,10 @@ import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattDescriptor;
 import android.bluetooth.BluetoothGattService;
 import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -23,8 +26,72 @@ public class ExerciseSoundActivity extends AppCompatActivity {
 
     Button btnDo, btnRe, btnMi, btnFa, btnSol;
     MediaPlayer mediaPlayer;
+    private BluetoothLeService mBluetoothLeService;
+    private String mDeviceAddress;
+    private String data;
+
+    public final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.i("RECEBE DA ESP32","VALOR: " + intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
+
+
+            data = intent.getStringExtra(BluetoothLeService.EXTRA_DATA);
+            Log.i("DA ESP32 PRA VARIAVEL","VALOR VARIAVEL: " + DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA);
+
+            if (data.contains("SQ")){
+
+                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SR";
+                Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+                BluetoothLeService.enviarDescriptor();
+                try {
+                    Thread.sleep(1665);
+                } catch (Exception e) {
+                    Log.e("Erro sleep", "Erro! " + e);
+                }
+                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SF";
+                Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+                BluetoothLeService.enviarDescriptor();
+
+            }
+
+            if (data.contains("SR")){
+
+                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SF";
+                Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+                BluetoothLeService.enviarDescriptor();
+
+            }
+
+
+
+            if (DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.contains("N1")){
+
+                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "N101";
+                Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+                BluetoothLeService.enviarDescriptor();
+
+            }
+        }
+    };
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
+        mBluetoothLeService = DeviceControlActivity.serviceBLE;
+        if (mBluetoothLeService != null) {
+            final boolean result = mBluetoothLeService.connect(mDeviceAddress);
+            Log.d("BLA", "Connect request result=" + result);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+        @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_sound);
@@ -35,6 +102,9 @@ public class ExerciseSoundActivity extends AppCompatActivity {
         btnFa = findViewById(R.id.e_button_fa);
         btnSol = findViewById(R.id.e_button_sol);
 
+        final Intent intent = getIntent();
+
+        mDeviceAddress = intent.getStringExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS);
         btnDo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,7 +177,6 @@ public class ExerciseSoundActivity extends AppCompatActivity {
                 DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SR";
 
                 BluetoothLeService.enviarDescriptor();
-                DeviceControlActivity merda = new DeviceControlActivity();
                 Log.i("AQUI MANDA SDATA","SR FOI : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
 
                 buttonStart.setVisibility(View.GONE);
@@ -247,6 +316,14 @@ public class ExerciseSoundActivity extends AppCompatActivity {
         });
         AlertDialog alertDialog=dialog.create();
         alertDialog.show();
+    }
+    private static IntentFilter makeGattUpdateIntentFilter() {
+        final IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(BluetoothLeService.ACTION_GATT_CONNECTED);
+        intentFilter.addAction(BluetoothLeService.ACTION_GATT_DISCONNECTED);
+        intentFilter.addAction(BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED);
+        intentFilter.addAction(BluetoothLeService.ACTION_DATA_AVAILABLE);
+        return intentFilter;
     }
 
     private class Sequencia {
