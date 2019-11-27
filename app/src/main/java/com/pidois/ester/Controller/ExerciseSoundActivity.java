@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 public class ExerciseSoundActivity extends AppCompatActivity {
 
-    Button btnDo, btnRe, btnMi, btnFa, btnSol;
+    Button btnDo, btnRe, btnMi, btnFa, btnSol, btnInfo;
     MediaPlayer mediaPlayer;
     String sequenceValue = null;
     private BluetoothLeService mBluetoothLeService;

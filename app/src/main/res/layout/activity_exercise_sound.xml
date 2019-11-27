@@ -52,14 +52,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="622dp" />
+        app:layout_constraintGuide_percent="0.14911081" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline32"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="256dp" />
+        app:layout_constraintGuide_percent="0.3" />
 
     <TextView
         android:id="@+id/exec_sound_title"
@@ -137,11 +137,13 @@
         android:layout_height="wrap_content"
         android:background="@drawable/round_btn_grey"
         android:padding="15dp"
-        android:text="@string/btn_demo"
+        android:text="@string/btn_demo2"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/exec_sound_chronometer"
         app:layout_constraintTop_toTopOf="@+id/guideline33" />
+
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
@@ -161,6 +163,7 @@
 
             <Button
                 android:id="@+id/e_button_do"
+                android:text="Do"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
@@ -177,6 +180,7 @@
 
             <Button
                 android:id="@+id/e_button_re"
+                android:text="Re"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="70dp"
@@ -190,6 +194,7 @@
 
             <Button
                 android:id="@+id/e_button_mi"
+                android:text="MI"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="70dp"
@@ -202,6 +207,7 @@
 
             <Button
                 android:id="@+id/e_button_fa"
+                android:text="FA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="70dp"
@@ -214,6 +220,7 @@
 
             <Button
                 android:id="@+id/e_button_sol"
+                android:text="SOL"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="70dp"
@@ -227,5 +234,6 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
