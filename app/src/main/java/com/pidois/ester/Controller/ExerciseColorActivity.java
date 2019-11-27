@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
@@ -19,7 +20,8 @@ public class ExerciseColorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_color);
 
-        final Chronometer exec_chronometer = (Chronometer)findViewById(R.id.exec_color_chronometer);
+        final Chronometer exec_chronometer = findViewById(R.id.exec_color_chronometer);
+
 
         final Button buttonStart = (Button)findViewById(R.id.exec_color_btn_start);
         final Button buttonStop = (Button)findViewById(R.id.exec_color_btn_stop);
@@ -40,8 +42,14 @@ public class ExerciseColorActivity extends AppCompatActivity {
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                buttonStart.setVisibility(View.INVISIBLE);
-                buttonStop.setVisibility(View.VISIBLE);
+
+                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SR";
+
+                Log.i("AQUI MANDA SDATA","CONEXAO ESTABELECIDA : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+                BluetoothLeService.enviarDescriptor();
+
+                buttonStart.setVisibility(View.GONE);
+               buttonStop.setVisibility(View.VISIBLE);
                 exec_chronometer.setBase(SystemClock.elapsedRealtime());
                 exec_chronometer.start();
             }
@@ -50,10 +58,11 @@ public class ExerciseColorActivity extends AppCompatActivity {
         buttonStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 buttonStart.setVisibility(View.VISIBLE);
-                buttonStop.setVisibility(View.INVISIBLE);
-                alertDialog();
-                exec_chronometer.stop();
+               buttonStop.setVisibility(View.GONE);
+               alertDialog();
+               exec_chronometer.stop();
             }
         });
 
@@ -67,6 +76,9 @@ public class ExerciseColorActivity extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,
                                         int which) {
+                        DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SF";
+                        Log.i("AQUI MANDA SDATA","CONEXAO ESTABELECIDA : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+                        BluetoothLeService.enviarDescriptor();
                         finish();
                     }
                 });

@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -30,10 +31,26 @@ public class StrapActivity extends StrapUtils implements View.OnClickListener {
     public void onClick(View view) {
         int i = view.getId();
         if (i == R.id.btn_m1){
+
+            DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "MT1";
+
+            Log.i("AQUI MANDA SDATA","MT1 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+            BluetoothLeService.enviarDescriptor();
+
             switchScreen(StrapRestActivity.class);
         } else if (i == R.id.btn_m2){
+
+            DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "MT2";
+
+            Log.i("AQUI MANDA SDATA","MT2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+            BluetoothLeService.enviarDescriptor();
             switchScreen(StrapPosturalActivity.class);
         } else if (i == R.id.btn_m3){
+
+            DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "MT3";
+
+            Log.i("AQUI MANDA SDATA","MT3 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+            BluetoothLeService.enviarDescriptor();
             switchScreen(StrapFingerNoseActivity.class);
         } else if (i == R.id.btn_m4){
             String title = null;

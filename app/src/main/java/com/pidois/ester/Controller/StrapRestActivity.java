@@ -2,6 +2,7 @@ package com.pidois.ester.Controller;
 
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
@@ -29,6 +30,11 @@ public class StrapRestActivity extends StrapUtils {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "IT";
+
+                Log.i("AQUI MANDA SDATA","IT : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+                BluetoothLeService.enviarDescriptor();
                 chronometer.setBase(SystemClock.elapsedRealtime() + (11*1000));
                 chronometer.start();
 
@@ -37,6 +43,10 @@ public class StrapRestActivity extends StrapUtils {
                     public void onChronometerTick(Chronometer chronometer) {
                         time++;
                         if (time == 11){
+                            DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "GTR";
+
+                            Log.i("AQUI MANDA SDATA","GTR MALUCO : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+                            BluetoothLeService.enviarDescriptor();
                             chronometer.stop();
 
                             strapResult(1);

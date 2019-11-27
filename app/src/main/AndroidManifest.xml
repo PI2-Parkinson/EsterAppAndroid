@@ -2,8 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.pidois.ester">
 
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <permission android:name="android.permission.BLUETOOTH" android:label="BLUETOOTH" />
+    <permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <application
         android:allowBackup="true"
@@ -22,6 +33,7 @@
         <activity android:name=".Controller.StrapFingerNoseActivity" />
         <activity android:name=".Controller.StrapPosturalActivity" />
         <activity android:name=".Controller.StrapRestActivity" />
+        <activity android:name=".Controller.DeviceScanActivity" />
         <activity
             android:name=".Controller.StrapActivity"
             android:theme="@style/ProfileTheme" />
@@ -48,6 +60,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Controller.DeviceControlActivity"/>
+        <service android:name=".Controller.BluetoothLeService" android:enabled="true"/>
     </application>
 
 </manifest>
