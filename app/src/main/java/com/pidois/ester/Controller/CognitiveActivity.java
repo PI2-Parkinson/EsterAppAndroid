@@ -1,7 +1,10 @@
 package com.pidois.ester.Controller;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -152,6 +155,8 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
         lView.setBackgroundColor(Color.parseColor(WHITE));
         lView.addView(mText);
         showRightAnswers();
+        DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "S1";
+        BluetoothLeService.enviarDescriptor();
     }
 
     public void showSequence(int[] color){
