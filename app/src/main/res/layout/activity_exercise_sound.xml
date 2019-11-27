@@ -52,14 +52,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="622dp" />
+        app:layout_constraintGuide_percent="0.14911081" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline32"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="256dp" />
+        app:layout_constraintGuide_percent="0.3" />
 
     <TextView
         android:id="@+id/exec_sound_title"
