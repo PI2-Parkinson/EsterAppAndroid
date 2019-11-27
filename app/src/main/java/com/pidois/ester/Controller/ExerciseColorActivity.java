@@ -22,10 +22,22 @@ public class ExerciseColorActivity extends AppCompatActivity {
 
         final Chronometer exec_chronometer = findViewById(R.id.exec_color_chronometer);
 
-        final Button buttonStart = findViewById(R.id.exec_color_btn_start);
-        final Button buttonStop = findViewById(R.id.exec_color_btn_stop);
+
+        final Button buttonStart = (Button)findViewById(R.id.exec_color_btn_start);
+        final Button buttonStop = (Button)findViewById(R.id.exec_color_btn_stop);
+        final Button buttonDemo = (Button)findViewById(R.id.btn_demo_color);
 
         buttonStop.setVisibility(View.INVISIBLE);
+        buttonStart.setVisibility(View.VISIBLE);
+
+        buttonDemo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                buttonStart.setVisibility(View.VISIBLE);
+                buttonStop.setVisibility(View.INVISIBLE);
+
+            }
+        });
 
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
