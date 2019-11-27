@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -58,6 +59,10 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
     private int correctAnswers = 0;
     ArrayList<Integer> randomColorArray = new ArrayList<>();
     ArrayList<Integer> randomButtonArray = new ArrayList<>();
+    private BluetoothLeService mBluetoothLeService;
+    private String mDeviceAddress;
+    private String data;
+    private String levelBd = null;
 
 
     Random random = new Random();
@@ -74,6 +79,36 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
             PINK, BROWN,
             WHITE, GRAY
     };
+
+    public final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.i("RECEBE DA ESP32","VALOR: " + intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
+
+
+            data = intent.getStringExtra(BluetoothLeService.EXTRA_DATA);
+            Log.i("DA ESP32 PRA VARIAVEL","VALOR VARIAVEL: " + DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA);
+
+
+
+            if (DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.contains("QM")){
+
+                switchScreen(MainActivity.class);
+
+            }
+        }
+    };
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
+        mBluetoothLeService = DeviceControlActivity.serviceBLE;
+        if (mBluetoothLeService != null) {
+            final boolean result = mBluetoothLeService.connect(mDeviceAddress);
+            Log.d("BLA", "Connect request result=" + result);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,7 +190,7 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
         lView.setBackgroundColor(Color.parseColor(WHITE));
         lView.addView(mText);
         showRightAnswers();
-        DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "S1";
+        DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "F1";
         BluetoothLeService.enviarDescriptor();
     }
 
@@ -238,6 +273,15 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
         }
 
         buttonRight.setOnClickListener(this);
+    }
+
+    private static IntentFilter makeGattUpdateIntentFilter() {
+        final IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(BluetoothLeService.ACTION_GATT_CONNECTED);
+        intentFilter.addAction(BluetoothLeService.ACTION_GATT_DISCONNECTED);
+        intentFilter.addAction(BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED);
+        intentFilter.addAction(BluetoothLeService.ACTION_DATA_AVAILABLE);
+        return intentFilter;
     }
 
     public void showLayout(){
@@ -332,5 +376,10 @@ public class CognitiveActivity extends ExerciseAbstractClass implements View.OnC
         String currentDateandTime = sdf.format(new Date());
 
         return currentDateandTime;
+    }
+
+    private void switchScreen (Class cl){
+        Intent intent = new Intent(CognitiveActivity.this, cl);
+        CognitiveActivity.this.startActivity(intent);
     }
 }

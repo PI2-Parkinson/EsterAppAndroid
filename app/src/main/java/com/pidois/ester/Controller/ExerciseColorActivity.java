@@ -37,14 +37,6 @@ public class ExerciseColorActivity extends AppCompatActivity {
 
             if (data.contains("SQ")){
 
-                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SR";
-                Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
-                BluetoothLeService.enviarDescriptor();
-                try {
-                    Thread.sleep(1665);
-                } catch (Exception e) {
-                    Log.e("Erro sleep", "Erro! " + e);
-                }
                 DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SF";
                 Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
                 BluetoothLeService.enviarDescriptor();
@@ -87,6 +79,12 @@ public class ExerciseColorActivity extends AppCompatActivity {
                 BluetoothLeService.enviarDescriptor();
 
             }
+
+            if (DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.contains("QM")){
+
+                switchScreen(MainActivity.class);
+
+            }
         }
     };
 
@@ -122,6 +120,9 @@ public class ExerciseColorActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "P1";
+                Log.i("AQUI MANDA SDATA","MANDOU P1 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+                BluetoothLeService.enviarDescriptor();
                 buttonStart.setVisibility(View.VISIBLE);
                buttonStop.setVisibility(View.GONE);
                alertDialog();
@@ -139,7 +140,7 @@ public class ExerciseColorActivity extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,
                                         int which) {
-                        DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SF";
+                        DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SN";
                         Log.i("AQUI MANDA SDATA","CONEXAO ESTABELECIDA : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
                         BluetoothLeService.enviarDescriptor();
                         finish();
@@ -178,5 +179,10 @@ public class ExerciseColorActivity extends AppCompatActivity {
         intentFilter.addAction(BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED);
         intentFilter.addAction(BluetoothLeService.ACTION_DATA_AVAILABLE);
         return intentFilter;
+    }
+
+    private void switchScreen (Class cl){
+        Intent intent = new Intent(ExerciseColorActivity.this, cl);
+        ExerciseColorActivity.this.startActivity(intent);
     }
 }

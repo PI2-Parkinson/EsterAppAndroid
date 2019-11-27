@@ -83,7 +83,7 @@ public class ExerciseSoundActivity extends AppCompatActivity {
 
             }
 
-            if (data.contains("V1")){
+            if ( DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.contains("V1")){
                 levelBd = DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA;
 
                 DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SN";
@@ -93,8 +93,7 @@ public class ExerciseSoundActivity extends AppCompatActivity {
             }
 
             if (data.contains("BP")){
-                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "P0";
-                Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+                alertDialog();
                 BluetoothLeService.enviarDescriptor();
             }
 
@@ -104,6 +103,12 @@ public class ExerciseSoundActivity extends AppCompatActivity {
                 DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "N101";
                 Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
                 BluetoothLeService.enviarDescriptor();
+
+            }
+
+            if (DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.contains("QM")){
+
+                switchScreen(MainActivity.class);
 
             }
         }
@@ -208,10 +213,10 @@ public class ExerciseSoundActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SR";
-
-                BluetoothLeService.enviarDescriptor();
-                Log.i("AQUI MANDA SDATA","SR FOI : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+//                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SR";
+//
+//                BluetoothLeService.enviarDescriptor();
+//                Log.i("AQUI MANDA SDATA","SR FOI : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
 
                 buttonStart.setVisibility(View.GONE);
                 buttonStop.setVisibility(View.VISIBLE);
@@ -311,25 +316,29 @@ public class ExerciseSoundActivity extends AppCompatActivity {
     private void alertDialog() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setMessage("Você deseja mesmo encerrar o exercício? Todo o progresso não será salvo.");
-        dialog.setTitle("Deseja mesmo sair?");
+        dialog.setTitle("Deseja sair do jogo?");
         dialog.setPositiveButton("sair",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,
                                         int which) {
+                        if (DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.contains("BP")){
+                            DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "P1";
+                            BluetoothLeService.enviarDescriptor();
+                        }
+                        Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
 
-                        DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SF";
-
-                        BluetoothLeService.enviarDescriptor();
-                        DeviceControlActivity merda = new DeviceControlActivity();
 
                         Log.i("%$%$#$#$$#%$%#$#$#$@#","SF FOI: " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
                         finish();
                     }
                 });
-        dialog.setNegativeButton("cancelar",new DialogInterface.OnClickListener() {
+        dialog.setNegativeButton("não",new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //
+                if (DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.contains("BP")){
+                    DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "P0";
+                    BluetoothLeService.enviarDescriptor();
+                }
             }
         });
         AlertDialog alertDialog=dialog.create();
@@ -346,5 +355,10 @@ public class ExerciseSoundActivity extends AppCompatActivity {
 
     private class Sequencia {
         String[] seq = {"15243", "12345"};
+    }
+
+    private void switchScreen (Class cl){
+        Intent intent = new Intent(ExerciseSoundActivity.this, cl);
+        ExerciseSoundActivity.this.startActivity(intent);
     }
 }
