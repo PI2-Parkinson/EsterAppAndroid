@@ -136,7 +136,7 @@ public class BluetoothLeService extends Service {
                                          int status) {
             Log.i(TAG, "ENTROU NO onCharacteristicRead " + characteristic);
             String value = new String(characteristic.getValue());
-            while (value == DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA){
+            if (value.contains("SF")){
                 try {
                     Thread.sleep(1000);
                 } catch (Exception e) {
@@ -321,8 +321,8 @@ public class BluetoothLeService extends Service {
 
     public static void enviarDescriptor(){
 
-        BluetoothGattService service = BluetoothLeService.mBluetoothGatt.getService(UUID.fromString("4fafc201-1fb5-459e-8fcc-c5c9c331914b"));
-        BluetoothGattCharacteristic mGattCharacteristic = service.getCharacteristic(UUID.fromString("beb5483e-36e1-4688-b7f5-ea07361b26a8"));
+        BluetoothGattService service = BluetoothLeService.mBluetoothGatt.getService(UUID.fromString("c96d9bcc-f3b8-442e-b634-d546e4835f64"));
+        BluetoothGattCharacteristic mGattCharacteristic = service.getCharacteristic(UUID.fromString("807b8bad-a892-4ff7-b8bc-83a644742f9b"));
 
         for (BluetoothGattDescriptor descriptor:mGattCharacteristic.getDescriptors()){
             Log.i(TAG, "BluetoothGattDescriptor: "+descriptor.getUuid().toString());

@@ -26,9 +26,13 @@ public class ExerciseSoundActivity extends AppCompatActivity {
 
     Button btnDo, btnRe, btnMi, btnFa, btnSol;
     MediaPlayer mediaPlayer;
+    String sequenceValue = null;
     private BluetoothLeService mBluetoothLeService;
     private String mDeviceAddress;
     private String data;
+    private String levelBd = null;
+
+    ArrayList<Integer> arraySeq = new ArrayList<Integer>(30);
 
     public final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() {
         @Override
@@ -40,6 +44,17 @@ public class ExerciseSoundActivity extends AppCompatActivity {
             Log.i("DA ESP32 PRA VARIAVEL","VALOR VARIAVEL: " + DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA);
 
             if (data.contains("SQ")){
+                arraySeq.clear();
+
+                sequenceValue = DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA; //SQ16565656
+
+                for(int i = 2; i < sequenceValue.length() - 1; i++) {
+                    arraySeq.add(Character.getNumericValue(sequenceValue.charAt(i)));
+                }
+
+                Log.i("Oi", "ARRAY" + arraySeq.toString());
+
+                playSequence(arraySeq);
 
                 DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SR";
                 Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
@@ -54,6 +69,11 @@ public class ExerciseSoundActivity extends AppCompatActivity {
                 BluetoothLeService.enviarDescriptor();
 
             }
+            if (data.contains("ES")){
+                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "C0";
+                Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+                BluetoothLeService.enviarDescriptor();
+            }
 
             if (data.contains("SR")){
 
@@ -63,6 +83,20 @@ public class ExerciseSoundActivity extends AppCompatActivity {
 
             }
 
+            if (data.contains("V1")){
+                levelBd = DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA;
+
+                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SN";
+                Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+                BluetoothLeService.enviarDescriptor();
+
+            }
+
+            if (data.contains("BP")){
+                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "P0";
+                Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+                BluetoothLeService.enviarDescriptor();
+            }
 
 
             if (DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.contains("N1")){
@@ -156,7 +190,7 @@ public class ExerciseSoundActivity extends AppCompatActivity {
             public void onClick(View view) {
                 buttonStart.setVisibility(View.VISIBLE);
                 buttonStop.setVisibility(View.INVISIBLE);
-                playSequence();
+//                playSequence();
 
             }
         });
@@ -199,31 +233,15 @@ public class ExerciseSoundActivity extends AppCompatActivity {
 
     }
 
-    private void playSequence() {
-        // create an empty array list with an initial capacity
-        ArrayList<Integer> arrlist = new ArrayList<Integer>(30);
+    private void playSequence(ArrayList<Integer> arrayList) {
+        // create an empty array list with an initial capacit
 
         // use add() method to add elements in the list
-        arrlist.add(3);
-        arrlist.add(3);
-        arrlist.add(4);
-        arrlist.add(5);
-        arrlist.add(5);
-        arrlist.add(4);
-        arrlist.add(3);
-        arrlist.add(2);
-        arrlist.add(1);
-        arrlist.add(1);
-        arrlist.add(2);
-        arrlist.add(3);
-        arrlist.add(3);
-        arrlist.add(2);
-        arrlist.add(2);
 
         final Handler handler = new Handler();
 
         // let us print all the elements available in list
-        for (Integer number : arrlist) {
+        for (Integer number : arrayList) {
             //System.out.println("Number = " + number);
             switch (number) {
                 case 1:
