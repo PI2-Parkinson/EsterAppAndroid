@@ -22,30 +22,28 @@ public class StrapPosturalActivity extends StrapUtils {
     private BluetoothLeService mBluetoothLeService;
     private String mDeviceAddress;
     private String data;
-    private String levelBd = null;
-
+    private int grade = 0;
+    private String GTValue = null;
 
     public final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.i("RECEBE DA ESP32","VALOR: " + intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
 
+
             data = intent.getStringExtra(BluetoothLeService.EXTRA_DATA);
             Log.i("DA ESP32 PRA VARIAVEL","VALOR VARIAVEL: " + DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA);
 
-
             if (DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.contains("GT")){
-                String a = DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA;
-                strapResult(a);
+                GTValue = DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA;
+                grade = Character.getNumericValue(GTValue.charAt(2));
+                Log.i("StrapFingerNoseActivity","Grau tremor : " + grade);
                 DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "GTR";
-                Log.i("AQUI MANDA SDATA","GRAU TREMOR : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+                Log.i("StrapFingerNoseActivity","Grau tremor : " + GTValue);
                 BluetoothLeService.enviarDescriptor();
+                strapResult(grade, StrapPosturalActivity.class);
             }
 
-            if (DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.contains("QM")){
-
-                switchScreen(MainActivity.class);
-            }
         }
     };
 
@@ -91,6 +89,11 @@ public class StrapPosturalActivity extends StrapUtils {
         }
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
     private static IntentFilter makeGattUpdateIntentFilter() {
         final IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(BluetoothLeService.ACTION_GATT_CONNECTED);
@@ -104,4 +107,5 @@ public class StrapPosturalActivity extends StrapUtils {
         Intent intent = new Intent(StrapPosturalActivity.this, cl);
         StrapPosturalActivity.this.startActivity(intent);
     }
+
 }
