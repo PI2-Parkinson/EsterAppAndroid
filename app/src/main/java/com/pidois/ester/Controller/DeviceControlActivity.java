@@ -190,7 +190,7 @@ public class DeviceControlActivity extends Activity {
 
         // Sets up UI references.
         ((TextView) findViewById(R.id.device_address)).setText(mDeviceAddress);
-        mGattServicesList = (ExpandableListView) findViewById(R.id.gatt_services_list);
+        //mGattServicesList = (ExpandableListView) findViewById(R.id.gatt_services_list);
 //        mGattServicesList.setOnChildClickListener(servicesListClickListner);
         mConnectionState = (TextView) findViewById(R.id.connection_state);
         mDataField = (TextView) findViewById(R.id.data_value);
@@ -293,7 +293,7 @@ public class DeviceControlActivity extends Activity {
     }*/
     private void displayData(String data) {
         if (data != null) {
-            mDataField.setText(data);
+            mDataField.setText(String.valueOf(data.charAt(0)));
         }
     }
 
