@@ -53,7 +53,7 @@ public class DeviceControlActivity extends Activity {
     private BluetoothLeService mBluetoothLeService;
     private ArrayList<ArrayList<BluetoothGattCharacteristic>> mGattCharacteristics =
             new ArrayList<>();
-    private boolean mConnected = false;
+    protected static boolean mConnected = false;
     private BluetoothGattCharacteristic mNotifyCharacteristic;
 
     private final String LIST_NAME = "NAME";
