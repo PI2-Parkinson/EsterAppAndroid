@@ -14,17 +14,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.ImageButton;
 
 import com.pidois.ester.R;
 
 import java.util.ArrayList;
 
-public class ExerciseColorActivity extends AppCompatActivity {
+public class ExerciseColorActivity extends ExercisesActivity {
 
     private BluetoothLeService mBluetoothLeService;
     private String mDeviceAddress;
     private String data;
     private String levelBd = null;
+    private Button buttonStart, buttonStop, buttonDemo, btn_help;
 
     public final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() {
         @Override
@@ -96,21 +98,12 @@ public class ExerciseColorActivity extends AppCompatActivity {
         final Chronometer exec_chronometer = findViewById(R.id.exec_color_chronometer);
 
 
-        final Button buttonStart = (Button)findViewById(R.id.exec_color_btn_start);
-        final Button buttonStop = (Button)findViewById(R.id.exec_color_btn_stop);
-        final Button buttonDemo = (Button)findViewById(R.id.btn_demo_color);
+        final Button buttonStart = findViewById(R.id.exec_color_btn_start);
+        final Button buttonStop = findViewById(R.id.exec_color_btn_stop);
+        final Button btn_help = findViewById(R.id.btn_help);
 
         buttonStop.setVisibility(View.INVISIBLE);
         buttonStart.setVisibility(View.VISIBLE);
-
-        buttonDemo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                buttonStart.setVisibility(View.VISIBLE);
-                buttonStop.setVisibility(View.INVISIBLE);
-
-            }
-        });
 
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,7 +115,7 @@ public class ExerciseColorActivity extends AppCompatActivity {
                 BluetoothLeService.enviarDescriptor();
 
                 buttonStart.setVisibility(View.GONE);
-               buttonStop.setVisibility(View.VISIBLE);
+                buttonStop.setVisibility(View.VISIBLE);
                 exec_chronometer.setBase(SystemClock.elapsedRealtime());
                 exec_chronometer.start();
             }
@@ -132,13 +125,20 @@ public class ExerciseColorActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "P1";
-                Log.i("AQUI MANDA SDATA","MANDOU P1 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
-                BluetoothLeService.enviarDescriptor();
-                buttonStart.setVisibility(View.VISIBLE);
-               buttonStop.setVisibility(View.GONE);
-               alertDialog();
-               exec_chronometer.stop();
+            DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "P1";
+            Log.i("AQUI MANDA SDATA","MANDOU P1 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+            BluetoothLeService.enviarDescriptor();
+            buttonStart.setVisibility(View.VISIBLE);
+            buttonStop.setVisibility(View.GONE);
+            alertDialog();
+            exec_chronometer.stop();
+            }
+        });
+
+        btn_help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialogInfo();
             }
         });
 

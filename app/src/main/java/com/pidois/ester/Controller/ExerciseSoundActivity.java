@@ -24,15 +24,15 @@ import android.widget.ImageView;
 import com.pidois.ester.R;
 import java.util.ArrayList;
 
-public class ExerciseSoundActivity extends AppCompatActivity {
+public class ExerciseSoundActivity extends ExercisesActivity {
 
-    Button btnDo, btnRe, btnMi, btnFa, btnSol, btnInfo;
     MediaPlayer mediaPlayer;
     String sequenceValue = null;
     private BluetoothLeService mBluetoothLeService;
     private String mDeviceAddress;
     private String data;
     private String levelBd = null;
+    private Button buttonStart, buttonStop, buttonDemo, btn_help;
 
     ArrayList<Integer> arraySeq = new ArrayList<Integer>(30);
 
@@ -143,48 +143,13 @@ public class ExerciseSoundActivity extends AppCompatActivity {
         final Intent intent = getIntent();
 
         mDeviceAddress = intent.getStringExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS);
-        btnDo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                playSound(mediaPlayer, R.raw.nota_do);
-            }
-        });
-
-        btnRe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                playSound(mediaPlayer, R.raw.nota_re);
-            }
-        });
-
-        btnMi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                playSound(mediaPlayer, R.raw.nota_mi);
-            }
-        });
-
-        btnFa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                playSound(mediaPlayer, R.raw.nota_fa);
-            }
-        });
-
-        btnSol.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                playSound(mediaPlayer, R.raw.nota_sol);
-            }
-        });
-
-        //playSequence();
 
         final Chronometer exec_chronometer = (Chronometer)findViewById(R.id.exec_sound_chronometer);
 
         final Button buttonStart = (Button)findViewById(R.id.exec_sound_btn_start);
         final Button buttonStop = (Button)findViewById(R.id.exec_sound_btn_stop);
         final Button buttonDemo = (Button)findViewById(R.id.btn_demo);
+        final Button btn_help = findViewById(R.id.btn_help);
 
         buttonStop.setVisibility(View.INVISIBLE);
         buttonStart.setVisibility(View.VISIBLE);
@@ -235,6 +200,12 @@ public class ExerciseSoundActivity extends AppCompatActivity {
             }
         });
 
+        btn_help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialogInfo();
+            }
+        });
     }
 
     private void playSequence(ArrayList<Integer> arrayList) {

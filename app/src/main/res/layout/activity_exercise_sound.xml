@@ -59,7 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3" />
+        app:layout_constraintGuide_percent="0.26" />
 
     <TextView
         android:id="@+id/exec_sound_title"
@@ -68,21 +68,10 @@
         android:text="@string/btn_exercise_sound"
         android:textAlignment="center"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/exec_sound_desc"
+        app:layout_constraintBottom_toTopOf="@+id/guideline32"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout3" />
-
-    <TextView
-        android:id="@+id/exec_sound_desc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/exercise_desc"
-        android:textAlignment="center"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline32"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -143,11 +132,23 @@
         app:layout_constraintStart_toEndOf="@+id/exec_sound_chronometer"
         app:layout_constraintTop_toTopOf="@+id/guideline33" />
 
+    <Button
+        android:id="@+id/btn_help"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/round_btn_grey"
+        android:text="?"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline32"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/exec_sound_title"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout3" />
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
-        android:layout_width="286dp"
-        android:layout_height="226dp"
+        android:layout_width="298dp"
+        android:layout_height="260dp"
         android:padding="20dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="1dp"
