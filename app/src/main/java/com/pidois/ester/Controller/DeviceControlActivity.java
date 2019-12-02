@@ -116,14 +116,6 @@ public class DeviceControlActivity extends Activity {
                 Log.i("DA ESP32 PRA VARIAVEL","VALOR VARIAVEL: " + BLUETOOTH_GLOBAL_RDATA);
 
 
-
-                if (BLUETOOTH_GLOBAL_RDATA.contains("N2")){
-
-                    BLUETOOTH_GLOBAL_SDATA = "N201";
-                    Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + BLUETOOTH_GLOBAL_SDATA);
-                    BluetoothLeService.enviarDescriptor();
-
-                }
                 displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
             }
         }
