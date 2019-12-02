@@ -144,94 +144,24 @@
         app:layout_constraintTop_toTopOf="@+id/guideline33" />
 
 
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="286dp"
+        android:layout_height="226dp"
         android:padding="20dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="1dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline33"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline32">
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/finger_sound"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/e_button_do"
-                android:text="Do"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:layout_marginTop="70dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="70dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_circle"
-                android:backgroundTint="@color/red"
-                app:layout_constraintEnd_toStartOf="@+id/e_button_re"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@id/cardView2"
-                app:layout_constraintTop_toTopOf="@+id/guideline32" />
-
-            <Button
-                android:id="@+id/e_button_re"
-                android:text="Re"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="70dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_circle"
-                android:backgroundTint="@color/orange"
-                app:layout_constraintEnd_toStartOf="@+id/e_button_mi"
-                app:layout_constraintStart_toEndOf="@id/e_button_do"
-                app:layout_constraintTop_toTopOf="@+id/guideline32" />
-
-            <Button
-                android:id="@+id/e_button_mi"
-                android:text="MI"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="70dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_circle"
-                android:backgroundTint="@color/yellow"
-                app:layout_constraintTop_toTopOf="@+id/guideline32"
-                tools:layout_editor_absoluteX="98dp" />
-
-            <Button
-                android:id="@+id/e_button_fa"
-                android:text="FA"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="70dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_circle"
-                android:backgroundTint="@color/green"
-                app:layout_constraintStart_toEndOf="@+id/e_button_mi"
-                app:layout_constraintTop_toTopOf="@+id/guideline32" />
-
-            <Button
-                android:id="@+id/e_button_sol"
-                android:text="SOL"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="70dp"
-                android:layout_marginRight="40dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_circle"
-                android:backgroundTint="@color/blue"
-                app:layout_constraintStart_toEndOf="@+id/e_button_fa"
-                app:layout_constraintTop_toTopOf="@+id/guideline32" />
-
-        </LinearLayout>
+            android:layout_weight="1"
+            android:contentDescription="@string/btn_exercise_sound" />
 
     </androidx.cardview.widget.CardView>
 

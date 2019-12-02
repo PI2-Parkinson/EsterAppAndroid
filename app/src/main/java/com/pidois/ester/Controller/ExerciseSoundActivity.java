@@ -19,6 +19,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.ImageView;
+
 import com.pidois.ester.R;
 import java.util.ArrayList;
 
@@ -135,11 +137,8 @@ public class ExerciseSoundActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_sound);
 
-        btnDo = findViewById(R.id.e_button_do);
-        btnRe = findViewById(R.id.e_button_re);
-        btnMi = findViewById(R.id.e_button_mi);
-        btnFa = findViewById(R.id.e_button_fa);
-        btnSol = findViewById(R.id.e_button_sol);
+        ImageView image = findViewById(R.id.finger_sound);
+        image.setImageResource(R.drawable.default_finger);
 
         final Intent intent = getIntent();
 
@@ -243,7 +242,7 @@ public class ExerciseSoundActivity extends AppCompatActivity {
 
         // use add() method to add elements in the list
 
-        final Handler handler = new Handler();
+        ImageView image = findViewById(R.id.finger_sound);
 
         // let us print all the elements available in list
         for (Integer number : arrayList) {
@@ -251,7 +250,7 @@ public class ExerciseSoundActivity extends AppCompatActivity {
             switch (number) {
                 case 1:
                     playSound(mediaPlayer, R.raw.nota_do);
-
+                    image.setImageResource(R.drawable.do_note);
                     try {
                         Thread.sleep(333);
                     } catch (Exception e) {
@@ -260,6 +259,7 @@ public class ExerciseSoundActivity extends AppCompatActivity {
 
                     break;
                 case 2:
+                    image.setImageResource(R.drawable.re_note);
                     playSound(mediaPlayer, R.raw.nota_re);
 
                     try {
@@ -270,6 +270,7 @@ public class ExerciseSoundActivity extends AppCompatActivity {
 
                     break;
                 case 3:
+                    image.setImageResource(R.drawable.mi_note);
                     playSound(mediaPlayer, R.raw.nota_mi);
 
                     try {
@@ -280,6 +281,7 @@ public class ExerciseSoundActivity extends AppCompatActivity {
 
                     break;
                 case 4:
+                    image.setImageResource(R.drawable.fa_note);
                     playSound(mediaPlayer, R.raw.nota_fa);
 
                     try {
@@ -289,6 +291,7 @@ public class ExerciseSoundActivity extends AppCompatActivity {
                     }
                     break;
                 case 5:
+                    image.setImageResource(R.drawable.sol_note);
                     playSound(mediaPlayer, R.raw.nota_sol);
 
                     try {
@@ -298,6 +301,7 @@ public class ExerciseSoundActivity extends AppCompatActivity {
                     }
                     break;
                 default:
+                    image.setImageResource(R.drawable.default_finger);
                     break;
             }
         }
