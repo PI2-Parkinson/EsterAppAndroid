@@ -81,7 +81,6 @@ public class StrapRestActivity extends StrapUtils {
                             BluetoothLeService.enviarDescriptor();
                             chronometer.stop();
 
-                            //strapResult("1");
                         }
                     }
                 });
