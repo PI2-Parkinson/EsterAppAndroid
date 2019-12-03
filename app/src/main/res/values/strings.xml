@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">EsTer</string>
 
+    <string name="btn_connect">Conectar</string>
+    <string name="btn_exercises">Exercícios</string>
+    <string name="btn_profile">Perfil</string>
+    <string name="btn_news">Notícias</string>
 
     <string name="email_title">Email</string>
     <string name="sex_title">Sexo</string>
