@@ -21,18 +21,27 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.pidois.ester.R;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ExerciseSoundActivity extends ExercisesActivity {
 
     MediaPlayer mediaPlayer;
-    String sequenceValue = null;
+    String sequenceValue = null, sequenceLevel = null;
     private BluetoothLeService mBluetoothLeService;
     private String mDeviceAddress;
     private String data;
     private String levelBd = null;
     private Button buttonStart, buttonStop, buttonDemo, btn_help;
+    private FirebaseUser currentFirebaseUser;
+    private DatabaseReference databaseReference;
 
     ArrayList<Integer> arraySeq = new ArrayList<Integer>(30);
 
@@ -71,42 +80,49 @@ public class ExerciseSoundActivity extends ExercisesActivity {
                 BluetoothLeService.enviarDescriptor();
 
             }
-            if (data.contains("ES")){
+            /*if (data.contains("ES")){
                 DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "C0";
                 Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
                 BluetoothLeService.enviarDescriptor();
-            }
+            }*/
 
-            if (data.contains("SR")){
+            /*if (data.contains("SR")){
 
                 DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SF";
                 Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
                 BluetoothLeService.enviarDescriptor();
 
-            }
+            }*/
 
             if ( DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.contains("V1")){
-                levelBd = DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA;
+                levelBd = DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA; //V1XX
 
-                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SN";
-                Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
-                BluetoothLeService.enviarDescriptor();
+                char ch1 = levelBd.charAt(2);
+                char ch2 = levelBd.charAt(3);
+
+                levelBd = new StringBuilder().append(ch1).append(ch2).toString();
+
+                Log.i("BD", "LEVEL: " +levelBd);
+
+                sendSoundAnswer(currentFirebaseUser, databaseReference, levelBd);
+
+                alertDialogShowLevel(levelBd);
 
             }
 
-            if (data.contains("BP")){
+            /*if (data.contains("BP")){
                 alertDialog();
                 BluetoothLeService.enviarDescriptor();
-            }
+            }*/
 
 
-            if (DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.contains("N1")){
+            /*if (DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.contains("N1")){
 
                 DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "N101";
                 Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
                 BluetoothLeService.enviarDescriptor();
 
-            }
+            }*/
 
             if (DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.contains("QM")){
 
@@ -166,12 +182,12 @@ public class ExerciseSoundActivity extends ExercisesActivity {
 
         Log.i("OLHA O RDATA MLK DOIDO","TOMAAAAAAAAA : " + DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA);
 
-        if (DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.contains("N1")){
+        /*if (DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.contains("N1")){
 
             DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "N101";
             Log.i("AQUI MANDA SDATA","NIVEL JOGO 1 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
             BluetoothLeService.enviarDescriptor();
-        }
+        }*/
 
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -195,7 +211,7 @@ public class ExerciseSoundActivity extends ExercisesActivity {
 
                 buttonStart.setVisibility(View.VISIBLE);
                 buttonStop.setVisibility(View.GONE);
-                alertDialog();
+                //alertDialog();
                 exec_chronometer.stop();
             }
         });
@@ -288,7 +304,7 @@ public class ExerciseSoundActivity extends ExercisesActivity {
 
     }
 
-    private void alertDialog() {
+    /*private void alertDialog() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setMessage("Você deseja mesmo encerrar o exercício? Todo o progresso não será salvo.");
         dialog.setTitle("Deseja sair do jogo?");
@@ -318,7 +334,7 @@ public class ExerciseSoundActivity extends ExercisesActivity {
         });
         AlertDialog alertDialog=dialog.create();
         alertDialog.show();
-    }
+    }*/
     private static IntentFilter makeGattUpdateIntentFilter() {
         final IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(BluetoothLeService.ACTION_GATT_CONNECTED);
@@ -335,5 +351,41 @@ public class ExerciseSoundActivity extends ExercisesActivity {
     private void switchScreen (Class cl){
         Intent intent = new Intent(ExerciseSoundActivity.this, cl);
         ExerciseSoundActivity.this.startActivity(intent);
+    }
+
+    private void alertDialogShowLevel(String level) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("Seu maior número de acertos foi: "+level+" sequência(s)");
+        dialog.setTitle("Resultado");
+        dialog.setCancelable(false);
+        dialog.setPositiveButton("ok",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                        DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SN";
+                        Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+                        BluetoothLeService.enviarDescriptor();
+                    }
+                });
+        AlertDialog alertDialog=dialog.create();
+        alertDialog.show();
+    }
+
+    public String getCurrentDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String currentDateandTime = sdf.format(new Date());
+
+        return currentDateandTime;
+    }
+
+    public void sendSoundAnswer(FirebaseUser currentFirebaseUser, DatabaseReference databaseReference, String value) {
+        currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("sound_answers/" + currentFirebaseUser.getUid());
+        DatabaseReference databaseRef = databaseReference.push();
+
+        databaseRef.child("right_answers").setValue(value);
+        databaseRef.child("date").setValue(getCurrentDate());
+
     }
 }
