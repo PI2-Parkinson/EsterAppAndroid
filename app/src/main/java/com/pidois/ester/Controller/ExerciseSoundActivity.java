@@ -144,11 +144,11 @@ public class ExerciseSoundActivity extends ExercisesActivity {
 
         mDeviceAddress = intent.getStringExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS);
 
-        final Chronometer exec_chronometer = (Chronometer)findViewById(R.id.exec_sound_chronometer);
+        final Chronometer exec_chronometer = findViewById(R.id.exec_sound_chronometer);
 
-        final Button buttonStart = (Button)findViewById(R.id.exec_sound_btn_start);
-        final Button buttonStop = (Button)findViewById(R.id.exec_sound_btn_stop);
-        final Button buttonDemo = (Button)findViewById(R.id.btn_demo);
+        final Button buttonStart = findViewById(R.id.exec_sound_btn_start);
+        final Button buttonStop = findViewById(R.id.exec_sound_btn_stop);
+        final Button buttonDemo = findViewById(R.id.btn_demo);
         final Button btn_help = findViewById(R.id.btn_help);
 
         buttonStop.setVisibility(View.INVISIBLE);
