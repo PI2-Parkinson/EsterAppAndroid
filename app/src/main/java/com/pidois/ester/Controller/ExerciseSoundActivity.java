@@ -19,18 +19,20 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.ImageView;
+
 import com.pidois.ester.R;
 import java.util.ArrayList;
 
-public class ExerciseSoundActivity extends AppCompatActivity {
+public class ExerciseSoundActivity extends ExercisesActivity {
 
-    Button btnDo, btnRe, btnMi, btnFa, btnSol, btnInfo;
     MediaPlayer mediaPlayer;
     String sequenceValue = null;
     private BluetoothLeService mBluetoothLeService;
     private String mDeviceAddress;
     private String data;
     private String levelBd = null;
+    private Button buttonStart, buttonStop, buttonDemo, btn_help;
 
     ArrayList<Integer> arraySeq = new ArrayList<Integer>(30);
 
@@ -135,57 +137,19 @@ public class ExerciseSoundActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_sound);
 
-        btnDo = findViewById(R.id.e_button_do);
-        btnRe = findViewById(R.id.e_button_re);
-        btnMi = findViewById(R.id.e_button_mi);
-        btnFa = findViewById(R.id.e_button_fa);
-        btnSol = findViewById(R.id.e_button_sol);
+        ImageView image = findViewById(R.id.finger_sound);
+        image.setImageResource(R.drawable.default_finger);
 
         final Intent intent = getIntent();
 
         mDeviceAddress = intent.getStringExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS);
-        btnDo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                playSound(mediaPlayer, R.raw.nota_do);
-            }
-        });
-
-        btnRe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                playSound(mediaPlayer, R.raw.nota_re);
-            }
-        });
-
-        btnMi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                playSound(mediaPlayer, R.raw.nota_mi);
-            }
-        });
-
-        btnFa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                playSound(mediaPlayer, R.raw.nota_fa);
-            }
-        });
-
-        btnSol.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                playSound(mediaPlayer, R.raw.nota_sol);
-            }
-        });
-
-        //playSequence();
 
         final Chronometer exec_chronometer = (Chronometer)findViewById(R.id.exec_sound_chronometer);
 
         final Button buttonStart = (Button)findViewById(R.id.exec_sound_btn_start);
         final Button buttonStop = (Button)findViewById(R.id.exec_sound_btn_stop);
         final Button buttonDemo = (Button)findViewById(R.id.btn_demo);
+        final Button btn_help = findViewById(R.id.btn_help);
 
         buttonStop.setVisibility(View.INVISIBLE);
         buttonStart.setVisibility(View.VISIBLE);
@@ -236,6 +200,12 @@ public class ExerciseSoundActivity extends AppCompatActivity {
             }
         });
 
+        btn_help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialogInfo();
+            }
+        });
     }
 
     private void playSequence(ArrayList<Integer> arrayList) {
@@ -243,7 +213,7 @@ public class ExerciseSoundActivity extends AppCompatActivity {
 
         // use add() method to add elements in the list
 
-        final Handler handler = new Handler();
+        ImageView image = findViewById(R.id.finger_sound);
 
         // let us print all the elements available in list
         for (Integer number : arrayList) {
@@ -251,7 +221,7 @@ public class ExerciseSoundActivity extends AppCompatActivity {
             switch (number) {
                 case 1:
                     playSound(mediaPlayer, R.raw.nota_do);
-
+                    image.setImageResource(R.drawable.do_note);
                     try {
                         Thread.sleep(333);
                     } catch (Exception e) {
@@ -260,6 +230,7 @@ public class ExerciseSoundActivity extends AppCompatActivity {
 
                     break;
                 case 2:
+                    image.setImageResource(R.drawable.re_note);
                     playSound(mediaPlayer, R.raw.nota_re);
 
                     try {
@@ -270,6 +241,7 @@ public class ExerciseSoundActivity extends AppCompatActivity {
 
                     break;
                 case 3:
+                    image.setImageResource(R.drawable.mi_note);
                     playSound(mediaPlayer, R.raw.nota_mi);
 
                     try {
@@ -280,6 +252,7 @@ public class ExerciseSoundActivity extends AppCompatActivity {
 
                     break;
                 case 4:
+                    image.setImageResource(R.drawable.fa_note);
                     playSound(mediaPlayer, R.raw.nota_fa);
 
                     try {
@@ -289,6 +262,7 @@ public class ExerciseSoundActivity extends AppCompatActivity {
                     }
                     break;
                 case 5:
+                    image.setImageResource(R.drawable.sol_note);
                     playSound(mediaPlayer, R.raw.nota_sol);
 
                     try {
@@ -298,6 +272,7 @@ public class ExerciseSoundActivity extends AppCompatActivity {
                     }
                     break;
                 default:
+                    image.setImageResource(R.drawable.default_finger);
                     break;
             }
         }
