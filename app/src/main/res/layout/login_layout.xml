@@ -56,8 +56,8 @@
         android:id="@+id/btn_logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:background="@drawable/round_bg"
         android:drawableLeft="@drawable/ic_google_logo"
         android:text="Log out"
@@ -71,8 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="20dp"
-        app:layout_constraintGuide_percent=".66" />
+        app:layout_constraintGuide_end="248dp" />
 
     <ProgressBar
         android:id="@+id/login_progressbar"
@@ -102,5 +101,13 @@
         app:layout_constraintGuide_percent=".33"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="20dp" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/guideline16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/bg_login" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
