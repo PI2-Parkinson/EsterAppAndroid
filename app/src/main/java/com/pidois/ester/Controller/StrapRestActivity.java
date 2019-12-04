@@ -63,6 +63,7 @@ public class StrapRestActivity extends StrapUtils {
 
                 button_result.setVisibility(View.VISIBLE);
                 chronometer.stop();
+                chronometer.setVisibility(View.GONE);
             }
 
 
@@ -160,7 +161,7 @@ public class StrapRestActivity extends StrapUtils {
 
     private void alertDialogShowLevel(String level) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setMessage("Seu maior número de acertos foi: "+level+" sequência(s)");
+        dialog.setMessage("Seu nível de tremor nesse modo é de grau: "+level+".");
         dialog.setTitle("Resultado");
         dialog.setCancelable(false);
         dialog.setPositiveButton("ok",
