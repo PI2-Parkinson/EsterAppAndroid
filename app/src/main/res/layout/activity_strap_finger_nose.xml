@@ -120,6 +120,20 @@
         app:layout_editor_absoluteX="20dp" />
 
     <Button
+        android:id="@+id/strap_finger_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/round_btn_grey"
+        android:padding="15dp"
+        android:text="resultado"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/strap_finger_chronometer"
+        app:layout_constraintTop_toTopOf="@+id/guideline25" />
+
+    <Button
         android:id="@+id/strap_finger_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

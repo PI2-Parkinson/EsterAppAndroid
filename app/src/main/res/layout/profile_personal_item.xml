@@ -74,15 +74,15 @@
                 android:text="vbda123@gmail.com"
                 android:layout_below="@id/profile_fixed_email"/>
 
-            <TextView
+            <!--<TextView
                 android:id="@+id/profile_fixed_birthday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:layout_below="@id/profile_person_email"
-                android:layout_marginTop="20dp"
-                android:text="Aniversário"/>
+                android:layout_marginTop="20dp" />
+                android:text="Aniversário"
 
             <TextView
                 android:id="@+id/profile_person_birthday"
@@ -90,8 +90,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="17sp"
                 android:layout_below="@id/profile_fixed_birthday"
-                android:layout_marginTop="3dp"
-                android:text="16/01/1993"/>
+                android:layout_marginTop="3dp" />-->
 
         </RelativeLayout>
 

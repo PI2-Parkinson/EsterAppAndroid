@@ -96,7 +96,7 @@ public abstract class StrapUtils extends AppCompatActivity {
         return currentDateandTime;
     }
 
-     public void sendStrapAsnwer(FirebaseUser currentFirebaseUser, DatabaseReference databaseReference, String tipoTremor, int value) {
+     public void sendStrapAsnwer(FirebaseUser currentFirebaseUser, DatabaseReference databaseReference, String tipoTremor, String value) {
          currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
          databaseReference = FirebaseDatabase.getInstance().getReference("strap_answers/" + currentFirebaseUser.getUid());

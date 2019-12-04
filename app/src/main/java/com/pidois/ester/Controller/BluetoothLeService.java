@@ -70,10 +70,16 @@ public class BluetoothLeService extends Service {
             BluetoothGattCharacteristic characteristic =
                     gatt.getService(UUID_ESTER_SERVICE)
                             .getCharacteristic(UUID_ESTER_CHARACTERISTIC);
-            characteristic.setValue(DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
-            characteristic.setWriteType(BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT);
-            Log.i("#AQUII ENVIA O VALOR##","########### " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
-            gatt.writeCharacteristic(characteristic);
+            if (DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.equals(DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA)){
+                readCharacteristic(characteristic);
+            } else {
+
+                characteristic.setValue(DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+                characteristic.setWriteType(BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT);
+                Log.i("#AQUII ENVIA O VALOR##","########### " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+                gatt.writeCharacteristic(characteristic);
+            }
+
 
         }
         @Override
@@ -146,6 +152,23 @@ public class BluetoothLeService extends Service {
                     gatt.writeCharacteristic(characteristic);
 
                 }
+            }
+            Log.i(TAG, "ENTROU NO value  " + value + " sdata " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+//            if (value.equals(DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA)){
+////                DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA = value;
+//                Log.i(TAG, "ENTROU NO IFFFFFFFFFFF " );
+//                BluetoothGattCharacteristic characteristicGatt =
+//                        gatt.getService(UUID_ESTER_SERVICE)
+//                                .getCharacteristic(UUID_ESTER_CHARACTERISTIC);
+//                readCharacteristic(characteristicGatt);
+//            }
+
+            if (value.equals(DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA)){
+                DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA = value;
+                Log.i(TAG, "ENTROU NO IFFFFFFFFFFF " );
+                BluetoothGattDescriptor descriptor = characteristic.getDescriptor(
+                        BluetoothLeService.UUID_CLIENT_CHARACTERISTIC_CONFIG);
+                BluetoothLeService.mBluetoothGatt.writeDescriptor(descriptor);
             }
 
             DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA = value;

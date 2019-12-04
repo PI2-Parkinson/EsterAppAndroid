@@ -70,7 +70,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private FirebaseUser currentFirebaseUser;
 
     private Long rightAnswers, totalAnswers, wrongAnswers;
-    private String cognitiveDate;
+    private String rest, postural, finger;
+    private String cognitiveDate, strapDate;
+    private String colorRightAnswers, colorDate;
+    private String soundRightAnswers, soundDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,30 +112,15 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         profile.setType(1);
         profile.setName(currentUser.getDisplayName());
         profile.setEmail(currentUser.getEmail());
-        profile.setBirthday("24/10/2016");
+        //profile.setBirthday("24/10/2016");
         dataProfile.add(profile);
 
-        profile = new Profile();
+        /*profile = new Profile();
         profile.setType(4);
         profile.setSoundLevel("5");
         profile.setSoundRightAnswers("20");
         profile.setSoundDate("25/10/2019");
-        dataProfile.add(profile);
-
-        profile = new Profile();
-        profile.setType(5);
-        profile.setColorLevel("2");
-        profile.setColorRightanswers("12");
-        profile.setColorDate("01/01/1960");
-        dataProfile.add(profile);
-
-        profile = new Profile();
-        profile.setType(2);
-        profile.setTremorPos1("1");
-        profile.setTremorPos2("2");
-        profile.setTremorPos3("3");
-        profile.setDate("24/10/2019");
-        dataProfile.add(profile);
+        dataProfile.add(profile);*/
 
         vRecyclerView = findViewById(R.id.profile_myrecycler);
         vRecyclerView.setHasFixedSize(true);
@@ -140,6 +128,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         profileAdapter = new ProfileAdapter(this, dataProfile);
         //vRecyclerView.setAdapter(profileAdapter);
 
+        getSoundLastAsnwer(currentFirebaseUser, firebaseDatabase, databaseReference);
+        getColorLastAsnwer(currentFirebaseUser, firebaseDatabase, databaseReference);
+        getStrapLastAsnwer(currentFirebaseUser,firebaseDatabase, databaseReference);
         getCognitiveLastAsnwer(currentFirebaseUser, firebaseDatabase, databaseReference);
 
     }
@@ -293,6 +284,192 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                     vRecyclerView.setAdapter(profileAdapter);
 
                     progressBar.setVisibility(View.INVISIBLE);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast toast = Toast.makeText(ProfileActivity.this, "Não deu!", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+
+
+    }
+
+    private void getStrapLastAsnwer(FirebaseUser currentFirebaseUser, FirebaseDatabase firebaseDatabase, DatabaseReference databaseReference) {
+
+        currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("strap_answers/" + currentFirebaseUser.getUid());
+
+        databaseReference.limitToLast(1).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    rest = ds.child("rest").getValue(String.class);
+                    postural = ds.child("postural").getValue(String.class);
+                    finger = ds.child("finger").getValue(String.class);
+                    strapDate = ds.child("date").getValue(String.class);
+
+                    //Log.d("NULLDATA", cognitiveDate);
+
+                }
+
+                if (strapDate == null) {
+
+                    Profile profile = new Profile();
+                    profile.setType(2);
+                    profile.setTremorPos1("Sem registro");
+                    profile.setTremorPos2("Sem registro");
+                    profile.setTremorPos3("Sem registro");
+                    profile.setDate("Sem registro");
+                    dataProfile.add(profile);
+
+                    //vRecyclerView.setAdapter(profileAdapter);
+
+                    //progressBar.setVisibility(View.INVISIBLE);
+
+                } else {
+
+                    Profile profile = new Profile();
+                    profile.setType(2);
+                    profile.setTremorPos1(rest);
+                    profile.setTremorPos2(postural);
+                    profile.setTremorPos3(finger);
+                    profile.setDate(strapDate);
+                    dataProfile.add(profile);
+
+                    //vRecyclerView.setAdapter(profileAdapter);
+
+                    //progressBar.setVisibility(View.INVISIBLE);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast toast = Toast.makeText(ProfileActivity.this, "Não deu!", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+
+
+    }
+
+    private void getColorLastAsnwer(FirebaseUser currentFirebaseUser, FirebaseDatabase firebaseDatabase, DatabaseReference databaseReference) {
+
+        currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("color_answers/" + currentFirebaseUser.getUid());
+
+        databaseReference.limitToLast(1).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    colorRightAnswers = ds.child("right_answers").getValue(String.class);
+                    colorDate = ds.child("date").getValue(String.class);
+
+                    /*char ch1 = 0;
+
+                    if (colorRightAnswers.charAt(0) == ch1){
+                        colorRightAnswers = new StringBuilder().append(colorRightAnswers.charAt(1)).toString();
+                    }*/
+
+
+                    //Log.d("NULLDATA", cognitiveDate);
+
+                }
+
+                if (colorDate == null) {
+
+                    Profile profile = new Profile();
+                    profile.setType(5);
+                    profile.setColorLevel("Sem registro");
+                    profile.setColorRightanswers("Sem registro");
+                    profile.setColorDate("Sem registro");
+                    dataProfile.add(profile);
+
+                    //vRecyclerView.setAdapter(profileAdapter);
+
+                    //progressBar.setVisibility(View.INVISIBLE);
+
+                } else {
+
+                    Profile profile = new Profile();
+                    profile.setType(5);
+                    profile.setColorLevel(colorRightAnswers);
+                    profile.setColorRightanswers(colorRightAnswers);
+                    profile.setColorDate(colorDate);
+                    dataProfile.add(profile);
+
+                    //vRecyclerView.setAdapter(profileAdapter);
+
+                    //progressBar.setVisibility(View.INVISIBLE);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast toast = Toast.makeText(ProfileActivity.this, "Não deu!", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+
+
+    }
+
+    private void getSoundLastAsnwer(FirebaseUser currentFirebaseUser, FirebaseDatabase firebaseDatabase, DatabaseReference databaseReference) {
+
+        currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("sound_answers/" + currentFirebaseUser.getUid());
+
+        databaseReference.limitToLast(1).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    soundRightAnswers = ds.child("right_answers").getValue(String.class);
+                    soundDate = ds.child("date").getValue(String.class);
+
+                    /*char ch1 = 0;
+
+                    if (colorRightAnswers.charAt(0) == ch1){
+                        colorRightAnswers = new StringBuilder().append(colorRightAnswers.charAt(1)).toString();
+                    }*/
+
+
+                    //Log.d("NULLDATA", cognitiveDate);
+
+                }
+
+                if (soundDate == null) {
+
+                    Profile profile = new Profile();
+                    profile.setType(4);
+                    profile.setSoundLevel("Sem registro");
+                    profile.setSoundRightAnswers("Sem registro");
+                    profile.setSoundDate("Sem registro");
+                    dataProfile.add(profile);
+
+                    //vRecyclerView.setAdapter(profileAdapter);
+
+                    //progressBar.setVisibility(View.INVISIBLE);
+
+                } else {
+
+                    Profile profile = new Profile();
+                    profile.setType(4);
+                    profile.setSoundLevel(soundRightAnswers);
+                    profile.setSoundRightAnswers(soundRightAnswers);
+                    profile.setSoundDate(soundDate);
+                    dataProfile.add(profile);
+
+                    //vRecyclerView.setAdapter(profileAdapter);
+
+                    //progressBar.setVisibility(View.INVISIBLE);
                 }
 
             }
