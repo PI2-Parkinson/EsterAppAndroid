@@ -38,11 +38,11 @@
 
     <!-- Strap strings -->
     <string name="strap_rest_title">Repouso</string>
-    <string name="strap_rest_desc">Permaneça sentado com os braços abaixados por 10 segundos.</string>
+    <string name="strap_rest_desc">Permaneça sentado com os braços abaixados por 30 segundos.</string>
     <string name="strap_postural_title">Postural</string>
-    <string name="strap_postural_desc">Permaneça sentado com os braços esticados na altura do ombro por 10 segundos.</string>
+    <string name="strap_postural_desc">Permaneça sentado com os braços esticados na altura do ombro por 30 segundos.</string>
     <string name="strap_fingernose_title">Dedo-nariz</string>
-    <string name="strap_fingernose_desc">Permaneça sentado com o braço na altura do nariz por 10 segundos.</string>
+    <string name="strap_fingernose_desc">Permaneça sentado com o braço na altura do nariz por 30 segundos.</string>
     <string name="strap_about_title">Sobre os testes</string>
     <string name="btn_start">Começar</string>
 

@@ -115,6 +115,19 @@
         app:layout_editor_absoluteX="20dp" />
 
     <Button
+        android:id="@+id/strap_postural_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_btn_grey"
+        android:padding="15dp"
+        android:text="Resultado"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/strap_postural_chronometer"
+        app:layout_constraintTop_toTopOf="@+id/guideline25" />
+
+    <Button
         android:id="@+id/strap_postural_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

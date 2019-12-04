@@ -59,8 +59,6 @@ public class StrapRestActivity extends StrapUtils {
 
                 Log.i("BD", "LEVEL: " +levelBd);
 
-                sendStrapAsnwer(firebaseUser, databaseReference, "rest", levelBd);
-
                 button_result.setVisibility(View.VISIBLE);
                 chronometer.stop();
                 chronometer.setVisibility(View.GONE);
@@ -99,33 +97,36 @@ public class StrapRestActivity extends StrapUtils {
             public void onClick(View v) {
 
                 DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "IT";
-
-                Log.i("AQUI MANDA SDATA","IT : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
                 BluetoothLeService.enviarDescriptor();
+                Log.i("AQUI MANDA SDATA","IT : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+
                 button.setVisibility(View.GONE);
-                chronometer.setBase(SystemClock.elapsedRealtime() + (30*1000));
+                chronometer.setBase(SystemClock.elapsedRealtime() + (40*1000));
                 chronometer.start();
 
-                /*chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
+                chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
                     @Override
                     public void onChronometerTick(Chronometer chronometer) {
                         time++;
-                        if (time == 20){
+                        if (time == 40){
                             //DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "GTR";
 
                             //Log.i("AQUI MANDA SDATA","GTR MALUCO : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
                             //BluetoothLeService.enviarDescriptor();
                             chronometer.stop();
+                            chronometer.setVisibility(View.GONE);
+                            alertDialogError();
 
                         }
                     }
-                });*/
+                });
             }
         });
 
         button_result.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                sendStrapAsnwer(firebaseUser, databaseReference, "rest", levelBd);
                 alertDialogShowLevel(levelBd);
             }
         });
@@ -148,6 +149,11 @@ public class StrapRestActivity extends StrapUtils {
     @Override
     protected void onPause() {
         super.onPause();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     private static IntentFilter makeGattUpdateIntentFilter() {
@@ -180,6 +186,27 @@ public class StrapRestActivity extends StrapUtils {
     private void switchScreen (Class cl){
         Intent intent = new Intent(StrapRestActivity.this, cl);
         StrapRestActivity.this.startActivity(intent);
+    }
+
+    private void alertDialogError() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("Ops... Falha na comunicação com a EsTer, tente novamente!");
+        dialog.setTitle("Erro");
+        dialog.setCancelable(false);
+        dialog.setPositiveButton("Tentar novamente",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                        Restart();
+                    }
+                });
+        AlertDialog alertDialog=dialog.create();
+        alertDialog.show();
+    }
+
+    public void Restart()
+    {
+        this.recreate();
     }
 
 
