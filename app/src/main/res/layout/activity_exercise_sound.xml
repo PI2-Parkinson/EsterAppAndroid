@@ -94,7 +94,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline33"
         app:layout_editor_absoluteX="20dp" />
 
-    <Button
+    <!--<Button
         android:id="@+id/exec_sound_btn_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -105,9 +105,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/exec_sound_chronometer"
-        app:layout_constraintTop_toBottomOf="@+id/btn_demo" />
+        app:layout_constraintTop_toTopOf="@+id/guideline33" />-->
 
-    <Button
+    <!--<Button
         android:id="@+id/exec_sound_btn_stop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -115,12 +115,10 @@
         android:padding="15dp"
         android:text="@string/btn_stop"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/exec_sound_chronometer"
-        app:layout_constraintTop_toBottomOf="@+id/btn_demo" />
+        app:layout_constraintTop_toTopOf="@+id/guideline33"
+        tools:layout_editor_absoluteX="268dp" />-->
 
-    <Button
+    <!--<Button
         android:id="@+id/btn_demo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -129,8 +127,9 @@
         android:text="@string/btn_demo2"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/exec_sound_chronometer"
-        app:layout_constraintTop_toTopOf="@+id/guideline33" />
+        app:layout_constraintTop_toTopOf="@+id/guideline33" />-->
 
     <Button
         android:id="@+id/btn_help"
@@ -149,9 +148,9 @@
         android:id="@+id/cardView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:padding="20dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="1dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline33"

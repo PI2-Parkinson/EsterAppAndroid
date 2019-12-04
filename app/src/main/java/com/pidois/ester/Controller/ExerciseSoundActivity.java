@@ -42,6 +42,8 @@ public class ExerciseSoundActivity extends ExercisesActivity {
     private Button buttonStart, buttonStop, buttonDemo, btn_help;
     private FirebaseUser currentFirebaseUser;
     private DatabaseReference databaseReference;
+    private Chronometer chronometer;
+    private int i=0;
 
     ArrayList<Integer> arraySeq = new ArrayList<Integer>(30);
 
@@ -54,7 +56,7 @@ public class ExerciseSoundActivity extends ExercisesActivity {
             data = intent.getStringExtra(BluetoothLeService.EXTRA_DATA);
             Log.i("DA ESP32 PRA VARIAVEL","VALOR VARIAVEL: " + DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA);
 
-            if (data.contains("SQ")){
+            if (DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.contains("SQ")){
                 arraySeq.clear();
 
                 sequenceValue = DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA; //SQ16565656
@@ -63,36 +65,18 @@ public class ExerciseSoundActivity extends ExercisesActivity {
                     arraySeq.add(Character.getNumericValue(sequenceValue.charAt(i)));
                 }
 
-                Log.i("Oi", "ARRAY" + arraySeq.toString());
+                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SF";
+                Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+                BluetoothLeService.enviarDescriptor();
 
                 playSequence(arraySeq);
 
-                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SR";
-                Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
-                BluetoothLeService.enviarDescriptor();
-                try {
-                    Thread.sleep(1665);
-                } catch (Exception e) {
-                    Log.e("Erro sleep", "Erro! " + e);
+                if (i == 0) {
+                    chronometer.setBase(SystemClock.elapsedRealtime());
+                    chronometer.start();
                 }
-                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SF";
-                Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
-                BluetoothLeService.enviarDescriptor();
-
+                i++;
             }
-            /*if (data.contains("ES")){
-                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "C0";
-                Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
-                BluetoothLeService.enviarDescriptor();
-            }*/
-
-            /*if (data.contains("SR")){
-
-                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SF";
-                Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
-                BluetoothLeService.enviarDescriptor();
-
-            }*/
 
             if ( DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.contains("V1")){
                 levelBd = DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA; //V1XX
@@ -108,21 +92,9 @@ public class ExerciseSoundActivity extends ExercisesActivity {
 
                 alertDialogShowLevel(levelBd);
 
+                chronometer.stop();
+
             }
-
-            /*if (data.contains("BP")){
-                alertDialog();
-                BluetoothLeService.enviarDescriptor();
-            }*/
-
-
-            /*if (DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.contains("N1")){
-
-                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "N101";
-                Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
-                BluetoothLeService.enviarDescriptor();
-
-            }*/
 
             if (DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.contains("QM")){
 
@@ -160,61 +132,12 @@ public class ExerciseSoundActivity extends ExercisesActivity {
 
         mDeviceAddress = intent.getStringExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS);
 
-        final Chronometer exec_chronometer = findViewById(R.id.exec_sound_chronometer);
+        chronometer = findViewById(R.id.exec_sound_chronometer);
 
         final Button buttonStart = findViewById(R.id.exec_sound_btn_start);
-        final Button buttonStop = findViewById(R.id.exec_sound_btn_stop);
-        final Button buttonDemo = findViewById(R.id.btn_demo);
         final Button btn_help = findViewById(R.id.btn_help);
 
-        buttonStop.setVisibility(View.INVISIBLE);
-        buttonStart.setVisibility(View.VISIBLE);
-
-        buttonDemo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                buttonStart.setVisibility(View.VISIBLE);
-                buttonStop.setVisibility(View.INVISIBLE);
-//                playSequence();
-
-            }
-        });
-
         Log.i("OLHA O RDATA MLK DOIDO","TOMAAAAAAAAA : " + DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA);
-
-        /*if (DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.contains("N1")){
-
-            DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "N101";
-            Log.i("AQUI MANDA SDATA","NIVEL JOGO 1 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
-            BluetoothLeService.enviarDescriptor();
-        }*/
-
-        buttonStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-//                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SR";
-//
-//                BluetoothLeService.enviarDescriptor();
-//                Log.i("AQUI MANDA SDATA","SR FOI : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
-
-                buttonStart.setVisibility(View.GONE);
-                buttonStop.setVisibility(View.VISIBLE);
-                exec_chronometer.setBase(SystemClock.elapsedRealtime());
-                exec_chronometer.start();
-            }
-        });
-
-        buttonStop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                buttonStart.setVisibility(View.VISIBLE);
-                buttonStop.setVisibility(View.GONE);
-                //alertDialog();
-                exec_chronometer.stop();
-            }
-        });
 
         btn_help.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -304,37 +227,6 @@ public class ExerciseSoundActivity extends ExercisesActivity {
 
     }
 
-    /*private void alertDialog() {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setMessage("Você deseja mesmo encerrar o exercício? Todo o progresso não será salvo.");
-        dialog.setTitle("Deseja sair do jogo?");
-        dialog.setPositiveButton("sair",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,
-                                        int which) {
-                        if (DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.contains("BP")){
-                            DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "P1";
-                            BluetoothLeService.enviarDescriptor();
-                        }
-                        Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
-
-
-                        Log.i("%$%$#$#$$#%$%#$#$#$@#","SF FOI: " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
-                        finish();
-                    }
-                });
-        dialog.setNegativeButton("não",new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.contains("BP")){
-                    DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "P0";
-                    BluetoothLeService.enviarDescriptor();
-                }
-            }
-        });
-        AlertDialog alertDialog=dialog.create();
-        alertDialog.show();
-    }*/
     private static IntentFilter makeGattUpdateIntentFilter() {
         final IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(BluetoothLeService.ACTION_GATT_CONNECTED);
