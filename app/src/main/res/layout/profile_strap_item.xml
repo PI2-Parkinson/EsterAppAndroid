@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                android:text="Posição 1"/>
+                android:text="Repouso"/>
 
             <TextView
                 android:id="@+id/profile_strap_scale1"
@@ -63,7 +63,7 @@
                 android:textStyle="bold"
                 android:layout_below="@id/profile_strap_scale1"
                 android:layout_marginTop="20dp"
-                android:text="Posição 2"/>
+                android:text="Postural"/>
 
             <TextView
                 android:id="@+id/profile_strap_scale2"
@@ -82,7 +82,7 @@
                 android:textStyle="bold"
                 android:layout_below="@id/profile_strap_scale2"
                 android:layout_marginTop="20dp"
-                android:text="Posição 3"/>
+                android:text="Dedo-Nariz"/>
 
             <TextView
                 android:id="@+id/profile_strap_scale3"

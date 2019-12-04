@@ -55,7 +55,7 @@ public class ProfileAdapter extends RecyclerView.Adapter {
             super(card);
             this.name = card.findViewById(R.id.profile_person_name);
             this.email = card.findViewById(R.id.profile_person_email);
-            this.birthday = card.findViewById(R.id.profile_person_birthday);
+            //this.birthday = card.findViewById(R.id.profile_person_birthday);
             this.headerLayout = card.findViewById(R.id.profile_personal_header);
             this.footerLayout = card.findViewById(R.id.profile_personal_footer);
 
@@ -439,7 +439,7 @@ public class ProfileAdapter extends RecyclerView.Adapter {
         if (getItemViewType(position) == TYPE_PERSON) {
             //((ProfilePersonalInfoHolder) holder).bindView(position);
             ((ProfilePersonalInfoHolder) holder).name.setText(dataProfile.get(position).getName());
-            ((ProfilePersonalInfoHolder) holder).birthday.setText(dataProfile.get(position).getBirthday());
+            //((ProfilePersonalInfoHolder) holder).birthday.setText(dataProfile.get(position).getBirthday());
             ((ProfilePersonalInfoHolder) holder).email.setText(dataProfile.get(position).getEmail());
         } else if (getItemViewType(position) == TYPE_STRAP) {
             //((ProfileStrapHolder) holder).bindView(position);
