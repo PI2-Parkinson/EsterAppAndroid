@@ -34,7 +34,7 @@ import java.util.Date;
 public class ExerciseSoundActivity extends ExercisesActivity {
 
     MediaPlayer mediaPlayer;
-    String sequenceValue = null, sequenceLevel = null;
+    private String sequenceValue = null, sequenceLevel = null;
     private BluetoothLeService mBluetoothLeService;
     private String mDeviceAddress;
     private String data;
@@ -43,7 +43,7 @@ public class ExerciseSoundActivity extends ExercisesActivity {
     private FirebaseUser currentFirebaseUser;
     private DatabaseReference databaseReference;
 
-    ArrayList<Integer> arraySeq = new ArrayList<Integer>(30);
+    private ArrayList<Integer> arraySeq = new ArrayList<Integer>(30);
 
     public final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() {
         @Override

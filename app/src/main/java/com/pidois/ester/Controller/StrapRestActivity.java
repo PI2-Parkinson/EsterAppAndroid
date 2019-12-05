@@ -127,7 +127,8 @@ public class StrapRestActivity extends StrapUtils {
             @Override
             public void onClick(View view) {
                 sendStrapAsnwer(firebaseUser, databaseReference, "rest", levelBd);
-                alertDialogShowLevel(levelBd);
+                //alertDialogShowLevel(levelBd);
+                strapResult(levelBd);
             }
         });
 

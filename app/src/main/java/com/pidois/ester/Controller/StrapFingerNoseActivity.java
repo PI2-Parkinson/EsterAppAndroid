@@ -120,7 +120,8 @@ public class StrapFingerNoseActivity extends StrapUtils {
             @Override
             public void onClick(View view) {
                 sendStrapAsnwer(firebaseUser, databaseReference, "finger", levelBd);
-                alertDialogShowLevel(levelBd);
+                //alertDialogShowLevel(levelBd);
+                strapResult(levelBd);
             }
         });
 

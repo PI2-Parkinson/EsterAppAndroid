@@ -120,7 +120,8 @@ public class StrapPosturalActivity extends StrapUtils {
             @Override
             public void onClick(View view) {
                 sendStrapAsnwer(firebaseUser, databaseReference, "postural", levelBd);
-                alertDialogShowLevel(levelBd);
+                //alertDialogShowLevel(levelBd);
+                strapResult(levelBd);
             }
         });
     }

@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,12 +31,14 @@ import java.util.Date;
 public class ExerciseColorActivity extends ExercisesActivity {
 
     private BluetoothLeService mBluetoothLeService;
+    private String sequenceValue = null, sequenceLevel = null;
     private String mDeviceAddress;
     private String data;
     private String levelBd = null;
     private Button buttonStart, buttonStop, buttonDemo, btn_help;
     private FirebaseUser currentFirebaseUser;
     private DatabaseReference databaseReference;
+    private ArrayList<Integer> arraySeq = new ArrayList<Integer>(30);
 
     public final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() {
         @Override
@@ -45,13 +49,32 @@ public class ExerciseColorActivity extends ExercisesActivity {
             data = intent.getStringExtra(BluetoothLeService.EXTRA_DATA);
             Log.i("DA ESP32 PRA VARIAVEL","VALOR VARIAVEL: " + DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA);
 
-            /*if (data.contains("SQ")){
+            if (data.contains("SQ")){
+                arraySeq.clear();
 
+                sequenceValue = DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA; //SQ16565656
+
+                for(int i = 2; i < sequenceValue.length() - 1; i++) {
+                    arraySeq.add(Character.getNumericValue(sequenceValue.charAt(i)));
+                }
+
+                Log.i("Oi", "ARRAY" + arraySeq.toString());
+
+                playSequence(arraySeq);
+
+                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SR";
+                Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+                BluetoothLeService.enviarDescriptor();
+                try {
+                    Thread.sleep(1665);
+                } catch (Exception e) {
+                    Log.e("Erro sleep", "Erro! " + e);
+                }
                 DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SF";
                 Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
                 BluetoothLeService.enviarDescriptor();
 
-            }*/
+            }
             /*if (data.contains("ES")){
                 DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "C0";
                 Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
@@ -66,9 +89,7 @@ public class ExerciseColorActivity extends ExercisesActivity {
 
             }*/
 
-            if (data.contains("V2")){
-                levelBd = DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA;
-
+            if ( DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.contains("V1")){
                 levelBd = DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA; //V1XX
 
                 char ch1 = levelBd.charAt(2);
@@ -85,15 +106,14 @@ public class ExerciseColorActivity extends ExercisesActivity {
             }
 
             /*if (data.contains("BP")){
-                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "P0";
-                Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+                alertDialog();
                 BluetoothLeService.enviarDescriptor();
             }*/
 
 
-            /*if (DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.contains("N2")){
+            /*if (DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.contains("N1")){
 
-                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "N201";
+                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "N101";
                 Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
                 BluetoothLeService.enviarDescriptor();
 
@@ -107,20 +127,20 @@ public class ExerciseColorActivity extends ExercisesActivity {
         }
     };
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exercise_color);
+    //@Override
+   // protected void onCreate(Bundle savedInstanceState) {
+        //super.onCreate(savedInstanceState);
+       // setContentView(R.layout.activity_exercise_color);
 
-        final Chronometer exec_chronometer = findViewById(R.id.exec_color_chronometer);
+        //final Chronometer exec_chronometer = findViewById(R.id.exec_color_chronometer);
 
 
-        final Button buttonStart = findViewById(R.id.exec_color_btn_start);
-        final Button buttonStop = findViewById(R.id.exec_color_btn_stop);
-        final Button btn_help = findViewById(R.id.btn_help);
+      //  final Button buttonStart = findViewById(R.id.exec_color_btn_start);
+      //  final Button buttonStop = findViewById(R.id.exec_color_btn_stop);
+       // final Button btn_help = findViewById(R.id.btn_help);
 
-        buttonStop.setVisibility(View.INVISIBLE);
-        buttonStart.setVisibility(View.VISIBLE);
+      //  buttonStop.setVisibility(View.INVISIBLE);
+      //  buttonStart.setVisibility(View.VISIBLE);
 
         /*buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,18 +171,18 @@ public class ExerciseColorActivity extends ExercisesActivity {
             }
         });*/
 
-        btn_help.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                alertDialogInfo();
-            }
-        });
+       // btn_help.setOnClickListener(new View.OnClickListener() {
+       //     @Override
+       //     public void onClick(View view) {
+       //         alertDialogInfo();
+          //  }
+     //   });
 
-    }
+   // }
 
     /*private void alertDialog() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setMessage("Você deseja mesmo encerrar o exercício? Todo o progresso não será salvo.");
+        dialog.setMessage("Você deseja mesmo encerrar o exercício Todo o progresso não será salvo.");
         dialog.setTitle("Deseja mesmo sair?");
         dialog.setPositiveButton("sair",
                 new DialogInterface.OnClickListener() {
@@ -200,6 +220,181 @@ public class ExerciseColorActivity extends ExercisesActivity {
         super.onPause();
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_exercise_color);
+
+        ImageView image = findViewById(R.id.finger_color);
+        image.setImageResource(R.drawable.exe_cor_0);
+
+        final Intent intent = getIntent();
+
+        mDeviceAddress = intent.getStringExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS);
+
+        final Chronometer exec_chronometer = findViewById(R.id.exec_color_chronometer);
+
+        final Button buttonStart = findViewById(R.id.exec_color_btn_start);
+        final Button buttonStop = findViewById(R.id.exec_color_btn_stop);
+        final Button buttonDemo = findViewById(R.id.btn_demo);
+        final Button btn_help = findViewById(R.id.btn_help);
+
+        buttonStop.setVisibility(View.INVISIBLE);
+        buttonStart.setVisibility(View.VISIBLE);
+
+        buttonDemo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                buttonStart.setVisibility(View.VISIBLE);
+                buttonStop.setVisibility(View.INVISIBLE);
+//                playSequence();
+
+            }
+        });
+
+        Log.i("OLHA O RDATA MLK DOIDO","TOMAAAAAAAAA : " + DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA);
+
+        /*if (DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.contains("N1")){
+
+            DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "N101";
+            Log.i("AQUI MANDA SDATA","NIVEL JOGO 1 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+            BluetoothLeService.enviarDescriptor();
+        }*/
+
+        buttonStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+//                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SR";
+//
+//                BluetoothLeService.enviarDescriptor();
+//                Log.i("AQUI MANDA SDATA","SR FOI : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+
+                buttonStart.setVisibility(View.GONE);
+                buttonStop.setVisibility(View.VISIBLE);
+                exec_chronometer.setBase(SystemClock.elapsedRealtime());
+                exec_chronometer.start();
+            }
+        });
+
+        buttonStop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                buttonStart.setVisibility(View.VISIBLE);
+                buttonStop.setVisibility(View.GONE);
+                //alertDialog();
+                exec_chronometer.stop();
+            }
+        });
+
+        btn_help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialogInfo();
+            }
+        });
+    }
+
+    private void playSequence(ArrayList<Integer> arrayList) {
+        // create an empty array list with an initial capacit
+
+        // use add() method to add elements in the list
+
+        ImageView image = findViewById(R.id.finger_color);
+
+        // let us print all the elements available in list
+        for (Integer number : arrayList) {
+            //System.out.println("Number = " + number);
+            switch (number) {
+                case 1:
+                    image.setImageResource(R.drawable.exe_cor_1);
+                    try {
+                        Thread.sleep(333);
+                    } catch (Exception e) {
+                        Log.e("Erro sleep", "Erro! " + e);
+                    }
+
+                    break;
+                case 2:
+                    image.setImageResource(R.drawable.exe_cor_2);
+
+                    try {
+                        Thread.sleep(333);
+                    } catch (Exception e) {
+                        Log.e("Erro sleep", "Erro! " + e);
+                    }
+
+                    break;
+                case 3:
+                    image.setImageResource(R.drawable.exe_cor_3);
+
+                    try {
+                        Thread.sleep(333);
+                    } catch (Exception e) {
+                        Log.e("Erro sleep", "Erro! " + e);
+                    }
+
+                    break;
+                case 4:
+                    image.setImageResource(R.drawable.exe_cor_4);
+
+                    try {
+                        Thread.sleep(333);
+                    } catch (Exception e) {
+                        Log.e("Erro sleep", "Erro! " + e);
+                    }
+                    break;
+                case 5:
+                    image.setImageResource(R.drawable.exe_cor_5);
+
+                    try {
+                        Thread.sleep(333);
+                    } catch (Exception e) {
+                        Log.e("Erro sleep", "Erro! " + e);
+                    }
+                    break;
+                default:
+                    image.setImageResource(R.drawable.exe_cor_0);
+                    break;
+            }
+        }
+
+
+
+    }
+
+    /*private void alertDialog() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("Você deseja mesmo encerrar o exercício? Todo o progresso não será salvo.");
+        dialog.setTitle("Deseja sair do jogo?");
+        dialog.setPositiveButton("sair",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                        if (DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.contains("BP")){
+                            DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "P1";
+                            BluetoothLeService.enviarDescriptor();
+                        }
+                        Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+
+
+                        Log.i("%$%$#$#$$#%$%#$#$#$@#","SF FOI: " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+                        finish();
+                    }
+                });
+        dialog.setNegativeButton("não",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.contains("BP")){
+                    DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "P0";
+                    BluetoothLeService.enviarDescriptor();
+                }
+            }
+        });
+        AlertDialog alertDialog=dialog.create();
+        alertDialog.show();
+    }*/
     private static IntentFilter makeGattUpdateIntentFilter() {
         final IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(BluetoothLeService.ACTION_GATT_CONNECTED);
@@ -209,10 +404,15 @@ public class ExerciseColorActivity extends ExercisesActivity {
         return intentFilter;
     }
 
+    private class Sequencia {
+        String[] seq = {"15243", "12345"};
+    }
+
     private void switchScreen (Class cl){
         Intent intent = new Intent(ExerciseColorActivity.this, cl);
         ExerciseColorActivity.this.startActivity(intent);
     }
+
 
     private void alertDialogShowLevel(String level) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
