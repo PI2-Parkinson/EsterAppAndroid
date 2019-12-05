@@ -20,6 +20,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pidois.ester.Controller.Charts;
+import com.pidois.ester.Controller.ChartsColor;
 import com.pidois.ester.Controller.ExercisesActivity;
 import com.pidois.ester.Models.Profile;
 import com.pidois.ester.R;
@@ -211,6 +212,8 @@ public class ProfileAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View view) {
                     Log.i("PROFILE", "Color btn click");
+                    Intent intent = new Intent(view.getContext(), ChartsColor.class);
+                    view.getContext().startActivity(intent);
                 }
             });
 

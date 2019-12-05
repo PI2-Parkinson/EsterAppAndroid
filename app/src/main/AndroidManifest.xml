@@ -9,11 +9,12 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <permission android:name="android.permission.BLUETOOTH" android:label="BLUETOOTH" />
+    <permission
+        android:name="android.permission.BLUETOOTH"
+        android:label="BLUETOOTH" />
     <permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <application
@@ -23,17 +24,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".Controller.ExerciseSoundActivity"
+        <activity android:name=".Controller.ChartsColor"></activity>
+        <activity
+            android:name=".Controller.ExerciseSoundActivity"
             android:theme="@style/ProfileTheme" />
         <activity
             android:name=".Controller.ExerciseColorActivity"
             android:theme="@style/ProfileTheme" />
-        <activity android:name=".Controller.Charts"></activity>
+        <activity android:name=".Controller.Charts" />
         <activity android:name=".Controller.StrapFingerNoseActivity" />
         <activity android:name=".Controller.StrapPosturalActivity" />
         <activity android:name=".Controller.StrapRestActivity" />
-        <activity android:name=".Controller.DeviceScanActivity"/>
+        <activity android:name=".Controller.DeviceScanActivity" />
         <activity
             android:name=".Controller.StrapActivity"
             android:theme="@style/ProfileTheme" />
@@ -41,8 +43,7 @@
             android:name=".Controller.ProfileActivity"
             android:theme="@style/ProfileTheme" />
         <activity android:name=".Controller.ExercisesActivity" />
-        <activity
-            android:name=".Controller.CognitiveActivity" />
+        <activity android:name=".Controller.CognitiveActivity" />
         <activity
             android:name=".Controller.NewsActivity"
             android:theme="@style/MyAppBarLayoutTheme" />
@@ -60,8 +61,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Controller.DeviceControlActivity"/>
-        <service android:name=".Controller.BluetoothLeService" android:enabled="true"/>
+        <activity android:name=".Controller.DeviceControlActivity" />
+
+        <service
+            android:name=".Controller.BluetoothLeService"
+            android:enabled="true" />
     </application>
 
 </manifest>
