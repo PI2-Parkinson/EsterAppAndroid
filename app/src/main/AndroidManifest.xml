@@ -24,7 +24,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Controller.ChartsColor"></activity>
+        <activity android:name=".Controller.ChartsSound"></activity>
+        <activity android:name=".Controller.ChartsColor" />
         <activity
             android:name=".Controller.ExerciseSoundActivity"
             android:theme="@style/ProfileTheme" />

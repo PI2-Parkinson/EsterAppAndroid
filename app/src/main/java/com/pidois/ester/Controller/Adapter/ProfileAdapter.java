@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.pidois.ester.Controller.Charts;
 import com.pidois.ester.Controller.ChartsColor;
+import com.pidois.ester.Controller.ChartsSound;
 import com.pidois.ester.Controller.ExercisesActivity;
 import com.pidois.ester.Models.Profile;
 import com.pidois.ester.R;
@@ -151,6 +152,8 @@ public class ProfileAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View view) {
                     Log.i("PROFILE", "Sound btn click");
+                    Intent intent = new Intent(view.getContext(), ChartsSound.class);
+                    view.getContext().startActivity(intent);
                 }
             });
 
