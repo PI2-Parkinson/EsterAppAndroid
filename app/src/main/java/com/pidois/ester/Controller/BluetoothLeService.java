@@ -32,7 +32,6 @@ public class BluetoothLeService extends Service {
     private String mBluetoothDeviceAddress;
     private static BluetoothGatt mBluetoothGatt;
     private int mConnectionState = STATE_DISCONNECTED;
-    public static String BLUETOOTH_GLOBAL_RDATA = "";
 
     private static final int STATE_DISCONNECTED = 0;
     private static final int STATE_CONNECTING = 1;
@@ -71,10 +70,16 @@ public class BluetoothLeService extends Service {
             BluetoothGattCharacteristic characteristic =
                     gatt.getService(UUID_ESTER_SERVICE)
                             .getCharacteristic(UUID_ESTER_CHARACTERISTIC);
-            characteristic.setValue(DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
-            characteristic.setWriteType(BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT);
-            Log.i("#AQUII ENVIA O VALOR##","########### " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
-            gatt.writeCharacteristic(characteristic);
+            if (DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.equals(DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA)){
+                readCharacteristic(characteristic);
+            } else {
+
+                characteristic.setValue(DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+                characteristic.setWriteType(BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT);
+                Log.i("#AQUII ENVIA O VALOR##","########### " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+                gatt.writeCharacteristic(characteristic);
+            }
+
 
         }
         @Override
@@ -135,17 +140,35 @@ public class BluetoothLeService extends Service {
         public void onCharacteristicRead(BluetoothGatt gatt,
                                          BluetoothGattCharacteristic characteristic,
                                          int status) {
-            Log.i(TAG, "ENTROU!!!!!!!!!!!!!!!!!: " + characteristic);
+            Log.i(TAG, "ENTROU NO onCharacteristicRead " + characteristic);
             String value = new String(characteristic.getValue());
-            Log.i(TAG, "!!!!!!!!!!!!!!!!!: " + value);
-            if (value.contains("SF")){
-                try {
-                    Thread.sleep(1000);
-                } catch (Exception e) {
-                    Log.e("Erro sleep", "Erro! " + e);
-                }
-                gatt.writeCharacteristic(characteristic);
+            if(!value.contains("BP")) {
+                if (value.contains("SF")) {
+                    try {
+                        Thread.sleep(30);
+                    } catch (Exception e) {
+                        Log.e("Erro sleep", "Erro! " + e);
+                    }
+                    gatt.writeCharacteristic(characteristic);
 
+                }
+            }
+            Log.i(TAG, "ENTROU NO value  " + value + " sdata " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
+//            if (value.equals(DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA)){
+////                DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA = value;
+//                Log.i(TAG, "ENTROU NO IFFFFFFFFFFF " );
+//                BluetoothGattCharacteristic characteristicGatt =
+//                        gatt.getService(UUID_ESTER_SERVICE)
+//                                .getCharacteristic(UUID_ESTER_CHARACTERISTIC);
+//                readCharacteristic(characteristicGatt);
+//            }
+
+            if (value.equals(DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA)){
+                DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA = value;
+                Log.i(TAG, "ENTROU NO IFFFFFFFFFFF " );
+                BluetoothGattDescriptor descriptor = characteristic.getDescriptor(
+                        BluetoothLeService.UUID_CLIENT_CHARACTERISTIC_CONFIG);
+                BluetoothLeService.mBluetoothGatt.writeDescriptor(descriptor);
             }
 
             DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA = value;
@@ -159,8 +182,13 @@ public class BluetoothLeService extends Service {
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt,
                                             BluetoothGattCharacteristic characteristic) {
-//            String value = Arrays.toString(characteristic.getValue());
-            Log.i(TAG, "ENTROU NA PORRA DESSE CARAI!!" + Arrays.toString(characteristic.getValue()));
+            String value = new String(characteristic.getValue());
+
+            // IMPORTANTE!!
+            // Se aparecer esse Log toda vez que mudar a característica,
+            // tira o while do onCharacteristicRead
+
+            Log.i(TAG, "ENTROU NO onCharacteristicChanged!! " + value);
             broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);
         }
 
@@ -318,8 +346,8 @@ public class BluetoothLeService extends Service {
 
     public static void enviarDescriptor(){
 
-        BluetoothGattService service = BluetoothLeService.mBluetoothGatt.getService(UUID.fromString("4fafc201-1fb5-459e-8fcc-c5c9c331914b"));
-        BluetoothGattCharacteristic mGattCharacteristic = service.getCharacteristic(UUID.fromString("beb5483e-36e1-4688-b7f5-ea07361b26a8"));
+        BluetoothGattService service = BluetoothLeService.mBluetoothGatt.getService(UUID.fromString("c96d9bcc-f3b8-442e-b634-d546e4835f64"));
+        BluetoothGattCharacteristic mGattCharacteristic = service.getCharacteristic(UUID.fromString("807b8bad-a892-4ff7-b8bc-83a644742f9b"));
 
         for (BluetoothGattDescriptor descriptor:mGattCharacteristic.getDescriptors()){
             Log.i(TAG, "BluetoothGattDescriptor: "+descriptor.getUuid().toString());

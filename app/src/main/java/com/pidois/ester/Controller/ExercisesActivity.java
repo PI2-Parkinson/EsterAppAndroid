@@ -1,10 +1,12 @@
 package com.pidois.ester.Controller;
 
+import android.app.AlertDialog;
 import android.app.Service;
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattDescriptor;
 import android.bluetooth.BluetoothGattService;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.content.Intent;
 import android.util.Log;
@@ -65,6 +67,24 @@ public class ExercisesActivity extends ExerciseAbstractClass implements View.OnC
     private void switchScreen (Class cl){
         Intent intent = new Intent(ExercisesActivity.this, cl);
         ExercisesActivity.this.startActivity(intent);
+    }
+
+    public void alertDialogInfo() {
+        AlertDialog.Builder dialog=new AlertDialog.Builder(this);
+        dialog.setTitle("Instruções do exercício");
+        dialog.setMessage("\nClique em COMEÇAR para dar início ao exercício.\n" +
+                "\n Fique atento às cores que acenderão nos LEDs.\n" +
+                "\n Clique nos botões correspondentes dos dois controladores. \n" +
+                "\n Os cliques não precisam ser simultâneos.");
+        dialog.setCancelable(false);
+        dialog.setPositiveButton("ok",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                    }
+                });
+        AlertDialog alertDialog=dialog.create();
+        alertDialog.show();
     }
 }
 

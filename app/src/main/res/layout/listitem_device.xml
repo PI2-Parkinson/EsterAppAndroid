@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/blue2">
+    >
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline29"
@@ -26,7 +26,7 @@
         android:layout_gravity="center"
         android:layout_margin="20dp"
         android:background="#000"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/blue4"
         android:elevation="2dp"
         android:padding="50dp"
         app:cardCornerRadius="10dp"
@@ -48,7 +48,8 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:padding="10dp"
-                android:textSize="24dp" />
+                android:textSize="24dp"
+                android:textColor="@color/white"/>
 
             <TextView
                 android:id="@+id/device_address"
@@ -57,7 +58,8 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:padding="10dp"
-                android:textSize="12dp" />
+                android:textSize="12dp"
+                android:textColor="@color/white"/>/>
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

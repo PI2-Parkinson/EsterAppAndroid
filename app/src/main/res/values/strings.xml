@@ -15,11 +15,11 @@
 
     <string name="ble_not_supported">BLE is not supported</string>
     <string name="label_data">Data:</string>
-    <string name="label_device_address">Device address:</string>
-    <string name="label_state">State:</string>
-    <string name="no_data">No data</string>
-    <string name="connected">Connected</string>
-    <string name="disconnected">Disconnected</string>
+    <string name="label_device_address">Endereço:</string>
+    <string name="label_state">Estado:</string>
+    <string name="no_data">Sem dado</string>
+    <string name="connected">Conectado</string>
+    <string name="disconnected">Desconectado</string>
     <string name="title_devices">BLE Device Scan</string>
     <string name="error_bluetooth_not_supported">Bluetooth not supported.</string>
 
@@ -38,11 +38,11 @@
 
     <!-- Strap strings -->
     <string name="strap_rest_title">Repouso</string>
-    <string name="strap_rest_desc">Permaneça sentado com os braços abaixados por 10 segundos.</string>
+    <string name="strap_rest_desc">Permaneça sentado com os braços abaixados por 30 segundos.</string>
     <string name="strap_postural_title">Postural</string>
-    <string name="strap_postural_desc">Permaneça sentado com os braços esticados na altura do ombro por 10 segundos.</string>
+    <string name="strap_postural_desc">Permaneça sentado com os braços esticados na altura do ombro por 30 segundos.</string>
     <string name="strap_fingernose_title">Dedo-nariz</string>
-    <string name="strap_fingernose_desc">Permaneça sentado com o braço na altura do nariz por 10 segundos.</string>
+    <string name="strap_fingernose_desc">Permaneça sentado com o braço na altura do nariz por 30 segundos.</string>
     <string name="strap_about_title">Sobre os testes</string>
     <string name="btn_start">Começar</string>
 

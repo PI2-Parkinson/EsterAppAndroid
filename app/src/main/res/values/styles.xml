@@ -36,8 +36,4 @@
         <item name="colorAccent">@color/blue1</item>
         <item name="colorSecondary">@color/white</item>
     </style>
-
-    <style name="BTtheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:backgroundTint">@color/blue2</item>
-    </style>
 </resources>

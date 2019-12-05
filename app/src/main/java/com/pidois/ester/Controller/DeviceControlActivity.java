@@ -53,7 +53,7 @@ public class DeviceControlActivity extends Activity {
     private BluetoothLeService mBluetoothLeService;
     private ArrayList<ArrayList<BluetoothGattCharacteristic>> mGattCharacteristics =
             new ArrayList<>();
-    private boolean mConnected = false;
+    protected static boolean mConnected = false;
     private BluetoothGattCharacteristic mNotifyCharacteristic;
 
     private final String LIST_NAME = "NAME";
@@ -116,14 +116,6 @@ public class DeviceControlActivity extends Activity {
                 Log.i("DA ESP32 PRA VARIAVEL","VALOR VARIAVEL: " + BLUETOOTH_GLOBAL_RDATA);
 
 
-
-                if (BLUETOOTH_GLOBAL_RDATA.contains("N2")){
-
-                    BLUETOOTH_GLOBAL_SDATA = "N201";
-                    Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + BLUETOOTH_GLOBAL_SDATA);
-                    BluetoothLeService.enviarDescriptor();
-
-                }
                 displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
             }
         }
@@ -190,7 +182,7 @@ public class DeviceControlActivity extends Activity {
 
         // Sets up UI references.
         ((TextView) findViewById(R.id.device_address)).setText(mDeviceAddress);
-        mGattServicesList = (ExpandableListView) findViewById(R.id.gatt_services_list);
+        //mGattServicesList = (ExpandableListView) findViewById(R.id.gatt_services_list);
 //        mGattServicesList.setOnChildClickListener(servicesListClickListner);
         mConnectionState = (TextView) findViewById(R.id.connection_state);
         mDataField = (TextView) findViewById(R.id.data_value);
@@ -293,7 +285,7 @@ public class DeviceControlActivity extends Activity {
     }*/
     private void displayData(String data) {
         if (data != null) {
-            mDataField.setText(data);
+            mDataField.setText(String.valueOf(data.charAt(0)));
         }
     }
 
