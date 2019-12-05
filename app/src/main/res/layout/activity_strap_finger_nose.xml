@@ -73,6 +73,8 @@
         app:layout_constraintTop_toBottomOf="@+id/fixed_strap_rest"
         tools:layout_editor_absoluteX="20dp" />
 
+
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline33"
         android:layout_width="wrap_content"
@@ -84,17 +86,16 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
         android:layout_width="match_parent"
-        android:layout_height="346dp"
+        android:layout_height="350dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:padding="20dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="2dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline33"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline32"
-        app:layout_constraintVertical_bias="0.551">
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
 
         <pl.droidsonroids.gif.GifImageView
             android:layout_width="wrap_content"
@@ -117,6 +118,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline33"
         app:layout_editor_absoluteX="20dp" />
+
+    <Button
+        android:id="@+id/strap_finger_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/round_btn_grey"
+        android:padding="15dp"
+        android:text="resultado"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/strap_finger_chronometer"
+        app:layout_constraintTop_toTopOf="@+id/guideline25" />
 
     <Button
         android:id="@+id/strap_finger_btn"

@@ -55,22 +55,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="622dp" />
+        app:layout_constraintGuide_percent="0.14911081" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline32"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.24" />
+        app:layout_constraintGuide_percent="0.26" />
 
     <TextView
-        android:id="@+id/fixed_strap_postural"
+        android:id="@+id/exec_sound_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="@string/exercise_in_progress"
-        android:textSize="18sp"
+        android:text="@string/btn_exercise_color"
+        android:textAlignment="center"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline32"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,8 +81,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.76" />
+        app:layout_constraintGuide_percent="0.7619699" />
 
+    <Button
+        android:id="@+id/btn_help"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/round_btn_grey"
+        android:text="?"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline32"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/exec_sound_title"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout4" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView5"
@@ -117,7 +128,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline33"
         app:layout_editor_absoluteX="20dp" />
 
-    <Button
+    <!--<Button
         android:id="@+id/exec_color_btn_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -141,7 +152,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/exec_color_chronometer"
-        app:layout_constraintTop_toTopOf="@+id/guideline33" />
+        app:layout_constraintTop_toTopOf="@+id/guideline33" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

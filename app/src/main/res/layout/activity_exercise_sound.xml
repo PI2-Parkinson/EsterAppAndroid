@@ -52,14 +52,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="622dp" />
+        app:layout_constraintGuide_percent="0.14911081" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline32"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="256dp" />
+        app:layout_constraintGuide_percent="0.26" />
 
     <TextView
         android:id="@+id/exec_sound_title"
@@ -68,21 +68,10 @@
         android:text="@string/btn_exercise_sound"
         android:textAlignment="center"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/exec_sound_desc"
+        app:layout_constraintBottom_toTopOf="@+id/guideline32"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout3" />
-
-    <TextView
-        android:id="@+id/exec_sound_desc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/exercise_desc"
-        android:textAlignment="center"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline32"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -105,7 +94,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline33"
         app:layout_editor_absoluteX="20dp" />
 
-    <Button
+    <!--<Button
         android:id="@+id/exec_sound_btn_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -116,9 +105,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/exec_sound_chronometer"
-        app:layout_constraintTop_toTopOf="@+id/guideline33" />
+        app:layout_constraintTop_toTopOf="@+id/guideline33" />-->
 
-    <Button
+    <!--<Button
         android:id="@+id/exec_sound_btn_stop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -126,108 +115,57 @@
         android:padding="15dp"
         android:text="@string/btn_stop"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/exec_sound_chronometer"
-        app:layout_constraintTop_toTopOf="@+id/guideline33" />
+        app:layout_constraintTop_toTopOf="@+id/guideline33"
+        tools:layout_editor_absoluteX="268dp" />-->
 
-    <Button
+    <!--<Button
         android:id="@+id/btn_demo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/round_btn_grey"
         android:padding="15dp"
-        android:text="@string/btn_demo"
+        android:text="@string/btn_demo2"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/exec_sound_chronometer"
-        app:layout_constraintTop_toTopOf="@+id/guideline33" />
+        app:layout_constraintTop_toTopOf="@+id/guideline33" />-->
+
+    <Button
+        android:id="@+id/btn_help"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/round_btn_grey"
+        android:text="?"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline32"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/exec_sound_title"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout3" />
 
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:padding="20dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="1dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline33"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline32">
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/finger_sound"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/e_button_do"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:layout_marginTop="70dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="70dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_circle"
-                android:backgroundTint="@color/red"
-                app:layout_constraintEnd_toStartOf="@+id/e_button_re"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@id/cardView2"
-                app:layout_constraintTop_toTopOf="@+id/guideline32" />
-
-            <Button
-                android:id="@+id/e_button_re"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="70dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_circle"
-                android:backgroundTint="@color/orange"
-                app:layout_constraintEnd_toStartOf="@+id/e_button_mi"
-                app:layout_constraintStart_toEndOf="@id/e_button_do"
-                app:layout_constraintTop_toTopOf="@+id/guideline32" />
-
-            <Button
-                android:id="@+id/e_button_mi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="70dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_circle"
-                android:backgroundTint="@color/yellow"
-                app:layout_constraintTop_toTopOf="@+id/guideline32"
-                tools:layout_editor_absoluteX="98dp" />
-
-            <Button
-                android:id="@+id/e_button_fa"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="70dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_circle"
-                android:backgroundTint="@color/green"
-                app:layout_constraintStart_toEndOf="@+id/e_button_mi"
-                app:layout_constraintTop_toTopOf="@+id/guideline32" />
-
-            <Button
-                android:id="@+id/e_button_sol"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="70dp"
-                android:layout_marginRight="40dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_circle"
-                android:backgroundTint="@color/blue"
-                app:layout_constraintStart_toEndOf="@+id/e_button_fa"
-                app:layout_constraintTop_toTopOf="@+id/guideline32" />
-
-        </LinearLayout>
+            android:layout_weight="1"
+            android:contentDescription="@string/btn_exercise_sound" />
 
     </androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

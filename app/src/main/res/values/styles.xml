@@ -11,26 +11,29 @@
     <!-- SplashScreen theme -->
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="windowActionBar">false</item>
-        <item name="android:colorPrimaryDark">#4ED6CB</item>
+        <item name="android:colorPrimaryDark">@color/blue2</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <!-- Login theme -->
     <style name="LoginTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:colorPrimaryDark">#4ED6CB</item>
+        <item name="android:colorPrimaryDark">@color/blue2</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="colorAccent">@color/white</item>
     </style>
 
     <!--Profile theme -->
     <style name="ProfileTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimaryDark">#015F74</item>
-        <item name="colorAccent">#4ED6CB</item>
+        <item name="colorPrimaryDark">@color/blue3</item>
+        <item name="colorAccent">@color/blue1</item>
     </style>
 
     <style name="MyAppBarLayoutTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorControlHighlight">@color/colorAccent</item>
+        <item name="colorControlHighlight">@color/blue1</item>
         <item name="colorPrimary">@color/blue1</item>
         <item name="colorPrimaryDark">@color/blue3</item>
+        <item name="colorAccent">@color/blue1</item>
+        <item name="colorSecondary">@color/white</item>
     </style>
 </resources>
