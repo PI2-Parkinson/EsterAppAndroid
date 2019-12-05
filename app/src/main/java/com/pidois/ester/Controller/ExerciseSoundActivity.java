@@ -43,7 +43,7 @@ public class ExerciseSoundActivity extends ExercisesActivity {
     private FirebaseUser currentFirebaseUser;
     private DatabaseReference databaseReference;
     private Chronometer chronometer;
-    private int i=0;
+    private ImageView image;
 
     ArrayList<Integer> arraySeq = new ArrayList<Integer>(30);
 
@@ -69,13 +69,8 @@ public class ExerciseSoundActivity extends ExercisesActivity {
                 Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
                 BluetoothLeService.enviarDescriptor();
 
-                playSequence(arraySeq);
+                playSequence(arraySeq, image);
 
-                if (i == 0) {
-                    chronometer.setBase(SystemClock.elapsedRealtime());
-                    chronometer.start();
-                }
-                i++;
             }
 
             if ( DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.contains("V1")){
@@ -120,12 +115,12 @@ public class ExerciseSoundActivity extends ExercisesActivity {
         super.onPause();
     }
 
-        @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_sound);
 
-        ImageView image = findViewById(R.id.finger_sound);
+        image = findViewById(R.id.finger_sound);
         image.setImageResource(R.drawable.default_finger);
 
         final Intent intent = getIntent();
@@ -133,6 +128,8 @@ public class ExerciseSoundActivity extends ExercisesActivity {
         mDeviceAddress = intent.getStringExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS);
 
         chronometer = findViewById(R.id.exec_sound_chronometer);
+        chronometer.setBase(SystemClock.elapsedRealtime());
+        chronometer.start();
 
         final Button buttonStart = findViewById(R.id.exec_sound_btn_start);
         final Button btn_help = findViewById(R.id.btn_help);
@@ -147,12 +144,11 @@ public class ExerciseSoundActivity extends ExercisesActivity {
         });
     }
 
-    private void playSequence(ArrayList<Integer> arrayList) {
+    private void playSequence(ArrayList<Integer> arrayList, ImageView image) {
         // create an empty array list with an initial capacit
 
         // use add() method to add elements in the list
 
-        ImageView image = findViewById(R.id.finger_sound);
 
         // let us print all the elements available in list
         for (Integer number : arrayList) {

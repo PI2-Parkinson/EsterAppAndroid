@@ -142,17 +142,7 @@ public class BluetoothLeService extends Service {
                                          int status) {
             Log.i(TAG, "ENTROU NO onCharacteristicRead " + characteristic);
             String value = new String(characteristic.getValue());
-            if(!value.contains("BP")) {
-                if (value.contains("SF")) {
-                    try {
-                        Thread.sleep(30);
-                    } catch (Exception e) {
-                        Log.e("Erro sleep", "Erro! " + e);
-                    }
-                    gatt.writeCharacteristic(characteristic);
 
-                }
-            }
             Log.i(TAG, "ENTROU NO value  " + value + " sdata " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
 //            if (value.equals(DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA)){
 ////                DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA = value;
