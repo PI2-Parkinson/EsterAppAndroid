@@ -35,6 +35,7 @@ public class ExerciseColorActivity extends ExercisesActivity {
     private Button buttonStart, buttonStop, buttonDemo, btn_help;
     private FirebaseUser currentFirebaseUser;
     private DatabaseReference databaseReference;
+    private Chronometer chronometer;
 
     public final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() {
         @Override
@@ -45,26 +46,6 @@ public class ExerciseColorActivity extends ExercisesActivity {
             data = intent.getStringExtra(BluetoothLeService.EXTRA_DATA);
             Log.i("DA ESP32 PRA VARIAVEL","VALOR VARIAVEL: " + DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA);
 
-            /*if (data.contains("SQ")){
-
-                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SF";
-                Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
-                BluetoothLeService.enviarDescriptor();
-
-            }*/
-            /*if (data.contains("ES")){
-                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "C0";
-                Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
-                BluetoothLeService.enviarDescriptor();
-            }*/
-
-            /*if (data.contains("SR")){
-
-                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SF";
-                Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
-                BluetoothLeService.enviarDescriptor();
-
-            }*/
 
             if (data.contains("V2")){
                 levelBd = DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA;
@@ -80,24 +61,11 @@ public class ExerciseColorActivity extends ExercisesActivity {
 
                 sendColorAnswer(currentFirebaseUser, databaseReference, levelBd);
 
+                chronometer.stop();
+
                 alertDialogShowLevel(levelBd);
 
             }
-
-            /*if (data.contains("BP")){
-                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "P0";
-                Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
-                BluetoothLeService.enviarDescriptor();
-            }*/
-
-
-            /*if (DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.contains("N2")){
-
-                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "N201";
-                Log.i("AQUI MANDA SDATA","NIVEL JOGO 2 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
-                BluetoothLeService.enviarDescriptor();
-
-            }*/
 
             if (DeviceControlActivity.BLUETOOTH_GLOBAL_RDATA.contains("QM")){
 
@@ -112,45 +80,13 @@ public class ExerciseColorActivity extends ExercisesActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_color);
 
-        final Chronometer exec_chronometer = findViewById(R.id.exec_color_chronometer);
+        chronometer = findViewById(R.id.exec_color_chronometer);
 
+        chronometer.setBase(SystemClock.elapsedRealtime());
+        chronometer.start();
 
-        final Button buttonStart = findViewById(R.id.exec_color_btn_start);
-        final Button buttonStop = findViewById(R.id.exec_color_btn_stop);
         final Button btn_help = findViewById(R.id.btn_help);
-
-        buttonStop.setVisibility(View.INVISIBLE);
-        buttonStart.setVisibility(View.VISIBLE);
-
-        /*buttonStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "M2";
-                Log.i("AQUI MANDA SDATA","CONEXAO ESTABELECIDA : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
-                BluetoothLeService.enviarDescriptor();
-
-                buttonStart.setVisibility(View.GONE);
-                //buttonStop.setVisibility(View.VISIBLE);
-                exec_chronometer.setBase(SystemClock.elapsedRealtime());
-                exec_chronometer.start();
-            }
-        });*/
-
-        /*buttonStop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "P1";
-            Log.i("AQUI MANDA SDATA","MANDOU P1 : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
-            BluetoothLeService.enviarDescriptor();
-            buttonStart.setVisibility(View.VISIBLE);
-            buttonStop.setVisibility(View.GONE);
-            //alertDialog();
-            exec_chronometer.stop();
-            }
-        });*/
-
+        
         btn_help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -159,30 +95,6 @@ public class ExerciseColorActivity extends ExercisesActivity {
         });
 
     }
-
-    /*private void alertDialog() {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setMessage("Você deseja mesmo encerrar o exercício? Todo o progresso não será salvo.");
-        dialog.setTitle("Deseja mesmo sair?");
-        dialog.setPositiveButton("sair",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,
-                                        int which) {
-                        DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA = "SN";
-                        Log.i("AQUI MANDA SDATA","CONEXAO ESTABELECIDA : " + DeviceControlActivity.BLUETOOTH_GLOBAL_SDATA);
-                        BluetoothLeService.enviarDescriptor();
-                        finish();
-                    }
-                });
-        dialog.setNegativeButton("cancelar",new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                //
-            }
-        });
-        AlertDialog alertDialog=dialog.create();
-        alertDialog.show();
-    }*/
 
     @Override
     protected void onResume() {

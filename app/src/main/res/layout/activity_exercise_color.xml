@@ -128,7 +128,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline33"
         app:layout_editor_absoluteX="20dp" />
 
-    <Button
+    <!--<Button
         android:id="@+id/exec_color_btn_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -152,7 +152,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/exec_color_chronometer"
-        app:layout_constraintTop_toTopOf="@+id/guideline33" />
+        app:layout_constraintTop_toTopOf="@+id/guideline33" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
