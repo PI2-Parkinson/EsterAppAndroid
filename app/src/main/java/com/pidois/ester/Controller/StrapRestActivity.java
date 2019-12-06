@@ -25,6 +25,7 @@ public class StrapRestActivity extends StrapUtils {
     private int time = 0;
     private String title, message;
     private String levelBd;
+    private int result;
 
     private BluetoothLeService mBluetoothLeService;
     private String mDeviceAddress;
@@ -56,6 +57,7 @@ public class StrapRestActivity extends StrapUtils {
                 char ch1 = levelBd.charAt(2);
 
                 levelBd = new StringBuilder().append(ch1).toString();
+                result = Integer.valueOf(levelBd);
 
                 Log.i("BD", "LEVEL: " +levelBd);
 
@@ -127,7 +129,7 @@ public class StrapRestActivity extends StrapUtils {
             @Override
             public void onClick(View view) {
                 sendStrapAsnwer(firebaseUser, databaseReference, "rest", levelBd);
-                alertDialogShowLevel(levelBd);
+                strapResult(result);
             }
         });
 
@@ -165,9 +167,9 @@ public class StrapRestActivity extends StrapUtils {
         return intentFilter;
     }
 
-    private void alertDialogShowLevel(String level) {
+    /*private void alertDialogShowLevel(String ) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setMessage("Seu nível de tremor nesse modo é de grau: "+level+".");
+        dialog.setMessage();
         dialog.setTitle("Resultado");
         dialog.setCancelable(false);
         dialog.setPositiveButton("ok",
@@ -181,7 +183,7 @@ public class StrapRestActivity extends StrapUtils {
                 });
         AlertDialog alertDialog=dialog.create();
         alertDialog.show();
-    }
+    }*/
 
     private void switchScreen (Class cl){
         Intent intent = new Intent(StrapRestActivity.this, cl);

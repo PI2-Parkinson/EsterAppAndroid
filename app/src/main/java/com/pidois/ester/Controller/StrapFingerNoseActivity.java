@@ -26,7 +26,7 @@ public class StrapFingerNoseActivity extends StrapUtils {
     private BluetoothLeService mBluetoothLeService;
     private String mDeviceAddress;
     private String data;
-    private int grade = 0;
+    private int grade = 0, result;
     private String GTValue = null;
     private String levelBd;
 
@@ -51,6 +51,7 @@ public class StrapFingerNoseActivity extends StrapUtils {
                 char ch1 = levelBd.charAt(2);
 
                 levelBd = new StringBuilder().append(ch1).toString();
+                result = Integer.valueOf(levelBd);
 
                 Log.i("BD", "LEVEL: " +levelBd);
 
@@ -120,7 +121,7 @@ public class StrapFingerNoseActivity extends StrapUtils {
             @Override
             public void onClick(View view) {
                 sendStrapAsnwer(firebaseUser, databaseReference, "finger", levelBd);
-                alertDialogShowLevel(levelBd);
+                strapResult(result);
             }
         });
 
